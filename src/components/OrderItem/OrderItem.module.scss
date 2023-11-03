@@ -1,0 +1,226 @@
+.wrapper {
+    height: auto;
+    border: 2px solid #F2F4F7;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.wrapper:last-child {
+    border-bottom: none;
+}
+
+.order__money{
+    width: 33%;
+    color: var(--primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    font-family: Nunito;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 44.8px */
+}
+
+.under{
+    margin-bottom: 10px;
+    .product__note{
+        width:62%;
+        color: #667085;
+        margin-left: 20px;
+        font-size: 1.4rem;
+        span {
+            color: #344054;
+        }
+    }
+    
+    .button{
+        .btn-center{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .btn-success{
+            display: flex;
+            width: 100px;
+            height: 30px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            border: 1px solid #3AD920;
+            background: #3AD920;
+            /* Shadow/xs */
+            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+            
+            //Text
+            color: #fff;
+            font-family: Nunito;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%;
+        }
+
+        .btn-cancel{
+            display: flex;
+            width: 100px;
+            height: 30px;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            border: 1px solid var(--error-600, #D92D20);
+            background: var(--error-600, #D92D20);
+            /* Shadow/xs */
+            box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+
+            //Text
+            color: #fff;
+            font-family: Nunito;
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%;
+        }
+    }
+
+    .status{
+        width:100%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
+
+// responsive
+/* Styles cho điện thoại */
+@media (max-width: 576px) {
+    .product {
+        padding: 10px;
+        flex-wrap: wrap;
+    }
+
+    .under{
+        flex-wrap: wrap;
+        
+        .product__note{
+            flex-basis: 100%;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+            margin-right: 15px;
+            .color{
+                width:auto;
+                text-align: center;
+            }
+            
+        }
+        .button{
+            margin:auto;
+            .btn-success{
+                margin-right: 10px;
+                width: 100px;
+                height: 30px;
+                font-size: 13px;
+            }
+            .btn-cancel{
+                margin-right: 20px;
+                width: 100px;
+                height: 30px;
+                font-size: 13px;
+            }
+        }
+        .status_content{
+            flex-basis: 100%;
+        }
+        .status{
+            width:100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+}
+/* Styles cho điện thoại nằm ngang */
+@media (min-width: 576px) and (max-width: 768px) {
+    .product {
+        .product__info {
+            .product__info-name {
+                font-size: 14px;
+            }
+    
+            .product__info-user {
+                font-size: 1.2rem;
+                span {
+                    color: #344054;
+                }
+            }
+        }
+
+    }
+    .under{
+        .button{
+            width:30%;
+            .btn-success{
+                margin-right: 10px;
+                width: 60px;
+                height: 25px;
+                font-size: 11px;
+            }
+            .btn-cancel{
+                margin-right: 20px;
+                width: 60px;
+                height: 25px;
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+/* Styles cho máy tính bảng */
+@media (max-width: 992px) {
+    .order__money{
+        width:43%;
+        margin:auto;
+        padding-right: 20px;
+        font-size: 18px;
+    }
+    .button{
+        width:33%;
+        .btn-success{
+            margin-right: 10px;
+        }
+    }
+    .under{
+        .product__note{
+            width:66%;
+        }
+        .button{
+            width: 33%;
+            .btn-success{
+                margin-right: 10px;
+                width: 70px;
+                height: 25px;
+                font-size: 11px;
+            }
+            .btn-cancel{
+                margin-right: 20px;
+                width: 70px;
+                height: 25px;
+                font-size: 11px;
+            }
+        }
+        .status_content{
+            width: 33%;
+        }
+        .status{
+            width:100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+}

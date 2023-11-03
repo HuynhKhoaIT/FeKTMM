@@ -1,0 +1,166 @@
+footer {
+    border-top: 2px solid var(--primary);
+}
+.footer {
+    position: relative;
+    padding-top: 24px;
+    padding-bottom: 45px;
+}
+.footer__contact {
+    .footer__contact-address {
+        font-size: 2rem;
+        line-height: 36px;
+        margin-bottom: 40px;
+    }
+
+    .footer__contact-phone,
+    .footer__contact-mail {
+        font-size: 1.4rem;
+        line-height: 22px;
+        a {
+            color: var(--primary);
+            margin-left: 6px;
+        }
+    }
+}
+.footer-certification {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 20px;
+    .footer-certification-img {
+        width: 310px;
+    }
+}
+.footer-policy,
+.footer-pay {
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 12px;
+    }
+    li {
+        list-style-type: none;
+        &:hover {
+            color: var(--primary);
+            cursor: pointer;
+        }
+    }
+    a {
+        font-size: 1.4rem;
+    }
+}
+.contact {
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 12px;
+    }
+}
+
+.footer-social {
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 12px;
+    }
+    .icon-social {
+        cursor: pointer;
+        margin-right: 12px;
+    }
+}
+
+.up-arrow {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    position: absolute;
+    top: 65px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &:hover {
+        background-color: #1e4780;
+    }
+    .icon {
+        font-size: 2.4rem;
+        color: var(--white-text-color);
+    }
+}
+
+.footer-license {
+    font-size: 1.2rem;
+    color: var(--sub-text-color);
+    padding-top: 50px;
+    // margin-left: 60px;
+}
+
+// responsive
+/* Styles cho điện thoại */
+@media screen and (max-width: 576px) {
+    .footer {
+        position: relative;
+        padding: 6px 12px;
+        padding-top: 20px;
+        padding-bottom: 15px;
+    }
+    .footer__contact-certification {
+        display: none;
+    }
+    .footer__contact-address {
+        font-size: 1.8rem;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+    .footer-certification {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-top: 20px;
+        img {
+            width: 227px;
+        }
+    }
+    h3 {
+        margin-bottom: 6px !important;
+    }
+    .contact,
+    .footer-policy,
+    .footer-pay,
+    .footer-social {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 0.265px solid #e2e8f0;
+    }
+    .up-arrow {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        position: absolute;
+        top: -15px;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:hover {
+            background-color: #1e4780;
+        }
+        .icon {
+            font-size: 2.4rem;
+            color: var(--white-text-color);
+        }
+    }
+}
+/* Styles cho điện thoại nằm ngang */
+@media screen and (min-width: 576px) and (max-width: 768px) {
+}
+
+/* Styles cho máy tính bảng */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+}

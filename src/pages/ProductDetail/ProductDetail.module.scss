@@ -1,0 +1,94 @@
+.wrapper {
+    margin: 0 auto;
+}
+.container {
+    margin: 12px 12px 32px;
+}
+
+.row-heading {
+    display: inline-block;
+    color: #000;
+    font-family: Nunito;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 44.8px */
+}
+
+/* Example 1: Using :not(:first-child) */
+.row-heading:not(:nth-of-type(1)) {
+    margin-bottom: 12px;
+}
+
+.productInfo {
+    display: flex;
+    justify-content: start;
+}
+
+.bg-white {
+    background-color: #fff;
+    box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.card-wrapper {
+    margin-top: 12px;
+    padding: 2px !important;
+}
+
+.viewAll-wrapper {
+    margin-top: 16px !important;
+}
+
+.overview-wrapper {
+    display: flex;
+}
+
+.overview-wrapper .title {
+    margin-right: 8px;
+}
+
+.rating-display {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rating-stars {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.stars {
+    position: relative;
+    top: -1px;
+    display: flex;
+    justify-content: center;
+}
+
+.stars-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 0 -3px;
+}
+
+.star-styles {
+    margin: 0 2px;
+}
+
+.ratingNumber {
+    position: relative;
+    top: 1px;
+    color: var(--gray-500, #667085);
+    /* PC/Bd/Body 3 */
+    font-family: Nunito;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 170%; /* 20.4px */
+    margin-left: 8px;
+}
+
+.padding-12 {
+    padding: 24px;
+}

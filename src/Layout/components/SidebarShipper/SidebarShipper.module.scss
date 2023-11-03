@@ -1,0 +1,51 @@
+.sidebar-wrapper {
+    background-color: #fff;
+    height: 100vh;
+    position: fixed;
+}
+
+.profil {
+    background-color: var(--primary);
+    height: 10vh;
+    width: 100%;
+}
+
+.logo {
+    height: 100%;
+    width: 150px;
+}
+
+.nav {
+    width: 100%;
+}
+
+.nav-list {
+    padding: 24px;
+    list-style: none;
+}
+
+.nav-list .nav-item {
+    padding: 12px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.nav-list .nav-item:hover,
+.nav-list #active {
+    cursor: pointer;
+    background-color: #d8e6f4;
+}
+
+.nav-item__link {
+    font-weight: bold;
+}
+
+.sign-out {
+    width: 100%;
+    padding: 10px;
+}
+
+.sign-out:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

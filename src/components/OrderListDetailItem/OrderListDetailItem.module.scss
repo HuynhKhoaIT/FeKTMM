@@ -1,0 +1,27 @@
+.wrapper {
+    padding: 4px 8px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.wrapper:last-child {
+    border-bottom: none;
+}
+
+.content {
+    position: relative;
+}
+
+.img-product img {
+    height: 80px;
+    width: 130px;
+}
+
+.name-product {
+    font-weight: bold;
+}
+
+.price-product p {
+    position: absolute;
+    bottom: 0;
+    color: #fe4672;
+}

@@ -1,0 +1,47 @@
+.main-pImages-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sale-tag {
+    position: absolute;
+    top: 25%;
+    right: 10%;
+    color: #fff;
+    text-align: center;
+    /* PC/L/Label 2 */
+    font-family: Nunito;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 140%; /* 19.6px */
+    background-color: #f60;
+    border-radius: 4px;
+    z-index: 5;
+    text-align: center;
+    width: 73px;
+    height: 19px;
+}
+
+.main-pImage {
+    width: 80%;
+}
+
+.sub-pImages-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.sub-pImage {
+    width: 20%;
+}
+
+.sub-pImage:hover {
+    border: 1px solid #1d6fdf;
+}
+
+.current-pImg {
+    border: 1px solid #1d6fdf;
+}

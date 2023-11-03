@@ -1,0 +1,116 @@
+.wrapper {
+    position: relative;
+    background-color: var(--grey-background);
+    padding-bottom: 20px;
+    min-height: calc(100vh - 72px);
+    h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        padding: 12px 0;
+        color: #1e4780;
+    }
+}
+.header,
+.footer,
+.cart-detail {
+    padding: 30px 0;
+    border-radius: 6px;
+    background-color: var(--white-background);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 48px;
+    .header__products input,
+    .footer__products input {
+        margin-left: 64px;
+        margin-right: 27px;
+    }
+    .footer__products a {
+        margin-left: 46px;
+        &:hover {
+            color: var(--primary) !important;
+            cursor: pointer;
+        }
+    }
+}
+
+.header__info {
+    text-align: center;
+}
+
+.footer__info {
+    .total-payment {
+        color: #d01212;
+    }
+    .btn-order {
+        color: var(--white-text-color);
+    }
+}
+
+// cart null
+.cart__null {
+    text-align: center;
+    height: calc(100vh - 127px);
+    align-items: center;
+    padding-top: 92px;
+    .cart__null-icon {
+        font-size: 6rem;
+        color: #1e4780;
+    }
+    .cart__null-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    button {
+        color: #fff;
+        &:hover {
+            border: 1px solid #fe2c55;
+        }
+    }
+}
+// responsive
+/* Styles cho điện thoại */
+@media screen and (max-width: 576px) {
+    .header {
+        display: none !important;
+    }
+    .footer {
+        width: 100%;
+        font-size: 1.4rem;
+        margin-bottom: 0px;
+        position: fixed;
+        z-index: 9999;
+        bottom: 0;
+        // left: 0;
+        // right: 0;
+    }
+    .cart-detail {
+        border-radius: 0;
+        background-color: transparent;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0);
+    }
+    .header__products input,
+    .footer__products input {
+        margin-left: 0 !important;
+        margin-right: 20px !important;
+    }
+
+    .footer__products a {
+        margin-left: 20px !important;
+    }
+    footer {
+        display: none;
+    }
+}
+/* Styles cho điện thoại nằm ngang */
+@media screen and (min-width: 576px) and (max-width: 768px) {
+}
+
+/* Styles cho máy tính bảng */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .header__products input,
+    .footer__products input {
+        margin-left: 0 !important;
+        margin-right: 20px !important;
+    }
+}

@@ -1,0 +1,13 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    background-color: #f8f8fc;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    margin-top: var(--default-layout-header-height);
+}

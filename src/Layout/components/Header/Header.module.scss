@@ -1,0 +1,340 @@
+.wrapper {
+    height: 127px;
+    background-color: var(--primary);
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        top: 47px;
+        background-color: #0096c9;
+    }
+}
+
+.header__top {
+    font-size: 1.4rem;
+    height: 47px !important;
+    position: relative;
+    .header__top-item-1 {
+        margin-right: 24px;
+    }
+    .header__top-item-2 {
+        margin-left: 24px;
+    }
+    .header__top-item-text {
+        margin-left: 8px;
+        color: #b2ddff;
+    }
+}
+
+.header__bot {
+    height: 80px;
+    .header__bot-nav {
+        height: 48px;
+        flex: 1 1 auto;
+        .logo {
+            height: 100%;
+            width: 200px;
+            margin-right: 24px;
+        }
+        .menu {
+            height: 42px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #fff;
+            margin-right: 24px;
+            cursor: pointer;
+        }
+        .menu-text {
+            margin-left: 8px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--white-text-color);
+        }
+
+        .notification {
+            cursor: pointer;
+            position: relative;
+            &:hover .notification-box {
+                display: block;
+            }
+        }
+        .notification-box {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: 0;
+            z-index: 999;
+            width: 400px;
+            min-height: 350px;
+            background-color: #fff;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 0, 0, 0.09);
+            .list-notification {
+                display: block;
+            }
+            .item-notification {
+                display: flex;
+                padding: 8px 10px;
+                background-color: #fff2ee;
+                &:hover {
+                    background-color: var(--grey-background);
+                }
+            }
+            h3 {
+                font-size: 1.6rem;
+                color: rgba(0, 0, 0, 0.26);
+                padding: 0 10px;
+                line-height: 40px;
+            }
+            .img-notification {
+                width: 40px;
+                flex-shrink: 0;
+            }
+            .item-title {
+                margin-left: 6px;
+            }
+            h4 {
+                font-size: 1.4rem;
+                margin-bottom: 5px;
+                text-transform: uppercase;
+                color: var(--primary-text-color);
+            }
+            p {
+                font-size: 1.2rem;
+                color: var(--primary-text-color);
+            }
+            .see-all {
+                color: var(--primary-text-color);
+            }
+            &::after {
+                content: '';
+                position: absolute;
+                z-index: 9;
+                top: -9px;
+                right: 20px;
+                width: 0;
+                height: 0;
+                border-left: 18px solid transparent;
+                border-right: 18px solid transparent;
+                border-bottom: 10px solid #fff;
+            }
+            &::before {
+                content: '';
+                position: absolute;
+                z-index: -1;
+                top: -20px;
+                right: 0px;
+                width: 100px;
+                height: 30px;
+                background-color: transparent;
+            }
+        }
+        .notification-quantity {
+            font-size: 1.4rem;
+            color: var(--grey-background);
+            text-align: center;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #f04438;
+            top: -7px;
+            left: -6px;
+            border-radius: 50%;
+            border: 1px solid var(--grey-background);
+        }
+        .icon-notification,
+        .icon-user {
+            font-size: 30px;
+        }
+        .account {
+            cursor: pointer;
+        }
+        .account,
+        .notification {
+            color: var(--white-text-color);
+            margin-left: 24px;
+        }
+        .nav__text {
+            margin-left: 8px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            .nav__text-login {
+                font-size: 1.4rem;
+            }
+            .icon-down {
+                margin-left: 6px;
+            }
+        }
+        .cart {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            position: relative;
+            margin-left: 24px;
+            cursor: pointer;
+            .cart-quantity {
+                font-size: 1.4rem;
+                color: var(--grey-background);
+                text-align: center;
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background-color: #f04438;
+                top: -7px;
+                right: -6px;
+                border-radius: 50%;
+                border: 1px solid var(--grey-background);
+            }
+        }
+        .search {
+            width: 570px;
+        }
+    }
+}
+.accout-result,
+.menu-list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0px;
+    background-color: var(--white-text-color);
+    color: var(--primary-text-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    a {
+        display: flex;
+        align-items: center;
+        padding: 10px 8px 10px 16px;
+        font-size: 1.6rem;
+        p {
+            margin-left: 8px;
+        }
+        &:hover {
+            background-color: var(--grey-background);
+        }
+    }
+}
+.accout-result {
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: 9;
+        top: -8px;
+        right: 18px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #fff;
+    }
+}
+.menu-list {
+    min-width: 350px;
+}
+.header__mobi {
+    display: none;
+}
+/* Lớp cho menu có sub-category */
+.abc {
+    display: none;
+    width: 300px;
+    position: absolute;
+    top: 0; /* Hiển thị phần tử bên dưới menu-body */
+    right: -300px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* Đảm bảo hiển thị trên các phần tử khác */
+}
+
+/* Hiển thị sub-category khi hover vào menu-body */
+.menu-body:hover + .abc,
+.abc:hover {
+    display: block !important;
+}
+
+// responsive
+/* Styles cho điện thoại */
+@media screen and (max-width: 576px) {
+    .wrapper {
+        display: none;
+    }
+    .header__mobi {
+        position: relative;
+        display: block;
+    }
+    .header {
+        padding: 6px 12px;
+
+        height: 84px;
+        background-color: #1e4780;
+        position: relative;
+    }
+    .header__mobi-top {
+        height: 32px;
+        .cart {
+            position: relative;
+            .cart-quantity {
+                font-size: 1.2rem;
+                color: var(--grey-background);
+                text-align: center;
+                position: absolute;
+                width: 18px;
+                height: 18px;
+                background-color: #039855;
+                top: -7px;
+                right: -6px;
+                border-radius: 50%;
+                border: 1px solid var(--grey-background);
+            }
+        }
+    }
+    .header__mobi-bot {
+        .search {
+            height: 32px;
+        }
+    }
+    .header-icon {
+        font-size: 30px;
+        color: var(--white-text-color);
+    }
+
+    .menu-text {
+        display: none;
+    }
+    .logo {
+        height: 100%;
+        width: 50px !important;
+        margin-right: 24px;
+    }
+}
+/* Styles cho điện thoại nằm ngang */
+@media screen and (min-width: 576px) and (max-width: 768px) {
+    .logo {
+        height: 100%;
+        width: 50px !important;
+        margin-right: 24px;
+    }
+}
+
+/* Styles cho máy tính bảng */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .logo {
+        height: 100%;
+        width: 50px !important;
+        margin-right: 24px;
+    }
+}
+
+.form-modal-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 350%;
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.3);
+}

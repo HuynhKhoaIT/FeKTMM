@@ -1,0 +1,74 @@
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@200;300;400;500;600;700&display=swap');
+
+:root {
+    --primary: #d70018;
+    --primary-text-color: #1c1f23;
+    --sub-text-color: #434657;
+    --white-background: #fff;
+    --light-blue-color: #f6f9fc;
+    --grey-background: #f8f8fc;
+    --white-text-color: #fff;
+    --red-color: #fe4672;
+    --tag-color: #ff6600;
+    --black-color: #000;
+    --font-family: 'Nunito', 'Montserrat';
+}
+img {
+    max-width: 100%;
+    height: 100%;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', 'IBM Plex Sans', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+button,
+input,
+[tabindex] {
+    border: none;
+    outline: none;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.form-error-message {
+    color: #ff6600;
+    padding: 0;
+    font-size: 14px;
+    width: 274px;
+}
+
+.form-sucess-message {
+    color: #1d6fdf;
+    padding: 0;
+    font-size: 14px;
+    width: 274px;
+}

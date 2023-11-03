@@ -1,0 +1,52 @@
+.search {
+    min-width: 200px;
+    height: 42px;
+    background: var(--grey-background, #f2f4f7);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-radius: 8px;
+
+    .input-search {
+        flex: 1;
+        border-radius: 8px;
+        height: 100%;
+        padding: 6px 12px;
+        background: var(--grey-background, #f2f4f7);
+    }
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 100%;
+        padding: 0 13px;
+        border: none;
+        background-color: #2e90fa;
+        border-radius: 0 6px 6px 0;
+    }
+    .icon-search {
+        font-size: 24px;
+    }
+}
+.search-title {
+    height: 30px;
+    padding: 5px 12px;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    font-weight: 600;
+    color: rgba(22, 24, 35, 0.5);
+}
+
+.search-result {
+    width: 100%;
+}
+
+// responsive
+/* Styles cho điện thoại */
+@media screen and (max-width: 576px) {
+    .search {
+        height: 32px;
+    }
+}

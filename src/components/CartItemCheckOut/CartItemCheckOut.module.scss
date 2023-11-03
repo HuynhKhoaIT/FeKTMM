@@ -1,0 +1,107 @@
+.wrapper {
+    // height: 80px;
+    position: relative;
+    border-bottom: 1px solid #eaecf0;
+    input {
+        margin-left: 64px;
+        margin-right: 27px;
+    }
+}
+
+.wrapper:last-child {
+    border-bottom: none;
+}
+
+.product {
+    .product-img {
+        max-height: 80px;
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
+    .product__info {
+        margin: auto;
+        .product__info-name {
+            font-size: 1.6rem;
+            line-height: 150%;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .product__info-memory {
+            color: #667085;
+            font-size: 1.4rem;
+            .color {
+                margin-left: 8px;
+            }
+            span {
+                color: #344054;
+            }
+        }
+    }
+}
+.cart__item-info {
+    font-size: 1.4rem;
+}
+
+.cart__item-delete:hover {
+    color: var(--primary);
+    cursor: pointer;
+}
+.cart__item-money {
+    color: var(--primary);
+}
+.cart__item-delete {
+    text-align: end;
+}
+
+.cart__gift {
+    margin: 8px 16px 8px 88px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    .cart__gift-title {
+        background-color: #edfcf2;
+        padding: 8px 20px;
+        color: #099250;
+    }
+    .cart__gift-item {
+        margin: 12px 20px;
+    }
+}
+// responsive
+/* Styles cho điện thoại */
+@media screen and (max-width: 576px) {
+    .cart__item-info {
+        text-align: end !important;
+    }
+    .product {
+        margin-top: 12px;
+    }
+    .cart__item-price {
+        color: var(--primary);
+    }
+    .quantity {
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            width: calc(100% - 92px);
+            height: 1px;
+            background-color: #344054;
+            bottom: 0;
+            right: 0;
+        }
+    }
+    .cart__gift {
+        margin: 4px 0px 16px 0px;
+    }
+    .cart__item-delete {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+    .icon-delete {
+        font-size: 1.8rem;
+    }
+}

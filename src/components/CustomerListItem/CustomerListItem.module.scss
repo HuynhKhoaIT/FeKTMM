@@ -1,0 +1,26 @@
+.wrapper {
+    padding: 24px 8px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.wrapper:last-child {
+    border-bottom: none;
+}
+
+.item-hide {
+    color: red;
+}
+
+.item-hide:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.item-active{
+    color: green;
+}
+
+.item-active:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}

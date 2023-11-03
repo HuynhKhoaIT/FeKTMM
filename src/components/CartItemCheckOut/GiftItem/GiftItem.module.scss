@@ -1,0 +1,20 @@
+.gift__item {
+    margin: 12px 0;
+    border-bottom: 1px solid #eaecf0;
+    .gift__item-img {
+        max-width: 48px;
+    }
+    .gift__item-name {
+        font-size: 1.6rem;
+        line-height: 1.7;
+        margin-left: 6px;
+    }
+}
+.gift__item:last-child {
+    border-bottom: none;
+}
+
+// responsive
+/* Styles cho điện thoại */
+@media screen and (max-width: 576px) {
+}

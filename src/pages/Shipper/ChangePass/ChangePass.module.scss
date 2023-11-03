@@ -1,0 +1,209 @@
+.section{
+    height: 10vh;
+    width: 100%;
+    font-size: 20pt;
+    font-weight: bold;
+    padding: 24px;
+    padding-left: 70px;
+    background:#FFF;
+    margin-bottom: 20px;
+}
+
+.container{
+    background: #F6F9FC;
+    width:100%;
+}
+
+.title{
+    width: 262px;
+    height: auto;
+    flex-shrink: 0;
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 35px;
+    margin-bottom: 0px;
+}
+
+
+.form_profile{
+    display: block;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    padding:10px;
+    margin-left: 10px;
+}
+
+.profile__input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-bottom: 24px;
+    margin-top: 24px;
+}
+
+.profile__input p {
+	color: #1c1c1c;
+    text-align: end;
+    width: 150px;
+    height: 41px;
+    flex-shrink: 0;
+    color: #000;
+    font-family: Inter;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    margin-right: 35px;
+    margin-top: 15px;
+}
+
+
+.profile__input input {
+	width: 400px;
+	height: 46px;
+	border: 1px solid #ebebeb;
+	font-size: 16px;
+	color: #b2b2b2;
+	border-radius: 4px;
+}
+
+.profile__input input.checkout__input__add {
+	margin-bottom: 20px;
+}
+
+.profile__input input::placeholder {
+	color: #b2b2b2;
+}
+
+.button_Luu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button_Luu input {
+    width: 150px;
+    height: 40px;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    background: #1D6FDF;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 768px) {
+    /* Quy tắc CSS áp dụng cho màn hình có chiều rộng tối đa 768px */
+    .page{
+        display:block;
+        flex-wrap: wrap;
+    }
+    
+    .title{
+        width: 262px;
+        height: 53px;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 27px;
+        color: #000000;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 35px;
+        margin-bottom: 0px;
+    }
+
+    .profile__input input {
+        width: 300px;
+        height: 35px;
+        border: 1px solid #ebebeb;
+        font-size: 16px;
+        color: #b2b2b2;
+        border-radius: 4px;
+    }
+
+    .button_Luu input {
+        width: 120px;
+        height: 32px;
+        color: #FFF;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        background: #1D6FDF;
+        margin-bottom: 20px;
+    }
+
+    
+}
+
+@media (max-width: 500px){
+    .title{
+        width: 262px;
+        height: 53px;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 25px;
+        color: #000000;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 35px;
+        margin-bottom: -10px;
+    }
+
+    .profile__input {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        height:30px;
+    }
+    
+    .profile__input p {
+        color: #1c1c1c;
+        text-align: end;
+        width: 100px;
+        height: 20px;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 200;
+        line-height: normal;
+        margin:10px;
+        margin-right: 35px;
+    }
+    
+    
+    .profile__input input {
+        width: 200px;
+        height: 25px;
+        border: 1px solid #ebebeb;
+        font-size: 12px;
+        color: #b2b2b2;
+        border-radius: 4px;
+    }
+
+    .button_Luu input {
+        width: 80px;
+        height: 25px;
+        color: #FFF;
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        background: #1D6FDF;
+        margin-bottom: 20px;
+    }
+}

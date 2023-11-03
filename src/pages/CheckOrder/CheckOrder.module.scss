@@ -1,0 +1,68 @@
+.title {
+    height: 10vh;
+    width: 100%;
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 24px 80px;
+}
+.wrapper {
+    background-color: #f6f9fc;
+    height: 90vh;
+}
+.content {
+    padding: 24px;
+}
+.profile {
+    border-radius: 6px;
+    background-color: var(--white-background);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    .profile-info {
+        padding: 48px 24px;
+        border-right: solid 1px #eaecf0;
+    }
+    .profile-avatar {
+        padding: 48px 24px;
+        border-bottom: solid 1px #eaecf0;
+    }
+}
+.heading {
+    font-weight: bold;
+}
+
+.heading div {
+    margin-bottom: 28px;
+}
+
+.info div {
+    margin-bottom: 24px;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    border: 1px solid;
+}
+
+.profile-avatar div {
+    margin-bottom: 12px;
+}
+
+.update-profile-modal input,
+.change-password-modal input {
+    border: 1px solid #eaecf0;
+    padding: 0;
+}
+.update-profile-modal div,
+.change-password-modal div {
+    padding: 4px;
+}
+
+.update-profile-modal .title-modal,
+.change-password-modal .title-modal {
+    font-weight: bold;
+}
+
+.update-profile-modal .gender label {
+    padding-right: 8px;
+}

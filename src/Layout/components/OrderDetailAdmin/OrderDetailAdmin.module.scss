@@ -1,0 +1,71 @@
+.title {
+    height: 10vh;
+    width: 100%;
+    font-size: 20pt;
+    font-weight: bold;
+    padding: 24px;
+    .arrow-left-icon {
+        padding-right: 60px;
+    }
+    .arrow-left-icon:hover {
+        opacity: 0.5;
+    }
+}
+.wrapper {
+    background-color: #f6f9fc;
+    height: 90vh;
+    overflow: auto;
+}
+.content {
+    padding: 12px;
+}
+
+.header,
+.shipment-details {
+    padding: 16px 48px;
+    border-bottom: 1px solid #eaecf0;
+    background-color: var(--white-background);
+    .order-status {
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+    h2,
+    h4 {
+        font-weight: bold;
+        margin-bottom: 12px;
+    }
+}
+.shipment-details p {
+    margin-bottom: 12px;
+}
+
+.order-details {
+    padding: 10px;
+    background-color: var(--white-background);
+}
+
+.list-items {
+    height: 280px;
+    overflow: auto;
+    border-bottom: 1px solid #eaecf0;
+}
+.total-fee {
+    background-color: var(--white-background);
+}
+
+.ship-fee,
+.order-fee {
+    padding: 4px 16px;
+    p {
+        color: #fe4672;
+    }
+}
+
+.operation {
+    background-color: var(--white-background);
+    padding: 10px;
+    .custom-large-button {
+        font-size: 16px;
+        padding: 12px 24px;
+    }
+}

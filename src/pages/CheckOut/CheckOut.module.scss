@@ -1,0 +1,495 @@
+.wrapper {
+    background-color: var(--grey-background);
+    padding-bottom: 20px;
+    position: relative;
+
+    h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        padding: 12px 0;
+        color: #1e4780;
+    }
+}
+.address {
+    padding: 30px 22px;
+    margin-bottom: 48px;
+    .address-icon {
+        color: var(--primary);
+    }
+    h3 {
+        margin-left: 12px;
+    }
+}
+.header,
+.checkout__cart-detail,
+.address,
+.payment-form,
+.order__info-form,
+.order-note {
+    border-radius: 6px;
+    background-color: var(--white-background);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.order-left {
+    gap: 8px;
+}
+.address-title {
+}
+.address-text {
+    font-size: 1.6rem;
+    div span {
+        font-weight: 700;
+    }
+    div a {
+        color: var(--primary) !important;
+        cursor: pointer;
+    }
+    .icon-repair {
+        color: var(--primary);
+        margin-right: 8px;
+    }
+}
+
+.header,
+.checkout__cart-detail {
+    padding: 5px 0;
+    font-size: 1.4rem;
+}
+
+.payment-form {
+    padding: 24px;
+
+    h3 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 145%;
+        color: #344054;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: -12px;
+            left: 0;
+        }
+    }
+    .payment-list {
+        margin-top: 36px;
+        gap: 16px;
+    }
+    .payment {
+        width: 24px;
+    }
+    label {
+        gap: 8px;
+    }
+}
+.order-note {
+    padding: 24px;
+    .order-note-text {
+        margin-bottom: 24px;
+        textarea {
+            font-size: 1.6rem !important;
+        }
+    }
+    input {
+        width: 20px;
+    }
+    label {
+        gap: 12px;
+    }
+}
+
+.order__info-form {
+    padding: 24px;
+    gap: 12px;
+    margin-left: 16px !important;
+    h3 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        line-height: 145%;
+        color: #344054;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: -12px;
+            left: 0;
+        }
+    }
+    .order__info-discount {
+        margin-top: 24px;
+        width: 100%;
+        h4 {
+            font-size: 1.8rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 145%;
+        }
+        .discount-input {
+            padding: 2px 2px 2px 12px;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #d0d5dd;
+            border-radius: 6px;
+        }
+        input {
+            flex: 1;
+            min-width: 40px;
+            font-size: 1.6rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 170%;
+        }
+        button {
+            color: var(--white-text-color);
+            font-size: 1.4rem;
+        }
+    }
+}
+
+.order__info {
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+    align-self: stretch;
+    border-radius: 4px;
+    background: #f5faff;
+    .order__info-detail {
+        width: 100%;
+        font-size: 1.4rem;
+        .subtotal,
+        .shipping-fee {
+            p {
+                font-weight: 700;
+            }
+        }
+
+        .discounted-shipping-fee,
+        .discounted,
+        .discounted-voucher {
+            p {
+                font-weight: 700;
+                color: #039855;
+            }
+        }
+    }
+    .order__info-total {
+        width: 100%;
+        font-size: 1.5rem;
+        position: relative;
+        p {
+            font-weight: 700;
+        }
+        .total-payment {
+            p {
+                font-weight: 700;
+                font-size: 1.6rem;
+                color: #f04438;
+            }
+            h4 {
+                font-size: 1.4rem;
+            }
+        }
+        &::before {
+            position: absolute;
+            content: '';
+            height: 1px;
+            width: 100%;
+            top: -16px;
+            left: 0;
+            background-color: #eaecf0;
+        }
+    }
+}
+.btn-order {
+    button {
+        border: 1px solid #d92d20;
+        width: 100%;
+        background-color: #d92d20;
+        &:hover {
+            border: 1px solid #fe2c55;
+        }
+    }
+}
+
+// change address
+.change__address {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    z-index: 999999;
+}
+.change__address-wrapper {
+    height: 100%;
+    width: 100%;
+}
+.font-size-16 {
+    font-size: 1.6rem !important;
+}
+.change__address-form {
+    background-color: var(--grey-background);
+    padding: 37px 0;
+    border-radius: 4px;
+
+    h1 {
+        padding: 0 24px;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+    }
+    form {
+        padding: 24px 37px;
+        font-size: 1.6rem !important;
+    }
+
+    h2 {
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 145%;
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 0;
+        }
+    }
+    h3 {
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 145%;
+    }
+    .button {
+        margin-top: 37px;
+    }
+    .btn-back {
+        font-size: 1.6rem;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 0px;
+    }
+    .btn-submit {
+        font-size: 1.6rem;
+        border-radius: 0px;
+    }
+    .input {
+        position: relative;
+    }
+    .error {
+        font-size: 1.4rem;
+        line-height: 170%;
+        color: #f04438;
+    }
+    .error-border {
+        border: 1px solid red;
+    }
+    .error-icon {
+        display: block !important;
+        position: absolute;
+        top: 33px;
+        right: 10px;
+    }
+}
+
+// Đặt hàng thành công
+.order__success {
+    padding: 48px;
+    color: #344054;
+    background-color: var(--white-background);
+    .order__success-full {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    h3 {
+        color: #344054;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 145%;
+    }
+    .text-1 {
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 140%;
+    }
+    .text-2 {
+        color: #475467;
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 150%;
+    }
+    .info-client-content,
+    .info-order-content {
+        padding: 24px;
+        background-color: var(--grey-background);
+    }
+    .order__info {
+        padding: 0;
+        background-color: var(--white-background);
+        .order__info-detail {
+            gap: 10px;
+        }
+        .total-payment {
+            p {
+                font-size: 2.2rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 145%;
+            }
+        }
+    }
+}
+.order__success-title {
+    h1 {
+        font-size: 2.8rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        margin-bottom: 16px;
+    }
+    p {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 170%;
+        a {
+            color: #d92d20;
+        }
+    }
+}
+
+.ordered-product {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    .product-img {
+        width: 64px;
+        margin-right: 8px;
+    }
+    h4 {
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+    }
+    .product__info-name {
+        font-size: 1.6rem;
+        line-height: 170%;
+    }
+
+    .product__info-memory {
+        color: #667085;
+        font-size: 1.4rem;
+        .color {
+            margin-left: 8px;
+        }
+        span {
+            color: #344054;
+        }
+    }
+    .product-price {
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 150%;
+    }
+    .product-quantity {
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 160%;
+        color: #667085;
+        span {
+            color: #344054;
+        }
+    }
+}
+.btn-continuel {
+    gap: 8px;
+}
+.btn-continuel a,
+.pay-back {
+    width: 310px;
+}
+.pay-back {
+    border: 1px solid var(--error-600, #d92d20);
+    background-color: #d92d20;
+    &:hover {
+        border: 1px solid var(--error-600, #d92d20);
+    }
+}
+
+// responsive
+/* Styles cho điện thoại */
+@media screen and (max-width: 576px) {
+    footer {
+        display: block;
+    }
+    .header {
+        display: none !important;
+    }
+    .address {
+        margin-bottom: 10px;
+    }
+    .order__info-form {
+        margin-top: 8px !important;
+        margin-left: calc(-0.5 * var(--bs-gutter-x)) !important;
+    }
+    .address {
+        padding: 16px 11px;
+    }
+
+    // Đặt hàng thành công
+    .order__success {
+        padding: 0;
+        .order__success-full {
+            gap: 16px;
+            .order__success-title {
+                h1 {
+                    text-align: center;
+                    margin-bottom: 8px;
+                }
+                p {
+                    text-align: justify;
+                }
+            }
+        }
+        .info-order-content {
+            gap: 14px;
+        }
+    }
+}
+/* Styles cho điện thoại nằm ngang */
+@media screen and (min-width: 576px) and (max-width: 768px) {
+}
+
+/* Styles cho máy tính bảng */
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .order__info-form {
+        margin-top: 8px !important;
+        margin-left: calc(-0.5 * var(--bs-gutter-x)) !important;
+    }
+}

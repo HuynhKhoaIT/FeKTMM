@@ -1,0 +1,35 @@
+.title {
+    height: 10vh;
+    width: 100%;
+    font-size: 16pt;
+    font-weight: bold;
+    padding: 24px 80px;
+}
+.wrapper {
+    background-color: #f6f9fc;
+    height: 90vh;
+    overflow: auto;
+}
+.content {
+    padding: 12px;
+}
+
+.statistical,
+.chart {
+    border-radius: 6px;
+    background-color: var(--white-background);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 4px;
+    .statistics {
+        padding: 12px;
+        .data {
+            border: solid 2px #eaecf0;
+            margin: 24px;
+            padding: 4px;
+        }
+    }
+}
+
+.filter-time {
+    padding: 12px;
+}

@@ -1,0 +1,250 @@
+.section{
+    height: 10vh;
+    width: 100%;
+    font-size: 20pt;
+    font-weight: bold;
+    padding: 24px;
+    padding-left: 70px;
+    background:#FFF;
+    margin-bottom: 20px;
+}
+
+.container{
+    background: #F6F9FC;
+    width:100%;
+}
+
+.title{
+    width: 290px;
+    height: auto;
+    flex-shrink: 0;
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 35px;
+    margin-bottom: 20px;
+}
+.icon{
+    width: 30px;
+    height: 30px;
+    margin: 35px;
+    margin-right: 0px;
+    margin-bottom: 20px;
+}
+.form_profile{
+    display: block;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    padding:10px;
+    margin-left: 10px;
+}
+
+.otp__input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-bottom: 24px;
+    margin-top: 24px;
+}
+
+.label {
+	color: #1c1c1c;
+    text-align: center;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    color: #000;
+    font-family: Inter;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 200;
+    line-height: normal;
+    margin-top: 15px;
+}
+
+
+.otp__input input {
+	width: 400px;
+	height: 72px;
+	border: 1px solid #ebebeb;
+	font-size: 40px;
+    text-align: center;
+	color: #000000;
+	border-radius: 4px;
+    letter-spacing: 25px;
+    font-weight: bold;
+}
+
+.otp__input input.checkout__input__add {
+	margin-bottom: 20px;
+}
+
+.otp__input input::placeholder {
+	color: #b2b2b2;
+}
+
+.button_Luu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button_Luu input {
+    width: 150px;
+    height: 40px;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    background: #1D6FDF;
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 768px) {
+    /* Quy tắc CSS áp dụng cho màn hình có chiều rộng tối đa 768px */
+    .page{
+        display:block;
+        flex-wrap: wrap;
+    }
+
+    .title{
+        width: 262px;
+        height: auto;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 27px;
+        color: #000000;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 35px;
+        margin-bottom: 0px;
+    }
+
+    .icon{
+        width: 30px;
+        height: 30px;
+        margin: 35px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .label {
+        color: #1c1c1c;
+        text-align: center;
+        width: auto;
+        height: auto;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 200;
+        line-height: normal;
+        margin-top: 15px;
+    }
+
+    .otp__input input {
+        width: 350px;
+        height: 63px;
+        border: 1px solid #ebebeb;
+        font-size: 30px;
+        text-align: center;
+        color: #000000;
+        border-radius: 4px;
+        letter-spacing: 20px;
+        font-weight: bold;
+    }
+
+    .button_Luu input {
+        width: 120px;
+        height: 32px;
+        color: #FFF;
+        font-family: Inter;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        background: #1D6FDF;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 500px){
+    .title{
+        width: 200px;
+        height: 40px;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 20px;
+        color: #000000;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 20px;
+        margin-bottom: -10px;
+    }
+
+    .icon{
+        width: 20px;
+        height: 20px;
+        margin: 20px;
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .otp__input {
+        margin-bottom: 15px;
+        margin-top: 15px;
+        height:30px;
+    }
+    
+    .label {
+        color: #1c1c1c;
+        text-align: center;
+        width: auto;
+        height: auto;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 200;
+        line-height: normal;
+        margin-top: 15px;
+    }
+    
+    
+    .otp__input input {
+        width: 250px;
+        height: 45px;
+        border: 1px solid #ebebeb;
+        font-size: 25px;
+        text-align: center;
+        color: #000000;
+        border-radius: 4px;
+        letter-spacing: 18px;
+        font-weight: bold;
+    }
+
+    .button_Luu input {
+        width: 80px;
+        height: 25px;
+        color: #FFF;
+        font-family: Inter;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 500;
+        background: #1D6FDF;
+        margin-bottom: 20px;
+    }
+}

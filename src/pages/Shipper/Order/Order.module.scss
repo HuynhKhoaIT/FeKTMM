@@ -1,0 +1,126 @@
+.section{
+    height: 10vh;
+    width: 100%;
+    font-size: 20pt;
+    font-weight: bold;
+    padding: 24px;
+    padding-left: 70px;
+    background:#FFF;
+    margin-bottom: 20px;
+}
+
+.container{
+    background: #F6F9FC;
+}
+.title{
+    width: 290px;
+    height: auto;
+    flex-shrink: 0;
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    color: #000000;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin: 35px;
+}
+
+.form_order{
+    display: block;
+    width: auto;
+    height: auto;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #FFF;
+    padding:10px;
+    margin-left: 10px;
+}
+
+
+.featured__controls {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.featured__controls ul li {
+    width: 100px;
+	list-style: none;
+	font-size: 18px;
+	color: #1c1c1c;
+	display: inline-block;
+	padding: 5px;
+    border: 1px solid #ebebeb;
+    background:#F2F4F7;
+	position: relative;
+	cursor: pointer;
+}
+
+.featured__controls ul li.active{
+    color:#1D6FDF;
+    border-bottom: 2px solid #1D6FDF;
+}
+
+.featured__controls ul li:first-child {
+	border-radius: 10px 0px 0px 10px;
+}
+
+.featured__controls ul li:last-child {
+	border-radius: 0px 10px 10px 0px;
+}
+.search{
+    width: 80%;
+    margin-bottom: 40px;
+}
+
+
+
+@media (max-width: 768px) {
+    /* Quy tắc CSS áp dụng cho màn hình có chiều rộng tối đa 768px */
+    .page{
+        display:block;
+        flex-wrap: wrap;
+        
+    }
+
+    .title{
+        width: 262px;
+        height: auto;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 27px;
+        color: #000000;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 35px;
+    }
+
+    .featured__controls ul li{
+        width: 80px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 500px){
+    .title{
+        width: 262px;
+        height: 53px;
+        flex-shrink: 0;
+        color: #000;
+        font-family: Inter;
+        font-size: 25px;
+        color: #000000;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin: 35px;
+        margin-bottom: -10px;
+    }
+
+    .featured__controls ul li{
+        width: 70px;
+        font-size: 12px;
+    }
+}
