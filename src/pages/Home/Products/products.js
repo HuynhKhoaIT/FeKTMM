@@ -10,11 +10,6 @@ import ImageSlider from '../../../components/Slider/slider';
 
 const cx = classNames.bind(styles);
 function Products() {
-    const [banners, setBanners] = useState([
-        'https://lh3.googleusercontent.com/AlIQ9zLNegLMYK3iZ0C38iJTsSuSBolyYK4SH_LmhKgohVHcmz6atxdRtydFItYjNYbhBf_ZdBKg6n0IyHbKOvC7EwqAsQc=w1920-rw',
-        'https://lh3.googleusercontent.com/AlIQ9zLNegLMYK3iZ0C38iJTsSuSBolyYK4SH_LmhKgohVHcmz6atxdRtydFItYjNYbhBf_ZdBKg6n0IyHbKOvC7EwqAsQc=w1920-rw',
-        'https://lh3.googleusercontent.com/AlIQ9zLNegLMYK3iZ0C38iJTsSuSBolyYK4SH_LmhKgohVHcmz6atxdRtydFItYjNYbhBf_ZdBKg6n0IyHbKOvC7EwqAsQc=w1920-rw',
-    ]);
 
     const [bestSellingProducts, setBestSellingProducts] = useState([
         {
@@ -67,20 +62,7 @@ function Products() {
         },
     ]);
 
-    //Lấy danh sách hình banners
-    useEffect(() => {
-        let mounted = true;
-        fetch('/api/banners')
-            .then((response) => response.json())
-            .then((banners) => {
-                if (mounted) {
-                    console.log(banners);
-                    setBanners(banners[0]._images);
-                }
-                return () => !mounted;
-            })
-            .catch((error) => alert('Failed to retrieve data'));
-    }, []);
+    
 
     // get best selling products
     useEffect(() => {
@@ -137,29 +119,9 @@ function Products() {
     }, []);
 
     return (
-        <Col xs={12} sm={8} md={8} lg={9} xl={9} className={cx('col-products')}>
-            <div className={cx('row-slider')}>
-                <Row>
-                    <ImageSlider sliderImages={banners} />
-                </Row>
-            </div>
-
-            <div className={cx('tag-wrapper')}>
-                <p>
-                    <a href="#top-sale-section">Top sale</a>
-                </p>
-                <p>
-                    <a href="#on-sale-section">Đang sale</a>
-                </p>
-                <p>
-                    <a href="#top-search-section">Tìm kiếm nhiều nhất</a>
-                </p>
-            </div>
-
-            {/* Top sale */}
+        <div className={cx('col-products')}>
             <div id="top-sale-section" className={cx('row-products')}>
-                {/* Bán chạy nhất */}
-                <p className={cx('row-products-label')}>Sản phẩm bán chạy nhất</p>
+                <h2 className={cx('row-products-label')}>Sản phẩm bán chạy nhất</h2>
                 <Row sm xs={2} md={3} lg={3} xl={5}>
                     {bestSellingProducts.map((product, index) => (
                         <div className={cx('card-wrapper')}>
@@ -225,7 +187,7 @@ function Products() {
                     }
                 </Row>
             </div>
-        </Col>
+        </div>
     );
 }
 

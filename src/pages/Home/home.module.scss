@@ -3,9 +3,45 @@
 }
 
 .main-section {
-    justify-content: space-around;
+    justify-content: space-between;
     margin-top: 22px !important;
 }
-
+.row-slider {
+    position: relative;
+    margin-bottom: 12px;
+}
 .container {
+}
+
+.menu{
+    border-radius: 8px;
+    width: 200px;
+    height: 400px;
+    position: absolute;
+    top: 40px;
+    z-index: 99;
+}
+.product-best-sale{
+    padding: 0 40px;
+    background-image:url(https://lh3.googleusercontent.com/F9Od-3pAVv2dUb7PoOlA3QEI-RU9grqSWizkSJoFPfs9FLcVYrg2luQJ8L0NPehlqFLfdwWAR0GtpZDIXN3COwavhiYY0sI=w1232);
+    height: 450px;
+    .product-best__title{
+        display: flex;
+        justify-content: space-between;
+        height: 56px;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #fff;
+        h2{
+            margin-left: 20px;
+            line-height: 56px;
+            font-size: 22px;
+            font-weight: 600;
+            color: #fff;
+        }
+        a{
+            color: #fff;
+            line-height: 56px;
+            margin-right: 22px;
+        }
+    }
 }

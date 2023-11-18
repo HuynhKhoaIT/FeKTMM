@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 :root {
-    --primary: #d70018;
+    --primary: #1d6fdf;
     --primary-text-color: #1c1f23;
     --sub-text-color: #434657;
     --white-background: #fff;
@@ -71,4 +71,17 @@ a {
     padding: 0;
     font-size: 14px;
     width: 274px;
+}
+.container{
+    max-width: 1200px;
+}
+
+
+.slick-next{
+    z-index: 9;
+    right: 25px !important;
+}
+.slick-prev{
+    z-index: 9;
+    left: 25px !important;
 }
