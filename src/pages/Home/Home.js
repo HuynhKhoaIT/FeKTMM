@@ -26,30 +26,7 @@ function Home() {
     "https://lh3.googleusercontent.com/AlIQ9zLNegLMYK3iZ0C38iJTsSuSBolyYK4SH_LmhKgohVHcmz6atxdRtydFItYjNYbhBf_ZdBKg6n0IyHbKOvC7EwqAsQc=w1920-rw",
     "https://lh3.googleusercontent.com/AlIQ9zLNegLMYK3iZ0C38iJTsSuSBolyYK4SH_LmhKgohVHcmz6atxdRtydFItYjNYbhBf_ZdBKg6n0IyHbKOvC7EwqAsQc=w1920-rw",
   ]);
-  const [bestSellingProducts, setBestSellingProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    setLoading(true);
-    const fetchBestSellingProducts = async () => {
-      try {
-        const response = await fetch(
-          "https://cnpmmnhom14.onrender.com/api/products/bestSelling/"
-        );
-        if (!response.ok) {
-          throw new Error("Request failed");
-        }
-        const data = await response.json();
-        setLoading(false);
-
-        setBestSellingProducts(data);
-      } catch (error) {
-        setLoading(false);
-
-        console.error("Không lấy được dữ liệu: ", error);
-      }
-    };
-    fetchBestSellingProducts();
-  }, []);
   //Lấy danh sách hình banners
   useEffect(() => {
     let mounted = true;
