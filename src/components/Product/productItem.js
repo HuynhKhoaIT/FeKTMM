@@ -77,7 +77,7 @@ function ProductItem(data) {
   return (
     <div className={cx("product-item")}>
       <div className={cx("product-item__img")}>
-        <img src="https://res.cloudinary.com/dawwzvnhe/image/upload/v1692778654/src/images/products/Monitor/Dell/LCD_S2421H/front1_zcl5i8.webp" />
+        <img src={data?.data?._images[0]} />
       </div>
       <div className={cx("product-item__info")}>
         <Link

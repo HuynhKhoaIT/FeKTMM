@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class VnPayPayment extends Component {
     createPayment = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/orders/vnpay_create_payment', {
+            const response = await fetch('https://cnpmmnhom14.onrender.com/api/orders/vnpay_create_payment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

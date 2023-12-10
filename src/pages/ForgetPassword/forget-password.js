@@ -39,7 +39,7 @@ function ForgetPassword() {
                 setMailError('')
                 try {
                     // Call your API to register the user
-                    const response = await fetch('/api/verification/send-otp', {
+                    const response = await fetch('https://cnpmmnhom14.onrender.com/api/verification/send-otp', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

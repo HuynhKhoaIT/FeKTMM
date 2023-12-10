@@ -140,9 +140,6 @@ function Home() {
                 </Link>
               </Col>
             </Row>
-
-            <ProductSlider dataDetail={bestSellingProducts} />
-
             <Row style={{ padding: "0 40px" }}>
               <a>
                 <img
@@ -153,10 +150,6 @@ function Home() {
                 />
               </a>
             </Row>
-            <ProductSlider dataDetail={bestSellingProducts} />
-
-            <ProductSlider dataDetail={bestSellingProducts} />
-
             <Row style={{ padding: "0 40px" }}>
               <a>
                 <img
@@ -167,12 +160,9 @@ function Home() {
                 />
               </a>
             </Row>
-            <ProductSlider dataDetail={bestSellingProducts} />
-
-            <ProductSlider dataDetail={bestSellingProducts} />
-            {/* <Row>
-                    <Products />
-                </Row> */}
+            <Row>
+              <Products />
+            </Row>
           </div>
         </div>
       </Spin>

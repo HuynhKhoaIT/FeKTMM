@@ -34,7 +34,7 @@ function Search() {
     useEffect(() => {
         const fetSearchResult = async () => {
             try {
-                const response = await fetch(`/api/products/get-by-keyId?categoryId=${data.keyId}&brandId=${data.keyId}`);
+                const response = await fetch(`https://cnpmmnhom14.onrender.com/api/products/get-by-keyId?categoryId=${data.keyId}&brandId=${data.keyId}`);
                 if (!response.ok) {
                     toast.error('Yêu cầu thất bại!')
 

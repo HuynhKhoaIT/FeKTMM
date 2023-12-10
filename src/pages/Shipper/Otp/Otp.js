@@ -28,7 +28,7 @@ function Otp() {
         if (otp.length === 6) {
             try {
                 // Call your API to register the user
-                const response = await fetch('/api/verification/shipper-reset-password', {
+                const response = await fetch('https://cnpmmnhom14.onrender.com/api/verification/shipper-reset-password', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

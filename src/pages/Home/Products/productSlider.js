@@ -5,13 +5,14 @@ import styles from "./products.module.scss";
 import classNames from "classnames/bind";
 import ProductItem from "../../../components/Product/productItem";
 const cx = classNames.bind(styles);
-export function ProductSlider({ dataDetail }) {
+export function ProductSlider({ dataDetail, title, row }) {
+  console.log("row", row);
   return (
     <Row className={cx("product-best-sale")}>
       <Col span={24}>
         <div className={cx("product-best__title")}>
           <div className={cx("title-slider__product")}>
-            <h4>SẢN PHẨM BÁN CHẠY NHẤT</h4>
+            <h4>{title}</h4>
           </div>
           <Link to={"/search"}>
             <p className={cx("pCate")}>Xem Thêm</p>
@@ -23,6 +24,8 @@ export function ProductSlider({ dataDetail }) {
           speed={500}
           slidesToShow={5}
           slidesToScroll={3}
+          rows={1}
+          slidesPerRow={row}
         >
           {dataDetail?.map((item, index) => (
             <ProductItem key={index} data={item} />

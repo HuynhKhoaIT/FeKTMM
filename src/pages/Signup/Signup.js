@@ -91,7 +91,7 @@ function Signup() {
                 setLNameError('')
                 try {
                     // Call your API to register the user
-                    const response = await fetch('/api/accounts/signup', {
+                    const response = await fetch('https://cnpmmnhom14.onrender.com/api/accounts/signup', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

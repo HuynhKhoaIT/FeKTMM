@@ -72,7 +72,7 @@ function ResetPassWordByOTPForUsers() {
                 if (checkPasswordComplexity(password)) {
                     try {
                         // Call your API to register the user
-                        const response = await fetch('/api/verification/user-reset-password', {
+                        const response = await fetch('https://cnpmmnhom14.onrender.com/api/verification/user-reset-password', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
