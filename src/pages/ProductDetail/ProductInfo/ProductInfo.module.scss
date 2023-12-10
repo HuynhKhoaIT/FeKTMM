@@ -34,7 +34,7 @@
 }
 
 .pBrandName:hover {
-    color: #1d6fdf;
+    color: var(--primary);
     cursor: pointer;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .pNewPrice {
-    color: #1d6fdf;
+    color: var(--primary);
     font-family: Nunito;
     font-size: 20px;
     font-style: normal;
