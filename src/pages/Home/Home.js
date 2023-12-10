@@ -57,7 +57,7 @@ function Home() {
         }
         return () => !mounted;
       })
-      .catch((error) => alert("Failed to retrieve data"));
+      .catch((error) => console.log("Failed to retrieve data"));
   }, []);
   const settings = {
     dots: true,
