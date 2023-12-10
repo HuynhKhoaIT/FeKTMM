@@ -1,10 +1,21 @@
 .wrapper {
     margin-top: 22px;
-}
 
+}
+.home{
+    background-color: #1F7A4F;
+    background-image: url(https://hoanghamobile.com/Content/xmas2023/bg.png);
+}
 .main-section {
     justify-content: space-between;
     margin-top: 22px !important;
+    .slick-next{
+        right: 45px !important;
+    }
+    .slick-prev{
+        z-index: 9;
+        left: 25px !important;
+    }
 }
 .row-slider {
     position: relative;
@@ -12,36 +23,89 @@
 }
 .container {
 }
-
-.menu{
-    border-radius: 8px;
-    width: 200px;
-    height: 400px;
+.sidebar{
     position: absolute;
-    top: 40px;
+    top:40px;
     z-index: 99;
+    width: 90%;
+    margin: 0 5%;
+    .menu-right{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between ;
+        padding: 10px;
+        box-shadow:0 1px 6px rgba(189, 189, 189, 0.3);
+        border-radius: 8px;
+         img {
+            border-radius: 8px;
+            transition: transform 0.3s ease; /* Hiệu ứng chuyển động */
+        }
+        
+        :hover img {
+            transform: scale(1.2); /* Tăng kích thước lên 120% khi hover */
+        }
+    }
 }
+
 .product-best-sale{
     padding: 0 40px;
-    background-image:url(https://lh3.googleusercontent.com/F9Od-3pAVv2dUb7PoOlA3QEI-RU9grqSWizkSJoFPfs9FLcVYrg2luQJ8L0NPehlqFLfdwWAR0GtpZDIXN3COwavhiYY0sI=w1232);
+    // background-image:url(https://lh3.googleusercontent.com/J3q6Macu2h1gTdwTwQtIsb5FBOVrqspUzz6LLWRz3Xq1viAaBfvFldSjA3cxrPPK0_7xpZf5wNQqrpGZEbVkvDMXwiBwyf04=rw-w3840);
     height: 450px;
     .product-best__title{
         display: flex;
         justify-content: space-between;
-        height: 56px;
+        height: 40px;
+        margin-top: 12px;
         margin-bottom: 12px;
         border-bottom: 1px solid #fff;
-        h2{
-            margin-left: 20px;
-            line-height: 56px;
-            font-size: 22px;
-            font-weight: 600;
-            color: #fff;
+        .title-slider__product{
+            position: relative;
+            h4{
+                padding: 0 20px;
+                background: #c42026;    
+                line-height: 40px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #fff;
+                margin-left: 40px;
+            }
+            ::before {
+                content: "";
+                width: 40px;
+                height: 40px;
+                position: absolute ;
+                left: 0;
+                border-top: 35px solid #c42026;
+                border-left: 40px solid #edb94b;
+            }
+            ::after{
+                content: "";
+                width: 100%;
+                height: 5px;
+                position: absolute ;
+                left: 0;
+                bottom: -1px;
+                background-color: #edb94b;
+            }
         }
+        
+       
         a{
             color: #fff;
             line-height: 56px;
             margin-right: 22px;
         }
     }
+}
+
+.sliderHome{
+    padding: 0 40px;
+    img{
+        border-radius: 8px;
+    }
+}
+
+.list-ad{
+    padding: 0 40px;
 }

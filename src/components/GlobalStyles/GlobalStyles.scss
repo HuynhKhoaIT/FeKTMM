@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Nunito:wght@200;300;400;500;600;700&display=swap');
 
 :root {
-    --primary: #1d6fdf;
-    --primary-text-color: #1c1f23;
+    --primary: #1F7A4F;
+    --primary-text-color: #1F7A4F;
     --sub-text-color: #434657;
     --white-background: #fff;
     --light-blue-color: #f6f9fc;
@@ -76,12 +76,19 @@ a {
     max-width: 1200px;
 }
 
-
 .slick-next{
     z-index: 9;
-    right: 25px !important;
+
 }
 .slick-prev{
     z-index: 9;
-    left: 25px !important;
+}
+.sliderHome{
+    .slick-next{
+       right: 25px;
+
+    }
+    .slick-prev{
+        left: 25px;
+    }
 }
