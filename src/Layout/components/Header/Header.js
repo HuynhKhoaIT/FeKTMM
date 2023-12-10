@@ -67,7 +67,7 @@ function Header() {
     if (token) {
       try {
         const response = await axios.get(
-          "http://localhost:5001/api/accounts/user",
+          "https://cnpmmnhom14.onrender.com/api/accounts/user",
           {
             headers: {
               Authorization: `Bearer ${token}`, // Gửi token trong header
