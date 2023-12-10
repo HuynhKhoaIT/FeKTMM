@@ -41,7 +41,7 @@ function ProductInfo(props) {
         if (token) {
             try {
 
-                const response = await fetch('/api/carts/add-to-cart', {
+                const response = await fetch('https://cnpmmnhom14.onrender.com/api/carts/add-to-cart', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',

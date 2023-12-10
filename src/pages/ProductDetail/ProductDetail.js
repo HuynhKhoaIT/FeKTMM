@@ -108,7 +108,7 @@ function ProductDetail({ productId }) {
     useEffect(() => {
         const fetchProductDetails = async () => {
             try {
-                const response = await fetch(`/api/products/${pId}`);
+                const response = await fetch(`https://cnpmmnhom14.onrender.com/api/products/${pId}`);
                 if (!response.ok) {
                     throw new Error('Request failed');
                 }
@@ -126,7 +126,7 @@ function ProductDetail({ productId }) {
     useEffect(() => {
         const updateClickCount = async () => {
             try {
-                const response = await fetch(`/api/products/update-click-count?pId=${pId}`, {
+                const response = await fetch(`https://cnpmmnhom14.onrender.com/api/products/update-click-count?pId=${pId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -149,7 +149,7 @@ function ProductDetail({ productId }) {
     useEffect(() => {
         const fetchProductComments = async () => {
             try {
-                const response = await fetch(`/api/reviews/${pId}`);
+                const response = await fetch(`https://cnpmmnhom14.onrender.com/api/reviews/${pId}`);
                 if (!response.ok) {
                     throw new Error('Request failed');
                 }
@@ -167,7 +167,7 @@ function ProductDetail({ productId }) {
     useEffect(() => {
         const fetchRelatedProducts = async () => {
             try {
-                const response = await fetch(`/api/products/related_products/${productDetails._categoryId}`);
+                const response = await fetch(`https://cnpmmnhom14.onrender.com/api/products/related_products/${productDetails._categoryId}`);
                 if (!response.ok) {
                     throw new Error('Request failed');
                 }

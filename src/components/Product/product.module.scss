@@ -202,7 +202,7 @@
             text-align: center;
             font-size: 12px;
             margin-bottom: 15px;
-            font-weight: 400;
+            font-weight: 500;
             color: #000;
             overflow: hidden;
             text-overflow: ellipsis; /* Hiển thị dấu ba chấm (...) khi nội dung quá dài */
@@ -210,6 +210,10 @@
             -webkit-line-clamp: 2; /* Số dòng tối đa */
             -webkit-box-orient: vertical;
             max-height: 3em; /* Chiều cao tối đa cho 2 dòng văn bản */
+            &:hover{
+                cursor: pointer;
+                color: var(--primary);
+            }
         }
         .product-price{
             display: flex;

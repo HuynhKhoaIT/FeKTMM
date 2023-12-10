@@ -30,7 +30,7 @@ function Login({ isShown = false, handleCloseForm }) {
 
             try {
                 // Call your API to register the user
-                const response = await fetch('/api/accounts/login', {
+                const response = await fetch('https://cnpmmnhom14.onrender.com/api/accounts/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

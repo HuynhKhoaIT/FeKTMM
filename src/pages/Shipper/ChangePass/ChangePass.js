@@ -70,7 +70,7 @@ function ChangePass() {
                 if (newPassword === confirmNewPassword) {
                     try {
                         // Call your API to register the user
-                        const response = await fetch('/api/shipper/profile/checkPass', {
+                        const response = await fetch('https://cnpmmnhom14.onrender.com/api/shipper/profile/checkPass', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ function ChangePass() {
                             setConfirmNewPassword('');
                             try {
                                 // Call your API to register the user
-                                const response = await fetch('/api/verification/send-otp', {
+                                const response = await fetch('https://cnpmmnhom14.onrender.com/api/verification/send-otp', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
