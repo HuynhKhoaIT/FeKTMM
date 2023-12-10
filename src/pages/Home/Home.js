@@ -30,7 +30,9 @@ function Home() {
   useEffect(() => {
     const fetchBestSellingProducts = async () => {
       try {
-        const response = await fetch("/api/products/bestSelling/");
+        const response = await fetch(
+          "https://cnpmmnhom14.onrender.com/api/products/bestSelling/"
+        );
         if (!response.ok) {
           throw new Error("Request failed");
         }
@@ -46,7 +48,7 @@ function Home() {
   //Lấy danh sách hình banners
   useEffect(() => {
     let mounted = true;
-    fetch("/api/banners")
+    fetch("https://cnpmmnhom14.onrender.com/api/banners")
       .then((response) => response.json())
       .then((banners) => {
         if (mounted) {
@@ -55,7 +57,7 @@ function Home() {
         }
         return () => !mounted;
       })
-      .catch((error) => alert("Failed to retrieve data"));
+      .catch((error) => console.log("Failed to retrieve data"));
   }, []);
   const settings = {
     dots: true,
