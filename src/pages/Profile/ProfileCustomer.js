@@ -135,7 +135,7 @@ function ProfileCustomer() {
                 }
 
                 const { data } = await profileCustomer.getUser(token);
-                setFname(data.user._fname);
+                setFname(data.user._fname); 
                 setLname(data.user._lname);
                 setEmail(data.user._email);
                 setPhone(data.user._phones ? data.user._phones[0] : '');
