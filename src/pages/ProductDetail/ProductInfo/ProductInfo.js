@@ -3,27 +3,27 @@ import { useState } from 'react';
 import styles from './ProductInfo.module.scss';
 import classNames from 'classnames/bind';
 import { AddIcon, MinusIcon } from '../../../components/Icons';
-import { Link, Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
-function ProductInfo(props) {
+function ProductInfo({ dataDetail }) {
+    console.log('dataDetail', dataDetail);
     const token = localStorage.getItem('token');
     const [quantity, setQuantity] = useState(1);
 
     const handleAddQuantity = () => {
-        if (props.quantity === 0) {
+        if (dataDetail?._quantity === 0) {
             alert('Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!');
         } else {
-            quantity < props.quantity
+            quantity < dataDetail?._quantity
                 ? setQuantity((prevQuantity) => prevQuantity + 1)
                 : alert('Không được vượt quá số lượng sản phẩm trong kho');
         }
     };
 
     const handleMinusQuantity = () => {
-        if (props.quantity === 0) {
+        if (dataDetail?._quantity === 0) {
             alert('Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!');
         } else {
             if (quantity > 1) {
