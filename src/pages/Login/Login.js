@@ -7,6 +7,7 @@ import { GoogleIcon, FacebookIcon, CloseIcon, HomeIcon } from '../../components/
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
+import { CloseOutlined } from '@ant-design/icons';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -14,7 +15,14 @@ import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-function Login({ isShown = false, handleCloseForm }) {
+function Login({
+    isShown = false,
+    handleCloseForm,
+    fetchUserInfo,
+    setUser,
+    setShowModalSignup,
+    setShowModalForgetPassWord,
+}) {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -41,13 +49,15 @@ function Login({ isShown = false, handleCloseForm }) {
                 const data = await response.json();
                 if (response.ok) {
                     // Registration was successful
-                    setIsLoggedIn(true);
                     localStorage.setItem('token', data.token);
+                    setIsLoggedIn(true);
+                    handleCloseForm();
+                    fetchUserInfo();
                     toast.success('Đăng nhập thành công!');
                 } else {
                     // Registration failed
                     setError(data.message);
-                    toast.info('Đăng nhập thất bại!');
+                    toast.success('Đăng nhập thất bại!');
                 }
             } catch (error) {
                 setError('Đăng nhập thất bại, vui lòng thử lại!');
@@ -63,6 +73,10 @@ function Login({ isShown = false, handleCloseForm }) {
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
+    const hanleSignUp = () => {
+        handleCloseForm();
+        setShowModalSignup(true);
+    };
 
     return (
         <>
@@ -70,6 +84,7 @@ function Login({ isShown = false, handleCloseForm }) {
                 <div className={cx('form-wrapper')}>
                     <form className={cx('loginForm')} onSubmit={handleSubmit}>
                         <div className={cx('icons-wrapper')}>
+                            <p className={cx('form-title')}>Đăng nhập</p>
                             <div onClick={handleCloseForm}>
                                 <CloseIcon
                                     className={cx('close-icon-wrapper', 'icon', `${!isShown ? 'hidden' : ''}`)}
@@ -80,7 +95,6 @@ function Login({ isShown = false, handleCloseForm }) {
                                     <HomeIcon width={24} height={24} />
                                 </div>
                             </Link>
-                            <p className={cx('form-title')}>Đăng nhập</p>
                         </div>
 
                         <div className={cx('input-wrapper')}>
@@ -123,18 +137,13 @@ function Login({ isShown = false, handleCloseForm }) {
                             </div>
                         </div>
                         <div className={cx('redirect-options', 'option-SignUp')}>
-                            <p>
-                                Chưa có tài khoản?{' '}
-                                <Link to={'/signup'} onClick={handleCloseForm}>
-                                    Đăng ký ngay
-                                </Link>
-                            </p>
+                            <p>Chưa có tài khoản?</p> <a onClick={hanleSignUp}>Đăng ký ngay</a>
                         </div>
                         <div className={cx('btns-group-control')}>
                             <button className={cx('btn', 'btn-SignIn')} type="submit">
                                 Đăng nhập
                             </button>
-                            <p className={cx('options-title')}>-Or-</p>
+                            {/* <p className={cx('options-title')}>-Or-</p>
                             <div className={cx('option-signIn')}>
                                 <button className={cx('btn', 'btn-SignIn-google')}>
                                     <GoogleIcon />
@@ -144,17 +153,23 @@ function Login({ isShown = false, handleCloseForm }) {
                                     <FacebookIcon width="24" height="24" />
                                     <Link to={'/'}> Đăng nhập bằng Facebook</Link>
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                         <div className={cx('redirect-options', 'option-forgetPw')}>
-                            <p>
-                                Quên mật khẩu? <Link to={'/forget-password'}>Đặt lại mật khẩu ngay</Link>
-                            </p>
+                            <p>Quên mật khẩu? </p>
+                            <a
+                                onClick={() => {
+                                    setShowModalForgetPassWord(true);
+                                    handleCloseForm();
+                                }}
+                            >
+                                Đặt lại mật khẩu ngay
+                            </a>
                         </div>
                     </form>
                 </div>
             ) : (
-                navigate('/cart')
+                navigate('/')
             )}
         </>
     );

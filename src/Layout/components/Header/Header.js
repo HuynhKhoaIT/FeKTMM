@@ -29,19 +29,42 @@ import { useEffect, useState } from "react";
 import Login from "../../../pages/Login/Login";
 import * as categoryService from "../../../services/categoryService";
 import axios from "axios";
+import Signup from "../../../pages/Signup/Signup";
+import ForgetPassword from "../../../pages/ForgetPassword/forget-password";
+import ResetPassWordByOTPForUsers from "../../../pages/ForgetPassword/ResetPassWordByOTPForUsers/ResetPassWordByOTPForUsers";
+import * as cartService from "../../../services/cartService";
 
 const cx = classNames.bind(styles);
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showModalSignup, setShowModalSignup] = useState(false);
+  const [showModalForgetPassword, setShowModalForgetPassWord] = useState(false);
+  const [showModalRessetPassword, setShowModalRessetPassword] = useState(false);
+
   const [category, setCategory] = useState([]);
+  const [user, setUser] = useState();
   const capitalizeFirstLetter = (word) => {
     if (!word) {
       return ""; // Return an empty string or handle the case when word is undefined or empty
     } else return word.charAt(0).toUpperCase() + word.slice(1);
   };
-  const savedLengthCart = localStorage.getItem("lengthCart");
+
+  const [savedLengthCart, setSavedLengthCart] = useState();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const data = await cartService.getCartByUserId(token);
+        setSavedLengthCart(data?.length);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -77,6 +100,7 @@ function Header() {
 
         if (response.status === 200) {
           const userData = response.data;
+          setUser(userData);
           localStorage.setItem("userName", userData._fname);
         }
       } catch (error) {
@@ -100,6 +124,7 @@ function Header() {
     window.location.reload();
   };
 
+  console.log("showModalSignup", showModalSignup);
   return (
     <header>
       <div className={cx("row", "header__top")}>
@@ -326,6 +351,7 @@ function Header() {
                     className={cx("icon-user")}
                     icon={faCircleUser}
                     color="var(--primary)"
+                    onClick={handleShowLoginForm}
                   />
                   <div className={cx("nav__text", "d-none d-lg-block")}>
                     {!userName ? (
@@ -361,7 +387,7 @@ function Header() {
                         hideOnClick
                       >
                         <div className={cx("d-flex")}>
-                          <p>{userName}</p>
+                          <p>{user?._fname}</p>
                           <FontAwesomeIcon
                             icon={faSortDown}
                             className={cx("icon-down")}
@@ -449,6 +475,37 @@ function Header() {
           <Login
             isShown={showModal}
             handleCloseForm={() => handleCloseForm()}
+            fetchUserInfo={fetchUserInfo}
+            setUser={setUser}
+            setShowModalForgetPassWord={setShowModalForgetPassWord}
+            setShowModalSignup={setShowModalSignup}
+          />
+        </div>
+      )}
+      {showModalSignup && (
+        <div className={cx("form-modal-wrapper")}>
+          <Signup
+            isShown={showModalSignup}
+            setShowModalSignup={setShowModalSignup}
+            setShowModal={setShowModal}
+          />
+        </div>
+      )}
+      {showModalForgetPassword && (
+        <div className={cx("form-modal-wrapper")}>
+          <ForgetPassword
+            isShown={showModalForgetPassword}
+            setShowModalForgetPassWord={setShowModalForgetPassWord}
+            fetchUserInfo={fetchUserInfo}
+            setShowModalRessetPassword={setShowModalRessetPassword}
+          />
+        </div>
+      )}
+      {showModalRessetPassword && (
+        <div className={cx("form-modal-wrapper")}>
+          <ResetPassWordByOTPForUsers
+            setShowModal={setShowModal}
+            setShowModalRessetPassword={setShowModalRessetPassword}
           />
         </div>
       )}

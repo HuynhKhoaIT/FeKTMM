@@ -63,34 +63,35 @@ function ProductInfo(props) {
         }
     };
 
-    const handleCheckOutClick = (quantity) => {
-        if (props.quantity === 0) {
+    const handleCheckOutClick = () => {
+        if (dataDetail?._quantity === 0) {
             alert('Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!');
         }
-        sessionStorage.setItem('selectedProductsId', props.pId);
-        sessionStorage.setItem('selectedQuntity', quantity);
     };
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('flex-item', 'pInfo')}>
-                <p className={cx('pName')}>{props.name}</p>
+                <p className={cx('pName')}>{dataDetail?._name}</p>
                 <p className={cx('pBrand-wrapper')}>
-                    Thương hiệu: <span className={cx('pBrandName')}>{props.brand}</span>
+                    Thương hiệu: <span className={cx('pBrandName')}>{dataDetail?._brand}</span>
                 </p>
                 <div className={cx('price-group')}>
                     <p className={cx('pNewPrice')}>
-                        {(props.oldPrice - props.oldPrice * (props.salePercents / 100)).toLocaleString('vi-VN')}đ
+                        {(dataDetail?._price - dataDetail?._price * (dataDetail?._salePercent / 100)).toLocaleString(
+                            'vi-VN',
+                        )}
+                        đ
                     </p>
-                    <p className={cx('pOldPrice')}>{props.oldPrice.toLocaleString('vi-VN')}đ</p>
+                    <p className={cx('pOldPrice')}>{dataDetail?._price.toLocaleString('vi-VN')}đ</p>
                 </div>
-                {props.quantity === 0 ? (
+                {dataDetail?._quantity === 0 ? (
                     <p className={cx('pStatus-wrapper')}>
                         Tình trạng: <span className={cx('pStatus')}> Hết hàng</span>
                     </p>
                 ) : (
                     <p className={cx('pStatus-wrapper')}>
-                        Số lượng kho: <span className={cx('pStatus')}> {props.quantity} </span>
+                        Số lượng kho: <span className={cx('pStatus')}> {dataDetail?._quantity} </span>
                     </p>
                 )}
             </div>
@@ -107,19 +108,24 @@ function ProductInfo(props) {
                         <AddIcon />
                     </div>
                 </div>
-            </div>
-            <div className={cx('flex-item', 'buttons-group')}>
-                <button type="button" className={cx('btn', 'buy-btn')} onClick={() => handleCheckOutClick(quantity)}>
-                    <Link to={'/cart/checkout'}>Mua ngay</Link>
-                </button>
                 <button
                     type="button"
                     className={cx('btn', 'add-to-cart-btn')}
-                    onClick={() => handleAddToCartClick(props.pId, quantity)}
+                    onClick={() => handleAddToCartClick(dataDetail?._pId, quantity)}
                 >
                     Thêm vào giỏ
                 </button>
             </div>
+            {/* <div className={cx("flex-item", "buttons-group")}>
+        <button type="button" className={cx('btn', 'buy-btn')} onClick={() => handleCheckOutClick}><Link to={'/cart/checkout'}>Mua ngay</Link></button>
+        <button
+          type="button"
+          className={cx("btn", "add-to-cart-btn")}
+          onClick={() => handleAddToCartClick(dataDetail?._pId, quantity)}
+        >
+          Thêm vào giỏ
+        </button>
+      </div> */}
         </div>
     );
 }
