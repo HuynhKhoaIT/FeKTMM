@@ -33,8 +33,9 @@ function OrderDetailAdmin({ id, rollbackListOrder }) {
         toast.success('Thao tác thành công');
     };
     const cancelOrder = async (orderId) => {
-        const result = await orderAdminService.updateOrder(orderId, { _status: 3 });
+        const result = await orderAdminService.updateOrder(orderId, { _status: 4 });
         if (result === 1) {
+            toast.success('Huỷ thành công');
             setReloadData(true);
         }
     };
@@ -60,10 +61,12 @@ function OrderDetailAdmin({ id, rollbackListOrder }) {
                                 )}
                             >
                                 {order._status === 0 ? (
-                                    <p>Chưa giao</p>
+                                    <p>Chưa xác nhận</p>
                                 ) : order._status === 1 ? (
-                                    <p>Đang giao</p>
+                                    <p>Đã xác nhận</p>
                                 ) : order._status === 2 ? (
+                                    <p>Đang giao</p>
+                                ) : order._status === 3 ? (
                                     <p>Đã giao</p>
                                 ) : (
                                     <p>Đã hủy</p>

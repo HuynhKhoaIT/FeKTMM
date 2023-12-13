@@ -11,9 +11,9 @@ import { Chart as chartjs } from 'chart.js/auto';
 const cx = classNames.bind(styles);
 function Statistical() {
     const [tagCurrent, setTagcurrent] = useState(1);
-    const [datamoney, setDatarmoney] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 12648000, 212648000, 1836000]);
-    const [datauser, setDatausser] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 6]);
-    const [dataorder, setDataoder] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 20, 18]);
+    const [datamoney, setDatarmoney] = useState([]);
+    const [datauser, setDatausser] = useState([]);
+    const [dataorder, setDataoder] = useState([]);
     useEffect(() => {
         const fetchApi = async () => {
             const result1 = await orderAdminService.getStaticOrders();
