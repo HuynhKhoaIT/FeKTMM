@@ -117,26 +117,7 @@ function Home() {
                 </Link>
               </Col>
             </Row>
-            <Row style={{ padding: "0 40px" }}>
-              <a>
-                <img
-                  style={{ width: "auto", height: "115px" }}
-                  src={
-                    "https://cdn.hoanghamobile.com/i/home/Uploads/2023/12/07/chuyen-muc-noen-1.gif"
-                  }
-                />
-              </a>
-            </Row>
-            <Row style={{ padding: "0 40px" }}>
-              <a>
-                <img
-                  style={{ width: "100%" }}
-                  src={
-                    "https://cdn.hoanghamobile.com/i/home/Uploads/2023/12/01/redmi-note12-04.jpg"
-                  }
-                />
-              </a>
-            </Row>
+
             <Row>
               <Products />
             </Row>

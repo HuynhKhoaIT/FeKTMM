@@ -84,6 +84,7 @@
     display: flex;
     align-items: center;
     margin-top: 12px;
+    gap: 16px;
 }
 
 .choose-quantity-title {
@@ -159,9 +160,8 @@
 
 .btn {
     display: flex;
-    margin-top: 6px;
-    width: 40%;
     height: 38px;
+    padding: 0 12px;
     justify-content: center;
     align-items: center;
     gap: 8px;

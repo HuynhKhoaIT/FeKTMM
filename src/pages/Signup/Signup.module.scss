@@ -74,6 +74,7 @@
 
 .password-input {
     width: 100%;
+    padding-right: 30px;
 }
 
 .password-input-wrapper input {
@@ -87,6 +88,7 @@
     transform: translateY(-50%);
     cursor: pointer;
 }
+
 
 .option-SignUp p {
     color: #000;
@@ -203,16 +205,16 @@
     font-weight: 600;
     line-height: 150%; /* 21px */
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.redirect-options p a {
-    color: var(--primary-color, #1d6fdf);
+.redirect-options a {
+    color: #1d6fdf !important;
     font-family: Nunito;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 150%;
 }
 
 .redirect-options p a:hover {

@@ -5,25 +5,37 @@ import styles from "./products.module.scss";
 import classNames from "classnames/bind";
 import ProductItem from "../../../components/Product/productItem";
 const cx = classNames.bind(styles);
-export function ProductSlider({ dataDetail, title, row }) {
-  console.log("row", row);
+export function ProductSlider({
+  dataDetail,
+  title,
+  row,
+  styles,
+  slidesToShow = 5,
+  slidesToScroll = 3,
+  dots = false,
+  infinite,
+}) {
+  console.log("styles", styles);
   return (
-    <Row className={cx("product-best-sale")}>
+    <Row className={cx("product-best-sale")} style={styles}>
       <Col span={24}>
-        <div className={cx("product-best__title")}>
-          <div className={cx("title-slider__product")}>
-            <h4>{title}</h4>
+        {title !== undefined ?? (
+          <div className={cx("product-best__title")}>
+            <div className={cx("title-slider__product")}>
+              <h4>{title}</h4>
+            </div>
+            <Link to={"/search"}>
+              <p className={cx("pCate")}>Xem Thêm</p>
+            </Link>
           </div>
-          <Link to={"/search"}>
-            <p className={cx("pCate")}>Xem Thêm</p>
-          </Link>
-        </div>
+        )}
+
         <Slider
-          dots={false}
+          dots={dots}
           infinite={true}
           speed={500}
-          slidesToShow={5}
-          slidesToScroll={3}
+          slidesToShow={slidesToShow}
+          slidesToScroll={slidesToScroll}
           rows={1}
           slidesPerRow={row}
         >
