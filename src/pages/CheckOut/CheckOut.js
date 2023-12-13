@@ -545,10 +545,10 @@ function CheckOut() {
                         "d-flex justify-content-between"
                       )}
                     >
-                      <div className={cx("col-lg-4", "text-1")}>
+                      {/* <div className={cx("col-lg-4", "text-1")}>
                         Mã đơn hàng
                       </div>
-                      <div className={cx("col-lg-8", "text-2")}>ASC124osm</div>
+                      <div className={cx("col-lg-8", "text-2")}>ASC124osm</div> */}
                     </div>
                     <div
                       className={cx(

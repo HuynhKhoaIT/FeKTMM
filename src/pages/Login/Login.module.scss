@@ -55,11 +55,17 @@
 .form-input {
     margin-bottom: 12px;
     display: inline-flex;
-    padding: 6px 72px 6px 6px;
+    padding: 6px 20px 6px 6px;
     align-items: center;
     border-radius: 2px;
     border: 1px solid #434657;
     background: #fff;
+
+}
+
+.password-input{
+    padding: 6px 30px 6px 6px;
+
 }
 
 .password-input-wrapper {
@@ -82,6 +88,14 @@
     transform: translateY(-50%);
     cursor: pointer;
 }
+.option-SignUp{
+    display: flex;
+    align-items: center ;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 12px;
+
+}
 
 .option-SignUp p {
     color: #000;
@@ -91,11 +105,11 @@
     font-weight: 600;
     line-height: 150%; /* 21px */
     text-align: center;
-    margin-top: 12px;
 }
 
-.option-SignUp p a {
-    color: var(--primary-color, #1d6fdf);
+.option-SignUp a {
+    cursor: pointer;
+    color: #1d6fdf !important;
     font-family: Nunito;
     font-size: 14px;
     font-style: normal;
@@ -198,16 +212,17 @@
     font-weight: 600;
     line-height: 150%; /* 21px */
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.redirect-options p a {
-    color: var(--primary-color, #1d6fdf);
+.redirect-options a {
+    color: #1d6fdf !important;
     font-family: Nunito;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: 150%;
+    margin-left: 8px;
 }
 
 .redirect-options p a:hover {
