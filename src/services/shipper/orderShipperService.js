@@ -23,6 +23,15 @@ export const getShipperOrders = async (shipperId) => {
         throw new Error('Lỗi trong quá trình lấy danh sách đơn hàng');
     }
 };
+export const getOrdersbyStatus = async () => {
+    try {
+        const res = await httprequest.get(`/admin/orders/order-status-1`, {});
+        return res;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Lỗi trong quá trình lấy danh sách đơn hàng');
+    }
+};
 
 export const getOrder = async (orderId) => {
     try {

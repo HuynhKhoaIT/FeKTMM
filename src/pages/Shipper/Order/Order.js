@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './Order.module.scss'
+import styles from './Order.module.scss';
 import classNames from 'classnames/bind';
 import Search from '../../../Layout/components/Search';
 import ListOrder from './ListOrder/ListOrder';
@@ -10,7 +10,7 @@ import * as orderShipperService from '../../../services/shipper/orderShipperServ
 import * as profileShipperService from '../../../services/shipper/profileShipperService';
 import { Navigate } from 'react-router-dom';
 
-const cx = classNames.bind(styles)
+const cx = classNames.bind(styles);
 
 function Order() {
     const [uid, setUid] = useState(null);
@@ -18,6 +18,10 @@ function Order() {
     const [reloadData, setReloadData] = useState(true);
     const [orderListItems, setOrderListItems] = useState([]);
     const [orderListItemTagCurrent, setOrderListItemTagCurrent] = useState([]);
+    const [status1, setStatus1] = useState([]);
+    const [status2, setStatus2] = useState([]);
+    const [status3, setStatus3] = useState([]);
+    const [status4, setStatus4] = useState([]);
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -31,8 +35,7 @@ function Order() {
             setUid(user._id);
         };
         fetchApi();
-            
-    },[])
+    }, []);
 
     useEffect(() => {
         if (!uid) {
@@ -41,8 +44,18 @@ function Order() {
         }
         const fetchApi = async () => {
             const result = await orderShipperService.getShipperOrders(uid);
+
+            const filteredOrdersby1 = result.filter((order) => order._status === 1);
+            const filteredOrdersby2 = result.filter((order) => order._status === 2);
+            const filteredOrdersby3 = result.filter((order) => order._status === 3);
+            const filteredOrdersby4 = result.filter((order) => order._status === 4);
+            setStatus1(filteredOrdersby1);
+            setStatus2(filteredOrdersby2);
+            setStatus3(filteredOrdersby3);
+            setStatus4(filteredOrdersby4);
+
             setOrderListItems(result);
-            setOrderListItemTagCurrent(result);
+            setOrderListItemTagCurrent(filteredOrdersby1);
         };
         if (reloadData) {
             fetchApi();
@@ -52,33 +65,22 @@ function Order() {
 
     const [tagCurrent, setTagcurrent] = useState(1);
     const filter = (tag) => {
-        setOrderListItemTagCurrent(orderListItems);
+        setOrderListItemTagCurrent(status1);
         if (tag === 1) {
             setTagcurrent(1);
+            setOrderListItemTagCurrent(status1);
         }
         if (tag === 2) {
             setTagcurrent(2);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 0),
-            );
+            setOrderListItemTagCurrent(status2);
         }
         if (tag === 3) {
             setTagcurrent(3);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 1),
-            );
+            setOrderListItemTagCurrent(status3);
         }
         if (tag === 4) {
             setTagcurrent(4);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 2),
-            );
-        }
-        if (tag === 5) {
-            setTagcurrent(5);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 3),
-            );
+            setOrderListItemTagCurrent(status4);
         }
     };
     const [currentPage, setCurrentPage] = useState(1); // page mặc định là 1
@@ -92,10 +94,8 @@ function Order() {
     const currentItems = orderListItemTagCurrent.slice(startIndex, endIndex); // item cho page hiện tại
 
     const comfirmOrder = async (orderId) => {
-        const result = await orderShipperService.comfirmOrder(orderId, { _status: 1, _shipperId: uid });
-        if (result === 1) {
-            setReloadData(true);
-        }
+        const result = await orderShipperService.comfirmOrder(orderId, { _status: 2, _shipperId: uid });
+        setReloadData(true);
     };
 
     const comfirmItem = (orderId) => {
@@ -106,24 +106,22 @@ function Order() {
     };
 
     const updateOrder = async (orderId) => {
-        const result = await orderShipperService.updateOrder(orderId, { _status: 2});
-        if (result === 1) {
-            setReloadData(true);
-        }
+        const result = await orderShipperService.updateOrder(orderId, { _status: 3 });
+
+        setReloadData(true);
     };
 
     const updateItem = (orderId) => {
-        const shouldUpdate = window.confirm('Bạn muốn giao đơn này không?');
+        const shouldUpdate = window.confirm('Xác nhận đã giao đơn hàng này');
         if (shouldUpdate) {
             updateOrder(orderId);
         }
     };
 
     const cancelOrder = async (orderId) => {
-        const result = await orderShipperService.updateOrder(orderId, { _status: 3 });
-        if (result === 1) {
-            setReloadData(true);
-        }
+        const result = await orderShipperService.updateOrder(orderId, { _status: 4 });
+
+        setReloadData(true);
     };
 
     const cancelItem = (orderId) => {
@@ -133,8 +131,7 @@ function Order() {
         }
     };
 
-
-    return (  
+    return (
         <div className={cx('d-flex', 'page')}>
             {shouldNavigate ? <Navigate to="/login" /> : null}
             <div className={cx('col-lg-3 col-xl-2 d-none d-xl-block', 'sidebar-wrapper')}>
@@ -145,8 +142,8 @@ function Order() {
             </div>
             <div className={cx('container')}>
                 <div className={cx('d-flex align-items-center', 'section')}>Đơn hàng</div>
-                <div className={cx('row justify-content-center','col-lg-12')} style={{ marginBottom: '50px'}}>
-                    <div className={cx('form_order','row justify-content-center','col-lg-11')}>
+                <div className={cx('row justify-content-center', 'col-lg-12')} style={{ marginBottom: '50px' }}>
+                    <div className={cx('form_order', 'row justify-content-center', 'col-lg-11')}>
                         <div className={cx('float-left', 'd-flex')}>
                             <p className={cx('title')}>Đơn hàng</p>
                         </div>
@@ -155,75 +152,67 @@ function Order() {
                                 <div className={cx('featured__controls')}>
                                     <ul>
                                         {tagCurrent === 1 ? (
-                                            <li className={cx('active')} >Tất cả</li>) : (
-                                                <li
-                                                    onClick={() => {
-                                                        filter(1);
-                                                        setCurrentPage(1);
-                                                    }}
-                                                >
-                                                    Tất cả
-                                                </li>
-                                            )
-                                        }
+                                            <li className={cx('active')}>Tất cả</li>
+                                        ) : (
+                                            <li
+                                                onClick={() => {
+                                                    filter(1);
+                                                    setCurrentPage(1);
+                                                }}
+                                            >
+                                                Tất cả
+                                            </li>
+                                        )}
+
                                         {tagCurrent === 2 ? (
-                                            <li className={cx('active')} >Chưa giao</li>) : (
-                                                <li
-                                                    onClick={() => {
-                                                        filter(2);
-                                                        setCurrentPage(1);
-                                                    }}
-                                                >
-                                                    Chưa giao
-                                                </li>
-                                            )
-                                        }
+                                            <li className={cx('active')}>Đang giao</li>
+                                        ) : (
+                                            <li
+                                                onClick={() => {
+                                                    filter(2);
+                                                    setCurrentPage(1);
+                                                }}
+                                            >
+                                                Đang giao
+                                            </li>
+                                        )}
                                         {tagCurrent === 3 ? (
-                                            <li className={cx('active')} >Đang giao</li>) : (
-                                                <li
-                                                    onClick={() => {
-                                                        filter(3);
-                                                        setCurrentPage(1);
-                                                    }}
-                                                >
-                                                    Đang giao
-                                                </li>
-                                            )
-                                        }
+                                            <li className={cx('active')}>Đã giao</li>
+                                        ) : (
+                                            <li
+                                                onClick={() => {
+                                                    filter(3);
+                                                    setCurrentPage(1);
+                                                }}
+                                            >
+                                                Đã giao
+                                            </li>
+                                        )}
                                         {tagCurrent === 4 ? (
-                                            <li className={cx('active')} >Đã giao</li>) : (
-                                                <li
-                                                    onClick={() => {
-                                                        filter(4);
-                                                        setCurrentPage(1);
-                                                    }}
-                                                >
-                                                    Đã giao
-                                                </li>
-                                            )
-                                        }
-                                        {tagCurrent === 5 ? (
-                                            <li className={cx('active')} >Hủy</li>) : (
-                                                <li
-                                                    onClick={() => {
-                                                        filter(5);
-                                                        setCurrentPage(1);
-                                                    }}
-                                                >
-                                                    Hủy
-                                                </li>
-                                            )
-                                        }
+                                            <li className={cx('active')}>Hủy</li>
+                                        ) : (
+                                            <li
+                                                onClick={() => {
+                                                    filter(4);
+                                                    setCurrentPage(1);
+                                                }}
+                                            >
+                                                Hủy
+                                            </li>
+                                        )}
                                     </ul>
                                 </div>
                             </div>
-                            <div className={cx('col-lg-12')} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <div
+                                className={cx('col-lg-12')}
+                                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                            >
                                 <div className={cx('col-lg-8', 'search')}>
-                                    <Search/>
+                                    <Search />
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div className={cx('row align-items-center', 'order-detail')}>
                             <ListOrder>
                                 {currentItems.map((item) => (
@@ -235,84 +224,81 @@ function Order() {
                                             updateItem={() => updateItem(item._id)}
                                             comfirmItem={() => comfirmItem(item._id)} // Hàm xóa sản phẩm
                                         />
-                                        </div>
+                                    </div>
                                 ))}
                             </ListOrder>
                         </div>
-                    
 
-                    <div className={cx('d-flex justify-content-center', 'paging')} style={{marginBottom: '30px',marginTop: '20px'}}>
-                        {totalPages > 1 ? (
-                            <ul className={cx('pagination pagination-lg')}>
-                                {currentPage === 1 ? (
-                                    <li className={cx('page-item disabled')}>
-                                        <span className={cx('page-link')}>Trước</span>
-                                    </li>
-                                ) : (
-                                    <li className={cx('page-item')}>
-                                        <span
-                                            onClick={() => setCurrentPage(currentPage - 1)}
-                                            className={cx('page-link')}
-                                        >
-                                            Trước
-                                        </span>
-                                    </li>
-                                )}
-                                {pageItems.map((index) =>
-                                    currentPage === index ? (
-                                        <li className={cx('page-item active')}>
-                                            <span className={cx('page-link')}>{index}</span>
+                        <div
+                            className={cx('d-flex justify-content-center', 'paging')}
+                            style={{ marginBottom: '30px', marginTop: '20px' }}
+                        >
+                            {totalPages > 1 ? (
+                                <ul className={cx('pagination pagination-lg')}>
+                                    {currentPage === 1 ? (
+                                        <li className={cx('page-item disabled')}>
+                                            <span className={cx('page-link')}>Trước</span>
                                         </li>
                                     ) : (
                                         <li className={cx('page-item')}>
                                             <span
-                                                onClick={() => setCurrentPage(index)}
+                                                onClick={() => setCurrentPage(currentPage - 1)}
                                                 className={cx('page-link')}
                                             >
-                                                {index}
+                                                Trước
                                             </span>
                                         </li>
-                                    ),
-                                )}
-                                {currentPage === totalPages ? (
-                                    <li className={cx('page-item disabled')}>
-                                        <span className={cx('page-link')}>Sau</span>
-                                    </li>
-                                ) : (
-                                    <li className={cx('page-item')}>
-                                        <span
-                                            onClick={() => setCurrentPage(currentPage + 1)}
-                                            className={cx('page-link')}
-                                        >
-                                            Sau
-                                        </span>
-                                    </li>
-                                )}
-                            </ul>
-                            ) : (<ul className={cx('pagination pagination-lg')}>
-                                {pageItems.map((index) =>
-                                    currentPage === index ? (
-                                        <li className={cx('page-item active')}>
-                                            <span className={cx('page-link')}>{index}</span>
+                                    )}
+                                    {pageItems.map((index) =>
+                                        currentPage === index ? (
+                                            <li className={cx('page-item active')}>
+                                                <span className={cx('page-link')}>{index}</span>
+                                            </li>
+                                        ) : (
+                                            <li className={cx('page-item')}>
+                                                <span onClick={() => setCurrentPage(index)} className={cx('page-link')}>
+                                                    {index}
+                                                </span>
+                                            </li>
+                                        ),
+                                    )}
+                                    {currentPage === totalPages ? (
+                                        <li className={cx('page-item disabled')}>
+                                            <span className={cx('page-link')}>Sau</span>
                                         </li>
                                     ) : (
                                         <li className={cx('page-item')}>
                                             <span
-                                                onClick={() => setCurrentPage(index)}
+                                                onClick={() => setCurrentPage(currentPage + 1)}
                                                 className={cx('page-link')}
                                             >
-                                                {index}
+                                                Sau
                                             </span>
                                         </li>
-                                    ),
-                                )}
-                            </ul> )}
+                                    )}
+                                </ul>
+                            ) : (
+                                <ul className={cx('pagination pagination-lg')}>
+                                    {pageItems.map((index) =>
+                                        currentPage === index ? (
+                                            <li className={cx('page-item active')}>
+                                                <span className={cx('page-link')}>{index}</span>
+                                            </li>
+                                        ) : (
+                                            <li className={cx('page-item')}>
+                                                <span onClick={() => setCurrentPage(index)} className={cx('page-link')}>
+                                                    {index}
+                                                </span>
+                                            </li>
+                                        ),
+                                    )}
+                                </ul>
+                            )}
                         </div>
                     </div>
-                                   
                 </div>
-            </div> 
+            </div>
         </div>
-    )
+    );
 }
-export default Order;;
+export default Order;

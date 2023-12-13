@@ -9,6 +9,24 @@ export const getAllOrders = async () => {
         throw new Error('Lỗi trong quá trình lấy danh sách đơn hàng');
     }
 };
+export const getStaticOrders = async () => {
+    try {
+        const res = await httprequest.get(`/admin/orders/static-order`);
+        return res;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Lỗi trong quá trình lấy danh sách đơn hàng');
+    }
+};
+export const getStaticOrdersIncome = async () => {
+    try {
+        const res = await httprequest.get(`/admin/orders/static-income`);
+        return res;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Lỗi trong quá trình lấy danh sách đơn hàng');
+    }
+};
 
 export const getOrder = async (orderId) => {
     try {

@@ -16,11 +16,7 @@ export const SidebarAdminNav = [
         icon: null,
         to: '/admin/customer-manager',
     },
-    {
-        title: 'Quản lý nhân viên',
-        icon: null,
-        to: '/admin/employee-manager',
-    },
+
     {
         title: 'Quản lý đơn hàng',
         icon: null,

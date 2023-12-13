@@ -35,26 +35,32 @@ function OrderManager() {
         }
         if (tag === 2) {
             setTagcurrent(2);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 0),
+            setOrderListItemTagCurrent(
+                (prevOrderListItemTagCurrent) => prevOrderListItemTagCurrent.filter((item) => item._status === 0), //chưa xác nhận
             );
         }
         if (tag === 3) {
             setTagcurrent(3);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 1),
+            setOrderListItemTagCurrent(
+                (prevOrderListItemTagCurrent) => prevOrderListItemTagCurrent.filter((item) => item._status === 1), //đã xác nhận
             );
         }
         if (tag === 4) {
             setTagcurrent(4);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 2),
+            setOrderListItemTagCurrent(
+                (prevOrderListItemTagCurrent) => prevOrderListItemTagCurrent.filter((item) => item._status === 2), //đang giao
             );
         }
         if (tag === 5) {
             setTagcurrent(5);
-            setOrderListItemTagCurrent((prevOrderListItemTagCurrent) =>
-                prevOrderListItemTagCurrent.filter((item) => item._status === 3),
+            setOrderListItemTagCurrent(
+                (prevOrderListItemTagCurrent) => prevOrderListItemTagCurrent.filter((item) => item._status === 3), //đã giao
+            );
+        }
+        if (tag === 6) {
+            setTagcurrent(6);
+            setOrderListItemTagCurrent(
+                (prevOrderListItemTagCurrent) => prevOrderListItemTagCurrent.filter((item) => item._status === 4), //đã huỷ
             );
         }
     };
@@ -120,7 +126,7 @@ function OrderManager() {
                                                 )}
                                                 {tagCurrent === 2 ? (
                                                     <button type="button" class="btn btn-light btn-outline-dark active">
-                                                        Chưa giao
+                                                        Chưa xác nhận
                                                     </button>
                                                 ) : (
                                                     <button
@@ -131,12 +137,13 @@ function OrderManager() {
                                                         type="button"
                                                         class="btn btn-light btn-outline-dark"
                                                     >
-                                                        Chưa giao
+                                                        Chưa xác nhận
                                                     </button>
                                                 )}
+
                                                 {tagCurrent === 3 ? (
                                                     <button type="button" class="btn btn-light btn-outline-dark active">
-                                                        Đang giao
+                                                        Đã xác nhận
                                                     </button>
                                                 ) : (
                                                     <button
@@ -147,12 +154,12 @@ function OrderManager() {
                                                         type="button"
                                                         class="btn btn-light btn-outline-dark"
                                                     >
-                                                        Đang giao
+                                                        Đã xác nhận
                                                     </button>
                                                 )}
                                                 {tagCurrent === 4 ? (
                                                     <button type="button" class="btn btn-light btn-outline-dark active">
-                                                        Đã giao
+                                                        Đang giao
                                                     </button>
                                                 ) : (
                                                     <button
@@ -163,12 +170,12 @@ function OrderManager() {
                                                         type="button"
                                                         class="btn btn-light btn-outline-dark"
                                                     >
-                                                        Đã giao
+                                                        Đang giao
                                                     </button>
                                                 )}
                                                 {tagCurrent === 5 ? (
                                                     <button type="button" class="btn btn-light btn-outline-dark active">
-                                                        Đã hủy
+                                                        Đã giao
                                                     </button>
                                                 ) : (
                                                     <button
@@ -179,7 +186,23 @@ function OrderManager() {
                                                         type="button"
                                                         class="btn btn-light btn-outline-dark"
                                                     >
-                                                        Đã hủy
+                                                        Đã giao
+                                                    </button>
+                                                )}
+                                                {tagCurrent === 6 ? (
+                                                    <button type="button" class="btn btn-light btn-outline-dark active">
+                                                        Đã huỷ
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        onClick={() => {
+                                                            filter(6);
+                                                            setCurrentPage(1);
+                                                        }}
+                                                        type="button"
+                                                        class="btn btn-light btn-outline-dark"
+                                                    >
+                                                        Đã huỷ
                                                     </button>
                                                 )}
                                             </div>
