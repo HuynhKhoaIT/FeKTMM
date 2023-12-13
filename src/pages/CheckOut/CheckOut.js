@@ -185,6 +185,9 @@ function CheckOut() {
                     console.error('Lỗi khi đặt hàng:', error);
                     setIsOrderPlaced(false);
                 });
+            sessionStorage.setItem('selectedProducts', []);
+            sessionStorage.setItem('selectedProductsId', null);
+            sessionStorage.setItem('selectedQuntity', 0);
         } else if (paymentMethod === 'vnpay') {
             // Tạo dữ liệu đơn hàng
             const orderData = {

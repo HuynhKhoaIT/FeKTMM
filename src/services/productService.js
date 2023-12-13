@@ -39,7 +39,7 @@ export const getAllProductsByCategory = async (categoryId) => {
 export const addProduct = async (data) => {
     try {
         const res = await httprequest.post(`/products/add`, data);
-        console.log(res);
+
         return res;
     } catch (error) {
         console.error(error);

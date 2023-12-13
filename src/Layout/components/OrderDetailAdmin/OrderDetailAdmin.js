@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import OrderListDetailItem from '../../../components/OrderListDetailItem';
 import * as orderAdminService from '../../../services/orderAdminService';
+import { toast } from 'react-toastify';
 const cx = classNames.bind(styles);
 
 function OrderDetailAdmin({ id, rollbackListOrder }) {
@@ -29,6 +30,7 @@ function OrderDetailAdmin({ id, rollbackListOrder }) {
         if (result === 1) {
             setReloadData(true);
         }
+        toast.success('Thao tác thành công');
     };
     const cancelOrder = async (orderId) => {
         const result = await orderAdminService.updateOrder(orderId, { _status: 3 });
