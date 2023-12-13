@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Statistical.module.scss';
 import classNames from 'classnames/bind';
 import SidebarAdmin from '../../../Layout/components/SidebarAdmin';
 import SidebarAdminMobi from '../../../Layout/components/SidebarAdmin/SidebarAdminMobi';
+import * as orderAdminService from '../../../services/orderAdminService';
+import * as customerAdminService from '../../../services/customerAdminService';
 import { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as chartjs } from 'chart.js/auto';
@@ -12,6 +14,17 @@ function Statistical() {
     const [datamoney, setDatarmoney] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 12648000, 212648000, 1836000]);
     const [datauser, setDatausser] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 8, 6]);
     const [dataorder, setDataoder] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 20, 18]);
+    useEffect(() => {
+        const fetchApi = async () => {
+            const result1 = await orderAdminService.getStaticOrders();
+            const result2 = await orderAdminService.getStaticOrdersIncome();
+            const result3 = await customerAdminService.getStaticCustomers();
+            setDataoder(result1);
+            setDatarmoney(result2);
+            setDatausser(result3);
+        };
+        fetchApi();
+    });
     const formatter = new Intl.NumberFormat('vi-VN', {
         style: 'currency',
         currency: 'VND',
