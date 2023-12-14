@@ -23,6 +23,7 @@ function CheckOut() {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [isOrderPlaced, setIsOrderPlaced] = useState(null);
     const [changeAddress, setChangeAddress] = useState(false);
+    const [order, setOrder] = useState();
     const [cartItems, setCartItems] = useState([]);
     const [note, setNote] = useState('');
     const dispatch = useDispatch();
@@ -174,9 +175,10 @@ function CheckOut() {
             };
             // Gửi yêu cầu POST đến API endpoint
 
-            postOrder(token, orderData)
+            const dataorder = postOrder(token, orderData)
                 .then(async (response) => {
                     if (response !== null) {
+                        setOrder(response);
                         setIsOrderPlaced(true);
                         try {
                             const token = localStorage.getItem('token');
@@ -497,7 +499,7 @@ function CheckOut() {
                                     <div className={cx('info-order-content', 'd-flex flex-column')}>
                                         <div className={cx('info-order-code', 'd-flex justify-content-between')}>
                                             <div className={cx('col-lg-4', 'text-1')}>Mã đơn hàng</div>
-                                            <div className={cx('col-lg-8', 'text-2')}>ASC124osm</div>
+                                            <div className={cx('col-lg-8', 'text-2')}>{order._id}</div>
                                         </div>
                                         <div
                                             className={cx(
@@ -546,21 +548,11 @@ function CheckOut() {
                                         >
                                             <div className={cx('ordered-product-left', 'd-flex')}>
                                                 <div className={cx('product-img')}>
-                                                    <Image
-                                                        src="https://lh3.googleusercontent.com/Jsg6-adZeI1TZnmeIT8Tpal63lIr4tLji5QjZaOWJjjXPY1blN5K9cG1MWkI7LesQj-8Xw80MVRBQwXWd9fs-kC03cyFCxo=w230-rw"
-                                                        alt="img"
-                                                    />
+                                                    <Image src={item[0]._images[0]} alt="img" />
                                                 </div>
                                                 <div className={cx('product__info')}>
                                                     <h4 className={cx('product__info-name')}>{item[0]._name}</h4>
-                                                    <div className={cx('product__info-memory', 'd-flex')}>
-                                                        <p>
-                                                            Bộ nhớ: <span>256GB</span>
-                                                        </p>
-                                                        <p className={cx('color')}>
-                                                            Màu: <span>Xám bạc</span>
-                                                        </p>
-                                                    </div>
+                                                    <div className={cx('product__info-memory', 'd-flex')}></div>
                                                 </div>
                                             </div>
                                             <div className={cx('product-right')}>

@@ -37,7 +37,8 @@ const postOrder = async (token, orderData) => {
                 Authorization: `Bearer ${token}`, // Gửi token trong header
             },
         });
-        return response.data; // Trả về dữ liệu phản hồi từ API
+
+        return response; // Trả về dữ liệu phản hồi từ API
     } catch (error) {
         console.log('Lỗi khi đặt hàng:', error);
         throw new Error('Đã xảy ra lỗi khi đặt hàng');
