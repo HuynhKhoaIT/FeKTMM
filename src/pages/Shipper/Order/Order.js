@@ -152,7 +152,7 @@ function Order() {
                                 <div className={cx('featured__controls')}>
                                     <ul>
                                         {tagCurrent === 1 ? (
-                                            <li className={cx('active')}>Tất cả</li>
+                                            <li className={cx('active')}>Chưa nhận</li>
                                         ) : (
                                             <li
                                                 onClick={() => {
@@ -160,7 +160,7 @@ function Order() {
                                                     setCurrentPage(1);
                                                 }}
                                             >
-                                                Tất cả
+                                                Chưa nhận
                                             </li>
                                         )}
 
@@ -206,11 +206,7 @@ function Order() {
                             <div
                                 className={cx('col-lg-12')}
                                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-                            >
-                                <div className={cx('col-lg-8', 'search')}>
-                                    <Search />
-                                </div>
-                            </div>
+                            ></div>
                         </div>
 
                         <div className={cx('row align-items-center', 'order-detail')}>
