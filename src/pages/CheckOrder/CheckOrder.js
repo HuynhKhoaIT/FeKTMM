@@ -33,6 +33,7 @@ function CheckOrder() {
             const { data } = await getOrderByStatus(st);
 
             setListOrder(data);
+            console.log(listOrder);
             setLoading(false);
         };
         handleSelectedStatus(status);
@@ -57,7 +58,8 @@ function CheckOrder() {
     const handleCancelOrder = async (id) => {
         setLoading(true);
         const { data } = await cancelOrder(id);
-        setStatus(status);
+
+        handleOrderByStatus({ status: status });
 
         setLoading(false);
     };
@@ -109,7 +111,7 @@ function CheckOrder() {
                                                 <Nav.Link
                                                     className="text-dark"
                                                     eventKey="0"
-                                                    onClick={() => handleOrderByStatus({ status: 0 })}
+                                                    onClick={() => setStatus(0)}
                                                 >
                                                     Chờ xác nhận
                                                 </Nav.Link>
@@ -118,7 +120,7 @@ function CheckOrder() {
                                                 <Nav.Link
                                                     className="text-dark"
                                                     eventKey="1"
-                                                    onClick={() => handleOrderByStatus({ status: 1 })}
+                                                    onClick={() => setStatus(1)}
                                                 >
                                                     Đã xác nhận
                                                 </Nav.Link>
@@ -127,7 +129,7 @@ function CheckOrder() {
                                                 <Nav.Link
                                                     className="text-dark"
                                                     eventKey="2"
-                                                    onClick={() => handleOrderByStatus({ status: 2 })}
+                                                    onClick={() => setStatus(2)}
                                                 >
                                                     Đang giao
                                                 </Nav.Link>
@@ -136,7 +138,7 @@ function CheckOrder() {
                                                 <Nav.Link
                                                     className="text-dark"
                                                     eventKey="3"
-                                                    onClick={() => handleOrderByStatus({ status: 3 })}
+                                                    onClick={() => setStatus(3)}
                                                 >
                                                     Đã giao
                                                 </Nav.Link>
@@ -145,9 +147,9 @@ function CheckOrder() {
                                                 <Nav.Link
                                                     className="text-dark"
                                                     eventKey="4"
-                                                    onClick={() => handleOrderByStatus({ status: 4 })}
+                                                    onClick={() => setStatus(4)}
                                                 >
-                                                    Hủy
+                                                    Đã hủy
                                                 </Nav.Link>
                                             </Nav.Item>
                                         </Nav>
@@ -234,8 +236,13 @@ function CheckOrder() {
                                                                                             </Link>
                                                                                         </h6>
                                                                                         <span className="small">
-                                                                                            Quantity: {detail.quantity}
+                                                                                            Số lượng: {detail.quantity}
                                                                                         </span>
+                                                                                        <h4>Ghi chú: {item._note}</h4>
+                                                                                        <h4>
+                                                                                            Mã shipper:{' '}
+                                                                                            {item._shipperId}
+                                                                                        </h4>
                                                                                     </div>
                                                                                 </div>
                                                                             </td>

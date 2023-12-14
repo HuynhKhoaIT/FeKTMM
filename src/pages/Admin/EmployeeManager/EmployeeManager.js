@@ -10,6 +10,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import * as employeeAdminService from '../../../services/employeeAdminService';
+import { toast } from 'react-toastify';
 
 const cx = classNames.bind(styles);
 function EmployeeManager() {
@@ -39,6 +40,7 @@ function EmployeeManager() {
             if (response === 0) {
                 throw new Error('Yêu cầu không thành công');
             }
+            setReloadData(true);
         } catch (error) {
             console.error('Lỗi khi gửi yêu cầu xóa nhân viên:', error);
             return null;
@@ -48,7 +50,7 @@ function EmployeeManager() {
         const shouldDelete = window.confirm('Bạn có muốn xóa nhân viên này không?');
         if (shouldDelete) {
             deleteEmployee(itemId);
-            setReloadData(true);
+            toast.success('Xoá nhân viên thành công');
         }
     };
 
@@ -87,7 +89,7 @@ function EmployeeManager() {
             setAddresses('');
             setDateOfbirth('');
             setGender('');
-            window.alert('Thêm nhân viên thành công');
+            toast.success('Thêm nhân viên thành công');
             closeAddEmployeeModal();
             setReloadData(true);
         }
@@ -102,7 +104,7 @@ function EmployeeManager() {
                     <SidebarAdminMobi />
                 </div>
                 <div className={cx('col-12 col-lg-12 col-xl-10 container-fluid', 'content-section')}>
-                    <div className={cx('d-flex align-items-center ', 'title')}>Quản lý nhân viên</div>
+                    <div className={cx('d-flex align-items-center ', 'title')}>Quản lý shipper</div>
                     <div className={cx('wrapper')}>
                         <div className={cx('content')}>
                             <div className={cx('container-fluid')}>
