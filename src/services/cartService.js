@@ -41,3 +41,22 @@ export const deleteItemCart = async (token, itemId) => {
         console.error('Lỗi khi gửi yêu cầu xóa sản phẩm khỏi giỏ hàng:', error.message);
     }
 };
+export const deleteallItemCart = async (token) => {
+    try {
+        // Gửi yêu cầu DELETE đến API để xóa sản phẩm từ giỏ hàng
+        const response = await httprequest.deleteRequest(`/carts/delete-all-cart`, {
+            headers: {
+                Authorization: `Bearer ${token}`, // Gửi token trong header
+            },
+        });
+
+        if (response.data !== null) {
+            console.log('Sản phẩm đã được xóa khỏi giỏ hàng.');
+        } else {
+            console.error('Lỗi khi xóa sản phẩm khỏi giỏ hàng:', response.statusText);
+        }
+    } catch (error) {
+        // Xử lý lỗi nếu có lỗi kết nối hoặc lỗi khác
+        console.error('Lỗi khi gửi yêu cầu xóa sản phẩm khỏi giỏ hàng:', error.message);
+    }
+};

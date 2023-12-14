@@ -5,13 +5,15 @@ import classNames from 'classnames/bind';
 import { AddIcon, MinusIcon } from '../../../components/Icons';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { useDispatch } from 'react-redux';
+import * as cartService from '../../../services/cartService';
+import addtocart from '../../../redux/Action';
 const cx = classNames.bind(styles);
 function ProductInfo({ dataDetail }) {
     console.log('dataDetail', dataDetail);
     const token = localStorage.getItem('token');
     const [quantity, setQuantity] = useState(1);
-
+    const dispatch = useDispatch();
     const handleAddQuantity = () => {
         if (dataDetail?._quantity === 0) {
             alert('Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!');
@@ -48,6 +50,13 @@ function ProductInfo({ dataDetail }) {
                 });
 
                 if (response.ok) {
+                    try {
+                        const token = localStorage.getItem('token');
+                        const data = await cartService.getCartByUserId(token);
+                        dispatch(addtocart(data.length));
+                    } catch (error) {
+                        console.error(error);
+                    }
                     toast.success('Thêm thành công sản phẩm vào giỏ hàng!');
                 } else {
                     toast.error('Có lỗi xảy ra trong quá trình thêm giỏ hàng!');

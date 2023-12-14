@@ -11,10 +11,11 @@ import { useState, useEffect } from 'react';
 import AddressForm from './AddressForm/AddressForm';
 import { useNavigate } from 'react-router-dom';
 import * as profileCustomer from '../../services/profileCustomerService';
-
+import { useDispatch } from 'react-redux';
 import { postOrder, postOrderVnpay } from '../../services/orderService';
 import e from 'cors';
-
+import * as cartService from '../../services/cartService';
+import addtocart from '../../redux/Action';
 const cx = classNames.bind(styles);
 function CheckOut() {
     const token = localStorage.getItem('token');
@@ -24,7 +25,7 @@ function CheckOut() {
     const [changeAddress, setChangeAddress] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [note, setNote] = useState('');
-
+    const dispatch = useDispatch();
     const dataValues = cartItems.map((item) => item[1]);
     const [user, setUser] = useState();
     useEffect(() => {
@@ -174,9 +175,16 @@ function CheckOut() {
             // Gửi yêu cầu POST đến API endpoint
 
             postOrder(token, orderData)
-                .then((response) => {
+                .then(async (response) => {
                     if (response !== null) {
                         setIsOrderPlaced(true);
+                        try {
+                            const token = localStorage.getItem('token');
+                            const data = await cartService.getCartByUserId(token);
+                            dispatch(addtocart(data.length));
+                        } catch (error) {
+                            console.error(error);
+                        }
                     } else {
                         setIsOrderPlaced(false);
                     }
@@ -185,6 +193,7 @@ function CheckOut() {
                     console.error('Lỗi khi đặt hàng:', error);
                     setIsOrderPlaced(false);
                 });
+
             sessionStorage.setItem('selectedProducts', []);
             sessionStorage.setItem('selectedProductsId', null);
             sessionStorage.setItem('selectedQuntity', 0);
