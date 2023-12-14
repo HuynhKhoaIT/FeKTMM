@@ -16,6 +16,7 @@ import { postOrder, postOrderVnpay } from '../../services/orderService';
 import e from 'cors';
 import * as cartService from '../../services/cartService';
 import addtocart from '../../redux/Action';
+import { toast } from 'react-toastify';
 const cx = classNames.bind(styles);
 function CheckOut() {
     const token = localStorage.getItem('token');
@@ -153,88 +154,98 @@ function CheckOut() {
     };
     const handlePlaceOrder = () => {
         const token = localStorage.getItem('token');
+        console.log(addressInfo.address);
+        if (
+            addressInfo.address &&
+            addressInfo.ward &&
+            addressInfo.district &&
+            addressInfo.province &&
+            addressInfo.phoneNumber
+        ) {
+            if (paymentMethod === 'shipcod') {
+                // Tạo dữ liệu đơn hàng
+                const orderData = {
+                    _address:
+                        addressInfo.address +
+                        ', ' +
+                        addressInfo.ward +
+                        ', ' +
+                        addressInfo.district +
+                        ', ' +
+                        addressInfo.province,
+                    _name: addressInfo?.fullName,
+                    _phone: addressInfo.phoneNumber,
+                    _status: 0,
+                    _totalPayment: totalPayment,
+                    // _uId: token,
+                    _shippingFee: shippingFee,
+                    _items: dataValues,
+                };
+                // Gửi yêu cầu POST đến API endpoint
 
-        if (paymentMethod === 'shipcod') {
-            // Tạo dữ liệu đơn hàng
-            const orderData = {
-                _address:
-                    addressInfo.address +
-                    ', ' +
-                    addressInfo.ward +
-                    ', ' +
-                    addressInfo.district +
-                    ', ' +
-                    addressInfo.province,
-                _name: addressInfo?.fullName,
-                _phone: addressInfo.phoneNumber,
-                _status: 0,
-                _totalPayment: totalPayment,
-                // _uId: token,
-                _shippingFee: shippingFee,
-                _items: dataValues,
-            };
-            // Gửi yêu cầu POST đến API endpoint
-
-            const dataorder = postOrder(token, orderData)
-                .then(async (response) => {
-                    if (response !== null) {
-                        setOrder(response);
-                        setIsOrderPlaced(true);
-                        try {
-                            const token = localStorage.getItem('token');
-                            const data = await cartService.getCartByUserId(token);
-                            dispatch(addtocart(data.length));
-                        } catch (error) {
-                            console.error(error);
+                postOrder(token, orderData)
+                    .then(async (response) => {
+                        if (response !== null) {
+                            setOrder(response);
+                            setIsOrderPlaced(true);
+                            try {
+                                const token = localStorage.getItem('token');
+                                const data = await cartService.getCartByUserId(token);
+                                dispatch(addtocart(data.length));
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        } else {
+                            setIsOrderPlaced(false);
                         }
-                    } else {
+                    })
+                    .catch((error) => {
+                        console.error('Lỗi khi đặt hàng:', error);
                         setIsOrderPlaced(false);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Lỗi khi đặt hàng:', error);
-                    setIsOrderPlaced(false);
-                });
+                    });
 
-            sessionStorage.setItem('selectedProducts', []);
-            sessionStorage.setItem('selectedProductsId', null);
-            sessionStorage.setItem('selectedQuntity', 0);
-        } else if (paymentMethod === 'vnpay') {
-            // Tạo dữ liệu đơn hàng
-            const orderData = {
-                amount: totalPayment,
-                bankCode: 'NCB',
-                orderDescription: `Nap tien cho thue bao ${addressInfo.phoneNumber}. So tien ${totalPayment} VND`,
-                orderType: '100000',
-                language: 'vn',
-                _address: addressInfo.address,
-                _name: addressInfo.fullName,
-                _phone: addressInfo.phoneNumber,
-                _status: 0,
-                _totalPayment: totalPayment,
-                // _uId: userId,
-                _shippingFee: shippingFee,
-                _items: dataValues,
-            };
-            // Gửi yêu cầu POST đến API endpoint
+                sessionStorage.setItem('selectedProducts', []);
+                sessionStorage.setItem('selectedProductsId', null);
+                sessionStorage.setItem('selectedQuntity', 0);
+            } else if (paymentMethod === 'vnpay') {
+                // Tạo dữ liệu đơn hàng
+                const orderData = {
+                    amount: totalPayment,
+                    bankCode: 'NCB',
+                    orderDescription: `Nap tien cho thue bao ${addressInfo.phoneNumber}. So tien ${totalPayment} VND`,
+                    orderType: '100000',
+                    language: 'vn',
+                    _address: addressInfo.address,
+                    _name: addressInfo.fullName,
+                    _phone: addressInfo.phoneNumber,
+                    _status: 0,
+                    _totalPayment: totalPayment,
+                    // _uId: userId,
+                    _shippingFee: shippingFee,
+                    _items: dataValues,
+                };
+                // Gửi yêu cầu POST đến API endpoint
 
-            postOrderVnpay(orderData)
-                .then((response) => {
-                    // if (response !== null) {
-                    //     setIsOrderPlaced(true);
-                    // } else {
-                    //     setIsOrderPlaced(false);
-                    // }
-                })
-                .catch((error) => {
-                    console.error('Lỗi khi đặt hàng:', error);
-                    setIsOrderPlaced(false);
-                });
-            sessionStorage.setItem('selectedProducts', []);
-            sessionStorage.setItem('selectedProductsId', null);
-            sessionStorage.setItem('selectedQuntity', 0);
+                postOrderVnpay(orderData)
+                    .then((response) => {
+                        // if (response !== null) {
+                        //     setIsOrderPlaced(true);
+                        // } else {
+                        //     setIsOrderPlaced(false);
+                        // }
+                    })
+                    .catch((error) => {
+                        console.error('Lỗi khi đặt hàng:', error);
+                        setIsOrderPlaced(false);
+                    });
+                sessionStorage.setItem('selectedProducts', []);
+                sessionStorage.setItem('selectedProductsId', null);
+                sessionStorage.setItem('selectedQuntity', 0);
+            } else {
+                alert('Vui lòng chọn hình thức thanh toán trước khi đặt hàng.');
+            }
         } else {
-            alert('Vui lòng chọn hình thức thanh toán trước khi đặt hàng.');
+            toast.warn('Vui lòng nhập đầy đủ thông tin');
         }
     };
 
