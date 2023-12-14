@@ -100,7 +100,7 @@ function Login({
           <form className={cx("loginForm")} onSubmit={handleSubmit}>
             <div className={cx("icons-wrapper")}>
               <p className={cx("form-title")}>Đăng nhập</p>
-              <div onClick={handleCloseForm}>
+              <div onClick={handleCloseForm} style={{ cursor: "pointer" }}>
                 <CloseIcon
                   className={cx(
                     "close-icon-wrapper",
