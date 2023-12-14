@@ -29,11 +29,11 @@ function CheckOrder() {
 
     useEffect(() => {
         const handleSelectedStatus = async (st) => {
+            setLoading(true);
             const { data } = await getOrderByStatus(st);
-            console.log('====================================');
-            console.log('data ne', data);
-            console.log('====================================');
+
             setListOrder(data);
+            setLoading(false);
         };
         handleSelectedStatus(status);
     }, [status]);
@@ -42,24 +42,24 @@ function CheckOrder() {
         setLoading(true);
         setStatus(5);
         const { data } = await getOrder();
-        setLoading(false);
-        console.log(data);
         setListOrder(data);
+        setLoading(false);
     };
     const handleOrderByStatus = async (body) => {
         setLoading(true);
         setStatus(body.status);
         const { data } = await getOrderByStatus(body.status);
-        setLoading(false);
+
         setListOrder(data.data);
+        setLoading(false);
     };
 
     const handleCancelOrder = async (id) => {
         setLoading(true);
         const { data } = await cancelOrder(id);
-        setStatus(4);
+        setStatus(status);
+
         setLoading(false);
-        setListOrder(data);
     };
     const handleClose = () => {
         setShow(false);

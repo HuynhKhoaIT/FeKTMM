@@ -177,6 +177,7 @@ function CheckOut() {
                     _phone: addressInfo.phoneNumber,
                     _status: 0,
                     _totalPayment: totalPayment,
+                    _note: note,
                     // _uId: token,
                     _shippingFee: shippingFee,
                     _items: dataValues,

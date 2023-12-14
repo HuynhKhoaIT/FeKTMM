@@ -8,6 +8,7 @@ import SidebarShipper from '../../../Layout/components/SidebarShipper';
 import SidebarShipperMobi from '../../../Layout/components/SidebarShipper/SidebarShipperMobi';
 import * as orderShipperService from '../../../services/shipper/orderShipperService';
 import * as profileShipperService from '../../../services/shipper/profileShipperService';
+import Loading from '../../../components/loading';
 import { Navigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -22,6 +23,7 @@ function Order() {
     const [status2, setStatus2] = useState([]);
     const [status3, setStatus3] = useState([]);
     const [status4, setStatus4] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchApi = async () => {
@@ -42,7 +44,9 @@ function Order() {
             setReloadData(true);
             return;
         }
+
         const fetchApi = async () => {
+            setLoading(true);
             const result = await orderShipperService.getShipperOrders(uid);
 
             const filteredOrdersby1 = result.filter((order) => order._status === 1);
@@ -56,9 +60,12 @@ function Order() {
 
             setOrderListItems(result);
             setOrderListItemTagCurrent(filteredOrdersby1);
+            setLoading(false);
         };
+
         if (reloadData) {
             fetchApi();
+
             setReloadData(false); // Đặt lại state để ngăn việc gọi lại liên tục
         }
     }, [reloadData, uid]);
@@ -133,7 +140,9 @@ function Order() {
 
     return (
         <div className={cx('d-flex', 'page')}>
+            <Loading show={loading} />
             {shouldNavigate ? <Navigate to="/login" /> : null}
+
             <div className={cx('col-lg-3 col-xl-2 d-none d-xl-block', 'sidebar-wrapper')}>
                 <SidebarShipper />
             </div>

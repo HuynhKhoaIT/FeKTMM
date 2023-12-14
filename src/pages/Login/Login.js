@@ -57,7 +57,7 @@ function Login({
                 } else {
                     // Registration failed
                     setError(data.message);
-                    toast.success('Đăng nhập thất bại!');
+                    toast.error('Đăng nhập thất bại!');
                 }
             } catch (error) {
                 setError('Đăng nhập thất bại, vui lòng thử lại!');

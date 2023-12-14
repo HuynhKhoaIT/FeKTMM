@@ -3,7 +3,7 @@ import styles from './OrderListDetailItem.module.scss';
 import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
-function OrderListDetailItem({ id, quantity }) {
+function OrderListDetailItem({ id, quantity, note }) {
     const [product, setProduct] = useState([]);
     const [image, setImage] = useState();
     useEffect(() => {
@@ -30,6 +30,7 @@ function OrderListDetailItem({ id, quantity }) {
                     </div>
                     {/* <div className={cx('classify-product')}>8GB 256GB </div> */}
                     <div className={cx('quantity')}>x{quantity}</div>
+                    <div className={cx('note')}>Ghi chú: {note}</div>
                 </div>
                 <div className={cx('col-lg-2 col-md-2', 'price-product')}>
                     <div className={cx('d-flex justify-content-end align-items-end')}>

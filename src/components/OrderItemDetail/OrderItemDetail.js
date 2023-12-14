@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import Image from '../Images';
 import classNames from 'classnames/bind';
 import styles from './OrderItemDetail.module.scss';
+import Loading from '../../components/loading';
 
 const cx = classNames.bind(styles);
-function OrderItemDetail({ id, quantity }) {
+function OrderItemDetail({ id, quantity, note }) {
     const [product, setProduct] = useState([]);
     const [price, setPrice] = useState('');
     const [images, setImages] = useState([]);
@@ -33,6 +34,9 @@ function OrderItemDetail({ id, quantity }) {
                     <p className={cx('color')}>
                         Giá: <span>{price}đ</span>
                     </p>
+                </div>
+                <div className={cx('product__info-user')}>
+                    <p className={cx('color')}>Ghi chú: {note}</p>
                 </div>
             </div>
         </div>
