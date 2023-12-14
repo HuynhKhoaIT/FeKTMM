@@ -21,7 +21,7 @@ function SidebarAdmin() {
 
   const navigate = useNavigate();
   const handleSignOut = () => {
-    navigate("/login");
+    navigate("/admin/login");
   };
   return (
     <div
