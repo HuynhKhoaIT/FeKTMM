@@ -35,7 +35,38 @@ export const getAllProductsByCategory = async (categoryId) => {
         throw new Error('Lỗi trong quá trình lấy danh mục sản phẩm');
     }
 };
+export const getAllProductsMoreSearch = async () => {
+    try {
+        const res = await httprequest.get('/products/mostSearched', {
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Lỗi trong quá trình lấy sản phẩm tìm kiếm nhiều nhất');
+    }
+};
 
+export const getAllProductsBestSeller = async () => {
+    try {
+        const res = await httprequest.get('/products/bestSelling', {
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Lỗi trong quá trình lấy sản phẩm bestSelling');
+    }
+};
+
+export const getAllProductsOnSale = async () => {
+    try {
+        const res = await httprequest.get('/products/onSale', {
+        });
+        return res;
+    } catch (error) {
+        console.log(error);
+        throw new Error('Lỗi trong quá trình lấy  sản phẩm on sale');
+    }
+};
 export const addProduct = async (data) => {
     try {
         const res = await httprequest.post(`/products/add`, data);

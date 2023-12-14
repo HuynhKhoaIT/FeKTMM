@@ -6,9 +6,11 @@ import Col from "react-bootstrap/Col";
 import ColProductCard from "../../../components/Product/product";
 import ViewAll from "../../../components/view-all/view-all";
 import ImageSlider from "../../../components/Slider/slider";
+import { toast } from "react-toastify";
 
 import styles from "./products.module.scss";
 import { ProductSlider } from "./productSlider";
+import { getAllProductsBestSeller, getAllProductsByCategory, getAllProductsMoreSearch, getAllProductsOnSale } from "../../../services/productService";
 const cx = classNames.bind(styles);
 function Products() {
   const [bestSellingProducts, setBestSellingProducts] = useState([
@@ -62,64 +64,50 @@ function Products() {
     },
   ]);
 
+  const [laptopData, setLoptopData] = useState([])
+
   // get best selling products
-  useEffect(() => {
-    const fetchBestSellingProducts = async () => {
-      try {
-        const response = await fetch(
-          "https://cnpmmnhom14.onrender.com/api/products/bestSelling"
-        );
-        if (!response.ok) {
-          throw new Error("Request failed");
-        }
-        const data = await response.json();
-        //console.log(data)
-        setBestSellingProducts(data);
-      } catch (error) {
-        console.error("Không lấy được dữ liệu: ", error);
-      }
-    };
-    fetchBestSellingProducts();
-  }, []);
+  const fetchBestSellingProducts = async () => {
+    try {
+      const data = await getAllProductsBestSeller();
+      setBestSellingProducts(data);
+    } catch (error) {
+      console.error("Không lấy được dữ liệu: ", error);
+    }
+  };
 
   //get on sale products
-  useEffect(() => {
-    const fetchOnSaleProducts = async () => {
-      try {
-        const response = await fetch(
-          "https://cnpmmnhom14.onrender.com/api/products/onSale"
-        );
-        if (!response.ok) {
-          throw new Error("Request failed");
-        }
-        const data = await response.json();
-        //console.log(data)
-        setOnSaleProducts(data);
-      } catch (error) {
-        console.error("Không lấy được dữ liệu: ", error);
-      }
-    };
-    fetchOnSaleProducts();
-  }, []);
-
+  const fetchOnSaleProducts = async () => {
+    try {
+      const data = await getAllProductsOnSale();
+      setOnSaleProducts(data);
+    } catch (error) {
+      console.error("Không lấy được dữ liệu: ", error);
+    }
+  };
   //get most searched products
+  const fetchMostSearchedProducts = async () => {
+    try {
+      const data = await getAllProductsMoreSearch();
+      setMostSearchedProducts(data);
+    } catch (error) {
+      console.error("Không lấy được dữ liệu: ", error);
+    }
+  };
+
+  const fetSearchResult = async () => {
+    try {
+      const data = await getAllProductsByCategory(1)
+      setLoptopData(data);
+    } catch (error) {
+    }
+  };
+
   useEffect(() => {
-    const fetchMostSearchedProducts = async () => {
-      try {
-        const response = await fetch(
-          "https://cnpmmnhom14.onrender.com/api/products/mostSearched"
-        );
-        if (!response.ok) {
-          throw new Error("Request failed");
-        }
-        const data = await response.json();
-        //console.log(data)
-        setMostSearchedProducts(data);
-      } catch (error) {
-        console.error("Không lấy được dữ liệu: ", error);
-      }
-    };
+    fetchBestSellingProducts();
+    fetchOnSaleProducts();
     fetchMostSearchedProducts();
+    fetSearchResult();
   }, []);
 
   return (
@@ -129,7 +117,7 @@ function Products() {
         title={"Sản phẩm được tìm kiếm nhiều nhất"}
         row={1}
       />
-      <Row style={{ padding: "10px 40px 40px 40px" }}>
+      <Row style={{ padding: "10px 0 40px 0" }}>
         <a>
           <img
             style={{ width: "auto", height: "115px" }}
@@ -145,7 +133,7 @@ function Products() {
         title={"Sản phẩm bán chạy nhất"}
         row={1}
       />
-      <Row style={{ padding: "10px 40px 40px 40px" }}>
+      <Row style={{ padding: "10px 0 40px 0" }}>
         <a>
           <img
             style={{ width: "100%" }}

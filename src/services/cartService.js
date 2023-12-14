@@ -2,7 +2,7 @@ import * as httprequest from '../utils/httprequest';
 
 export const getCartByUserId = async (token) => {
     try {
-        const res = await httprequest.get(`/carts/`, {
+        const res = await httprequest.get(`/carts`, {
             headers: {
                 Authorization: `Bearer ${token}`, // Gửi token trong header
             },

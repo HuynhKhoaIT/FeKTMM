@@ -11,16 +11,17 @@ import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 function Category() {
+    const location = useLocation();
     const [products, setProducts] = useState([]);
     const queryParams = new URLSearchParams(useLocation().search);
     // Access individual query parameters
     const categoryId = queryParams.get('categoryId');
-    console.log(categoryId);
+    const data = location.state;
     useEffect(() => {
         // Hàm fetch dữ liệu sản phẩm từ API
         const fetchProducts = async () => {
             try {
-                const listProducts = await product.getAllProductsByCategory(categoryId);
+                const listProducts = await product.getAllProductsByCategory(data.keyId);
                 setProducts(listProducts); // Lưu dữ liệu sản phẩm vào state
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -28,13 +29,14 @@ function Category() {
         };
 
         fetchProducts();
-    }, [categoryId]);
+    }, [data.keyId]);
     console.log(products);
     return (
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
-                <div className={cx('row')}>
-                    <h2>Danh Mục</h2>
+                <div className={cx('d-flex align-items-center')}>
+                    <h2>Danh Mục:</h2>
+                    <h3>{categoryId}</h3>
                 </div>
                 <div className={cx('row')}>
                     <div className={cx('product-list', 'd-flex')}>
