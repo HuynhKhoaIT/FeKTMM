@@ -33,7 +33,8 @@ function ProfileAdmin() {
             setImages(result._avatar);
             setPhones(result._phones);
             setAddresses(result._addresses);
-            setDateOfbirth(result._dateOfBirth);
+            const datePart = result._dateOfBirth.slice(0, 10);
+            setDateOfbirth(datePart);
             setGender(result._gender);
         };
         if (reloadData) {
@@ -88,11 +89,7 @@ function ProfileAdmin() {
             }
         }
     };
-    const formData = (isoDateString) => {
-        const dateObject = new Date(isoDateString);
-        const formattedDate = dateObject.toISOString().split('T')[0];
-        return formattedDate;
-    };
+
     //Form cập nhật mật khẩu
     const [changePassword, setChangePassword] = useState(false);
     const showChangePassWordModal = () => {
@@ -182,7 +179,7 @@ function ProfileAdmin() {
                                                 <div>Ngày sinh:</div>
                                             </div>
                                             <div className={cx('col-lg-9 col-md-9 d-flex justify-content-end', 'info')}>
-                                                <div>{formData(dateOfBirth)}</div>
+                                                <div>{dateOfBirth}</div>
                                             </div>
                                         </div>
                                         <div className={cx('row')}>
@@ -388,7 +385,7 @@ function ProfileAdmin() {
                                 <input
                                     type="date"
                                     defaultValue={dateOfBirth}
-                                    value={formData(dateOfBirth)}
+                                    value={dateOfBirth}
                                     onChange={(e) => setDateOfbirth(e.target.value)}
                                     className={cx('col-lg-9 col-md-9')}
                                 />
