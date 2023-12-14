@@ -3,17 +3,21 @@ import styles from './Cart.module.scss';
 import ListCart from './ListCart/ListCart';
 import CartItem from '../../components/CartItem';
 import Button from '../../components/Button';
+import Loading from '../../components/loading';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretRight, faFaceMeh } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import * as cartService from '../../services/cartService';
-
+import { useDispatch } from 'react-redux';
+import addtocart from '../../redux/Action';
+import { toast } from 'react-toastify';
 const cx = classNames.bind(styles);
 function Cart() {
     const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
-
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
     // Lưu giá trị lengthCart vào localStorage khi có thay đổi trong giỏ hàng
     useEffect(() => {
         localStorage.setItem('lengthCart', cartItems.length);
@@ -22,6 +26,7 @@ function Cart() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const token = localStorage.getItem('token'); // Lấy token từ Local Storage
                 if (!token) {
                     // Xử lý trường hợp token không tồn tại
@@ -29,7 +34,7 @@ function Cart() {
                 }
 
                 const data = await cartService.getCartByUserId(token);
-                console.log(data);
+
                 const productDetailsPromises = data.map(async (item) => {
                     const response = await fetch(`https://cnpmmnhom14.onrender.com/api/products/${item.itemId}`);
 
@@ -45,7 +50,9 @@ function Cart() {
                 const listcart = productDetails.map((value, index) => [value, data[index]]);
 
                 setCartItems(listcart);
+                setLoading(false);
             } catch (error) {
+                setLoading(false);
                 console.error(error);
             }
         };
@@ -76,22 +83,46 @@ function Cart() {
         );
     };
     // xóa từng sản phẩm ra khỏi giỏ hàng
-    const deleteItem = (itemId) => {
-        const shouldDelete = window.confirm('Bạn có muốn xóa sản phẩm này không?');
-        if (shouldDelete) {
-            const token = localStorage.getItem('token');
-            const data = cartService.deleteItemCart(token, itemId);
-            setCartItems((prevCartItems) => prevCartItems.filter((item) => item[0]._id !== itemId));
-            console.log(itemId);
-            console.log(data);
+    const deleteItem = async (itemId) => {
+        if (!isProductsSelected) {
+            toast.info('Vui lòng chọn ít nhất một sản phẩm trước khi xoá.');
+            return;
+        } else {
+            const shouldDelete = window.confirm('Bạn có muốn xóa sản phẩm này không?');
+            if (shouldDelete) {
+                const token = localStorage.getItem('token');
+                const data = cartService.deleteItemCart(token, itemId);
+                try {
+                    const token = localStorage.getItem('token');
+                    const data = await cartService.getCartByUserId(token);
+                    dispatch(addtocart(data.length));
+                } catch (error) {
+                    console.error(error);
+                }
+                setCartItems((prevCartItems) => prevCartItems.filter((item) => item[0]._id !== itemId));
+            }
         }
     };
 
     // xóa tất cả sản phẩm ra khỏi giỏ hàng
-    const deleteAllItem = () => {
-        const shouldDelete = window.confirm('Bạn có muốn xóa sản phẩm này không?');
-        if (shouldDelete) {
-            setCartItems((prevCartItems) => prevCartItems.filter((item) => item[0].checked !== true));
+    const deleteAllItem = async () => {
+        if (!isProductsSelected) {
+            toast.info('Vui lòng chọn ít nhất một sản phẩm trước khi xoá.');
+            return;
+        } else {
+            const shouldDelete = window.confirm('Bạn có muốn xóa sản phẩm này không?');
+            if (shouldDelete) {
+                const token = localStorage.getItem('token');
+                cartService.deleteallItemCart(token);
+                try {
+                    const token = localStorage.getItem('token');
+                    const data = await cartService.getCartByUserId(token);
+                    dispatch(addtocart(data.length));
+                } catch (error) {
+                    console.error(error);
+                }
+                setCartItems((prevCartItems) => prevCartItems.filter((item) => item[0].checked !== true));
+            }
         }
     };
     // Tính tổng giá trị giỏ hàng
@@ -143,6 +174,7 @@ function Cart() {
 
     return (
         <div className={cx('wrapper')}>
+            <Loading show={loading} />
             <h2 className={cx('d-flex justify-content-center', 'title')}>Giỏ Hàng</h2>
             {cartItems.length !== 0 ? (
                 <div className={cx('container')}>

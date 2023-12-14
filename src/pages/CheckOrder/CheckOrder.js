@@ -11,6 +11,7 @@ import { Alert, Badge, Button, Col, Nav, Row } from 'react-bootstrap';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { cancelOrder, getOrder, getOrderByStatus } from '../../services/orderService';
+import Loading from '../../components/loading';
 
 const cx = classNames.bind(styles);
 
@@ -28,11 +29,11 @@ function CheckOrder() {
 
     useEffect(() => {
         const handleSelectedStatus = async (st) => {
+            setLoading(true);
             const { data } = await getOrderByStatus(st);
-            console.log('====================================');
-            console.log('data ne', data);
-            console.log('====================================');
+
             setListOrder(data);
+            setLoading(false);
         };
         handleSelectedStatus(status);
     }, [status]);
@@ -41,24 +42,24 @@ function CheckOrder() {
         setLoading(true);
         setStatus(5);
         const { data } = await getOrder();
-        setLoading(false);
-        console.log(data);
         setListOrder(data);
+        setLoading(false);
     };
     const handleOrderByStatus = async (body) => {
         setLoading(true);
         setStatus(body.status);
         const { data } = await getOrderByStatus(body.status);
-        setLoading(false);
+
         setListOrder(data.data);
+        setLoading(false);
     };
 
     const handleCancelOrder = async (id) => {
         setLoading(true);
         const { data } = await cancelOrder(id);
-        setStatus(4);
+        setStatus(status);
+
         setLoading(false);
-        setListOrder(data);
     };
     const handleClose = () => {
         setShow(false);
@@ -72,12 +73,9 @@ function CheckOrder() {
         setShow(true);
     };
 
-    if (loading) {
-        return <div>Loading..</div>;
-    }
-
     return (
         <div className={cx('container-fluid')}>
+            <Loading show={loading} />
             <div className={cx('row')}>
                 <div className={cx('col-lg-3 col-xl-2 d-none d-xl-block', 'sidebar-wrapper')}>
                     <SidebarCustomer />

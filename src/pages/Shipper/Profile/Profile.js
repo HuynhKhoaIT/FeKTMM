@@ -32,6 +32,7 @@ function Profile() {
     const [avatar, setAvatar] = useState();
     const [user, setUser] = useState([]);
     const [name, setName] = useState([]);
+    const [phone, setPhone] = useState();
     const [gender, setGender] = useState([]);
     const [dateOfBirth, setDateOfBirth] = useState([]);
     useEffect(() => {
@@ -48,6 +49,7 @@ function Profile() {
             setName(result._fname + ' ' + result._lname);
             setAvatar(result._avatar);
             setGender(result._gender);
+            setPhone(result._phones[0]);
             setDateOfBirth(result._dateOfBirth);
         };
         if (reloadData) {
@@ -101,15 +103,17 @@ function Profile() {
     };
 
     const submitHandler = async () => {
+        const phones = [phone];
         const editData = {
             _fname: name.split(' ').slice(0, -1).join(' '),
             _lname: name.split(' ').slice(-1).join(' '),
             _avatar: avatar,
             _gender: gender,
+            _phones: phones,
             _dateOfBirth: dateOfBirth,
         };
         const result = await profileShipperService.editProfile(uid, editData);
-        if (result === 1) {
+        if (result !== null) {
             setReloadData(true);
             toast.success('Cập nhật thông tin thành công');
         }
@@ -180,8 +184,9 @@ function Profile() {
                                             <input
                                                 type="number"
                                                 class={cx('form-control')}
-                                                value={user._phones && user._phones.length > 0 ? user._phones[0] : ''}
+                                                value={phone}
                                                 name="phone"
+                                                onChange={(e) => setPhone(e.target.value)}
                                                 required
                                             />
                                         </div>

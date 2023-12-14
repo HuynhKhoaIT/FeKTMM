@@ -12,12 +12,14 @@ function OrderDetailAdmin({ id, rollbackListOrder }) {
     const [reloadData, setReloadData] = useState(true);
     const [order, setOrder] = useState([]);
     const [orderItems, setOrderItems] = useState([]);
+    const [note, setNote] = useState();
 
     useEffect(() => {
         const fetchApi = async () => {
             const result = await orderAdminService.getOrder(id);
             setOrderItems(result._items);
             setOrder(result);
+            setNote(result._note);
         };
         if (reloadData) {
             fetchApi();
@@ -82,7 +84,12 @@ function OrderDetailAdmin({ id, rollbackListOrder }) {
                         <div className={cx('row', 'order-details')}>
                             <div className={cx('list-items')}>
                                 {orderItems.map((item) => (
-                                    <OrderListDetailItem key={item.itemId} id={item.itemId} quantity={item.quantity} />
+                                    <OrderListDetailItem
+                                        key={item.itemId}
+                                        note={note}
+                                        id={item.itemId}
+                                        quantity={item.quantity}
+                                    />
                                 ))}
                             </div>
                         </div>

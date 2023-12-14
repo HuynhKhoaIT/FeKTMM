@@ -2,6 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './OrderItem.module.scss';
 import OrderItemDetail from '../OrderItemDetail';
 import React, { useState, useEffect } from 'react';
+import Loading from '../loading';
 import * as orderShipperService from '../../services/shipper/orderShipperService';
 const cx = classNames.bind(styles);
 function OrderItem({ id, cancelItem, updateItem, comfirmItem }) {
@@ -9,13 +10,18 @@ function OrderItem({ id, cancelItem, updateItem, comfirmItem }) {
     const [order, setOrder] = useState([]);
     const [orderItems, setOrderItems] = useState([]);
     const [totalPrice, setTotalPrice] = useState([]);
+    const [note, setNote] = useState();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchApi = async () => {
+            setLoading(true);
             const result = await orderShipperService.getOrder(id);
             setOrderItems(result._items);
             setOrder(result);
             setTotalPrice(result._totalPayment.toLocaleString('vi-VN'));
+            setNote(result._note);
+            setLoading(false);
         };
         if (reloadData) {
             fetchApi();
@@ -24,11 +30,12 @@ function OrderItem({ id, cancelItem, updateItem, comfirmItem }) {
     }, [id, reloadData]);
     return (
         <div className={cx('wrapper')}>
+            <Loading show={loading} />
             <div className={cx('row')}>
                 <div className={cx('col-lg-12', 'd-flex', 'product')}>
                     <div className={cx('col-lg-8')}>
                         {orderItems.map((item) => (
-                            <OrderItemDetail key={item.itemId} id={item.itemId} quantity={item.quantity} />
+                            <OrderItemDetail key={item.itemId} note={note} id={item.itemId} quantity={item.quantity} />
                         ))}
                     </div>
 

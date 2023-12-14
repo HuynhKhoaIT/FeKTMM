@@ -11,10 +11,12 @@ import { useState, useEffect } from 'react';
 import AddressForm from './AddressForm/AddressForm';
 import { useNavigate } from 'react-router-dom';
 import * as profileCustomer from '../../services/profileCustomerService';
-
+import { useDispatch } from 'react-redux';
 import { postOrder, postOrderVnpay } from '../../services/orderService';
 import e from 'cors';
-
+import * as cartService from '../../services/cartService';
+import addtocart from '../../redux/Action';
+import { toast } from 'react-toastify';
 const cx = classNames.bind(styles);
 function CheckOut() {
     const token = localStorage.getItem('token');
@@ -22,9 +24,10 @@ function CheckOut() {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [isOrderPlaced, setIsOrderPlaced] = useState(null);
     const [changeAddress, setChangeAddress] = useState(false);
+    const [order, setOrder] = useState();
     const [cartItems, setCartItems] = useState([]);
     const [note, setNote] = useState('');
-
+    const dispatch = useDispatch();
     const dataValues = cartItems.map((item) => item[1]);
     const [user, setUser] = useState();
     useEffect(() => {
@@ -151,79 +154,99 @@ function CheckOut() {
     };
     const handlePlaceOrder = () => {
         const token = localStorage.getItem('token');
+        console.log(addressInfo.address);
+        if (
+            addressInfo.address &&
+            addressInfo.ward &&
+            addressInfo.district &&
+            addressInfo.province &&
+            addressInfo.phoneNumber
+        ) {
+            if (paymentMethod === 'shipcod') {
+                // Tạo dữ liệu đơn hàng
+                const orderData = {
+                    _address:
+                        addressInfo.address +
+                        ', ' +
+                        addressInfo.ward +
+                        ', ' +
+                        addressInfo.district +
+                        ', ' +
+                        addressInfo.province,
+                    _name: addressInfo?.fullName,
+                    _phone: addressInfo.phoneNumber,
+                    _status: 0,
+                    _totalPayment: totalPayment,
+                    _note: note,
+                    // _uId: token,
+                    _shippingFee: shippingFee,
+                    _items: dataValues,
+                };
+                // Gửi yêu cầu POST đến API endpoint
 
-        if (paymentMethod === 'shipcod') {
-            // Tạo dữ liệu đơn hàng
-            const orderData = {
-                _address:
-                    addressInfo.address +
-                    ', ' +
-                    addressInfo.ward +
-                    ', ' +
-                    addressInfo.district +
-                    ', ' +
-                    addressInfo.province,
-                _name: addressInfo?.fullName,
-                _phone: addressInfo.phoneNumber,
-                _status: 0,
-                _totalPayment: totalPayment,
-                // _uId: token,
-                _shippingFee: shippingFee,
-                _items: dataValues,
-            };
-            // Gửi yêu cầu POST đến API endpoint
-
-            postOrder(token, orderData)
-                .then((response) => {
-                    if (response !== null) {
-                        setIsOrderPlaced(true);
-                    } else {
+                postOrder(token, orderData)
+                    .then(async (response) => {
+                        if (response !== null) {
+                            setOrder(response);
+                            setIsOrderPlaced(true);
+                            try {
+                                const token = localStorage.getItem('token');
+                                const data = await cartService.getCartByUserId(token);
+                                dispatch(addtocart(data.length));
+                            } catch (error) {
+                                console.error(error);
+                            }
+                        } else {
+                            setIsOrderPlaced(false);
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Lỗi khi đặt hàng:', error);
                         setIsOrderPlaced(false);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Lỗi khi đặt hàng:', error);
-                    setIsOrderPlaced(false);
-                });
-            sessionStorage.setItem('selectedProducts', []);
-            sessionStorage.setItem('selectedProductsId', null);
-            sessionStorage.setItem('selectedQuntity', 0);
-        } else if (paymentMethod === 'vnpay') {
-            // Tạo dữ liệu đơn hàng
-            const orderData = {
-                amount: totalPayment,
-                bankCode: 'NCB',
-                orderDescription: `Nap tien cho thue bao ${addressInfo.phoneNumber}. So tien ${totalPayment} VND`,
-                orderType: '100000',
-                language: 'vn',
-                _address: addressInfo.address,
-                _name: addressInfo.fullName,
-                _phone: addressInfo.phoneNumber,
-                _status: 0,
-                _totalPayment: totalPayment,
-                // _uId: userId,
-                _shippingFee: shippingFee,
-                _items: dataValues,
-            };
-            // Gửi yêu cầu POST đến API endpoint
+                    });
 
-            postOrderVnpay(orderData)
-                .then((response) => {
-                    // if (response !== null) {
-                    //     setIsOrderPlaced(true);
-                    // } else {
-                    //     setIsOrderPlaced(false);
-                    // }
-                })
-                .catch((error) => {
-                    console.error('Lỗi khi đặt hàng:', error);
-                    setIsOrderPlaced(false);
-                });
-            sessionStorage.setItem('selectedProducts', []);
-            sessionStorage.setItem('selectedProductsId', null);
-            sessionStorage.setItem('selectedQuntity', 0);
+                sessionStorage.setItem('selectedProducts', []);
+                sessionStorage.setItem('selectedProductsId', null);
+                sessionStorage.setItem('selectedQuntity', 0);
+            } else if (paymentMethod === 'vnpay') {
+                // Tạo dữ liệu đơn hàng
+                const orderData = {
+                    amount: totalPayment,
+                    bankCode: 'NCB',
+                    orderDescription: `Nap tien cho thue bao ${addressInfo.phoneNumber}. So tien ${totalPayment} VND`,
+                    orderType: '100000',
+                    language: 'vn',
+                    _address: addressInfo.address,
+                    _name: addressInfo.fullName,
+                    _phone: addressInfo.phoneNumber,
+                    _status: 0,
+                    _totalPayment: totalPayment,
+                    // _uId: userId,
+                    _shippingFee: shippingFee,
+                    _items: dataValues,
+                };
+                // Gửi yêu cầu POST đến API endpoint
+
+                postOrderVnpay(orderData)
+                    .then((response) => {
+                        // if (response !== null) {
+                        //     setIsOrderPlaced(true);
+                        // } else {
+                        //     setIsOrderPlaced(false);
+                        // }
+                    })
+                    .catch((error) => {
+                        console.error('Lỗi khi đặt hàng:', error);
+                        setIsOrderPlaced(false);
+                    });
+                sessionStorage.setItem('selectedProducts', []);
+                sessionStorage.setItem('selectedProductsId', null);
+                sessionStorage.setItem('selectedQuntity', 0);
+            } else {
+                alert('Vui lòng chọn hình thức thanh toán trước khi đặt hàng.');
+            }
         } else {
-            alert('Vui lòng chọn hình thức thanh toán trước khi đặt hàng.');
+            toast.warn('Vui lòng nhập đầy đủ thông tin');
         }
     };
 
@@ -488,7 +511,7 @@ function CheckOut() {
                                     <div className={cx('info-order-content', 'd-flex flex-column')}>
                                         <div className={cx('info-order-code', 'd-flex justify-content-between')}>
                                             <div className={cx('col-lg-4', 'text-1')}>Mã đơn hàng</div>
-                                            <div className={cx('col-lg-8', 'text-2')}>ASC124osm</div>
+                                            <div className={cx('col-lg-8', 'text-2')}>{order._id}</div>
                                         </div>
                                         <div
                                             className={cx(
@@ -537,21 +560,11 @@ function CheckOut() {
                                         >
                                             <div className={cx('ordered-product-left', 'd-flex')}>
                                                 <div className={cx('product-img')}>
-                                                    <Image
-                                                        src="https://lh3.googleusercontent.com/Jsg6-adZeI1TZnmeIT8Tpal63lIr4tLji5QjZaOWJjjXPY1blN5K9cG1MWkI7LesQj-8Xw80MVRBQwXWd9fs-kC03cyFCxo=w230-rw"
-                                                        alt="img"
-                                                    />
+                                                    <Image src={item[0]._images[0]} alt="img" />
                                                 </div>
                                                 <div className={cx('product__info')}>
                                                     <h4 className={cx('product__info-name')}>{item[0]._name}</h4>
-                                                    <div className={cx('product__info-memory', 'd-flex')}>
-                                                        <p>
-                                                            Bộ nhớ: <span>256GB</span>
-                                                        </p>
-                                                        <p className={cx('color')}>
-                                                            Màu: <span>Xám bạc</span>
-                                                        </p>
-                                                    </div>
+                                                    <div className={cx('product__info-memory', 'd-flex')}></div>
                                                 </div>
                                             </div>
                                             <div className={cx('product-right')}>
