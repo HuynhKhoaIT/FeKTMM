@@ -306,7 +306,7 @@ function ProfileAdmin() {
                         <Modal.Body>
                             <div className={cx('row align-items-center')}>
                                 <div class={cx('d-inline', 'col-md-12', 'centerP')}>
-                                    <div class={cx('left')}>
+                                    <div style={{ display: 'grid', justifyContent: 'center' }} class={cx('right')}>
                                         <div class={cx('avatar', 'justify-content-center')}>
                                             <img
                                                 src={images ? images : noImage.noImage}
