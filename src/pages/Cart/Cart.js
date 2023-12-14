@@ -41,9 +41,9 @@ function Cart() {
                 });
 
                 const productDetails = await Promise.all(productDetailsPromises);
-                console.log(productDetails);
+
                 const listcart = productDetails.map((value, index) => [value, data[index]]);
-                console.log(listcart);
+
                 setCartItems(listcart);
             } catch (error) {
                 console.error(error);

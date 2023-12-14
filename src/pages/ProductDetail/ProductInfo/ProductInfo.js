@@ -111,7 +111,7 @@ function ProductInfo({ dataDetail }) {
                 <button
                     type="button"
                     className={cx('btn', 'add-to-cart-btn')}
-                    onClick={() => handleAddToCartClick(dataDetail?._pId, quantity)}
+                    onClick={() => handleAddToCartClick(dataDetail?._id, quantity)}
                 >
                     Thêm vào giỏ
                 </button>
