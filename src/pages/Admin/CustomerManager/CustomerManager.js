@@ -44,7 +44,7 @@ function CustomerManager() {
     };
 
     const hideItem = (itemId) => {
-        const shouldDelete = window.confirm('Bạn có muốn ẩn khách hàng này không?');
+        const shouldDelete = window.confirm('Bạn có muốn kích hoạt khách hàng này không?');
         if (shouldDelete) {
             hideCustomer(itemId);
             //setCustomerListItems((prevCustomerListItems) => prevCustomerListItems.filter((item) => item.id !== itemId));
@@ -65,7 +65,7 @@ function CustomerManager() {
     };
 
     const activeItem = (itemId) => {
-        const shouldActive = window.confirm('Bạn có muốn kích hoạt khách hàng này không?');
+        const shouldActive = window.confirm('Bạn có muốn ẩn khách hàng này không?');
         if (shouldActive) {
             activeCustomer(itemId);
 

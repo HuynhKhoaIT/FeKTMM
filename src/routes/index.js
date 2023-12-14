@@ -43,7 +43,7 @@ const publicRoutes = [
     { path: '/profile', component: ProfileCustomer, layout: HeaderOnly },
     { path: '/check-order', component: CheckOrder, layout: HeaderOnly },
     { path: '/admin/customer-manager', component: CustomerManager, layout: null },
-    { path: '/admin/employee-manager', component: EmployeeManager, layout: null },
+    { path: '/admin/shipper-manager', component: EmployeeManager, layout: null },
     { path: '/admin/product-manager', component: ProductManager, layout: null },
     { path: '/admin/order-manager', component: OrderManager, layout: null },
     { path: '/admin/profile', component: ProfileAdmin, layout: null },

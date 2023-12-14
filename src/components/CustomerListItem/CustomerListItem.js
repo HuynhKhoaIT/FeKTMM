@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './CustomerListItem.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash, faCheck} from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash, faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 function CustomerListItem({ fullname, phone, address, status, hideItem, activeItem }) {
     return (
@@ -20,11 +20,15 @@ function CustomerListItem({ fullname, phone, address, status, hideItem, activeIt
                     <p>{address}</p>
                 </div>
                 <div className={cx('col-lg-2 col-md-2 d-flex justify-content-center')}>
-                    { status ? (<a onClick={hideItem} className={cx('item-active')}>
-                        <FontAwesomeIcon icon={faCheck} />
-                    </a>) : (<a onClick={activeItem} className={cx('item-hide')}>
-                        <FontAwesomeIcon icon={faEyeSlash} />
-                    </a>) }
+                    {status ? (
+                        <a onClick={hideItem} className={cx('item-hide')}>
+                            <FontAwesomeIcon icon={faTimes} />
+                        </a>
+                    ) : (
+                        <a onClick={activeItem} className={cx('item-hide')}>
+                            <FontAwesomeIcon icon={faEyeSlash} />
+                        </a>
+                    )}
                 </div>
             </div>
         </div>

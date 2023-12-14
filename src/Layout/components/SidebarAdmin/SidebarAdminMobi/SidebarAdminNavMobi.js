@@ -12,6 +12,10 @@ export const SidebarAdminNavMobi = [
         to: '/admin/customer-manager',
     },
     {
+        title: 'Quản lý shipper',
+        to: '/admin/shipper-manager',
+    },
+    {
         title: 'Quản lý đơn hàng',
         to: '/admin/order-manager',
     },
