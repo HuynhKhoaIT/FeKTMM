@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import noImage from '../../assets/images';
 import { toast } from 'react-toastify';
+import PhoneInput from 'react-phone-number-input';
 
 const cx = classNames.bind(styles);
 
@@ -25,7 +26,7 @@ function ProfileCustomer() {
     const [dateOfBirth, setDateOfBirth] = useState('');
     const showUpdateModal = () => setUpdateProfile(true);
     const closeUpdateModal = () => setUpdateProfile(false);
-
+    const [isAdding, setIsAdding] = useState(false);
     const [changePassword, setChangePassword] = useState(false);
     const showChangePassWordModal = () => setChangePassword(true);
     const closeChangePassWordModal = () => {
@@ -43,15 +44,40 @@ function ProfileCustomer() {
     const showChangeAvatarModal = () => setChangeAvatar(true);
     const closeChangeAvatarModal = () => setChangeAvatar(false);
 
-    const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0]; // Lấy tệp đã chọn
-        if (selectedFile) {
-            // Đọc tệp và cập nhật state avatar với URL hình ảnh mới
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                setAvatar(event.target.result);
-            };
-            reader.readAsDataURL(selectedFile);
+    // const handleFileChange = (e) => {
+    //     const selectedFile = e.target.files[0]; // Lấy tệp đã chọn
+    //     if (selectedFile) {
+    //         // Đọc tệp và cập nhật state avatar với URL hình ảnh mới
+    //         const reader = new FileReader();
+    //         reader.onload = (event) => {
+    //             setAvatar(event.target.result);
+    //         };
+    //         reader.readAsDataURL(selectedFile);
+    //     }
+    // };
+    const handleFileChange = async (e) => {
+        const files = e.target.files;
+
+        for (let i = 0; i < files.length; i++) {
+            const formData = new FormData();
+            formData.append('file', files[i]);
+            formData.append('upload_preset', 'laj3rqxg');
+            setIsAdding(true);
+            // Gửi ảnh lên Cloudinary
+            const response = await fetch('https://api.cloudinary.com/v1_1/doqcndr2c/image/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const imageUrl = data.secure_url;
+
+                setAvatar(imageUrl);
+                setIsAdding(false);
+            } else {
+                console.error('Failed to upload image to Cloudinary');
+            }
         }
     };
 
@@ -92,10 +118,7 @@ function ProfileCustomer() {
             }
             const result = await profileCustomer.editProfile(editData, token);
 
-            console.log('====================================');
-            console.log('result: ', result);
-            console.log('====================================');
-            window.alert('Cập nhật thông tin thành công');
+            toast.success('Cập nhật thông tin thành công');
         } catch (error) {
             toast.error(error);
         }
@@ -113,12 +136,10 @@ function ProfileCustomer() {
                     { oldPassword, newPassword, retypedNewPassword: confirmNewPassword },
                     token,
                 );
-                console.log('====================================');
-                console.log('changePassword', saveChangePassword);
-                console.log('====================================');
-                window.alert('Cập nhật mật khẩu thành công!');
+                closeChangePassWordModal();
+                toast.success('Cập nhật mật khẩu thành công!');
             } else {
-                window.alert('Nhập lại mật khẩu không khớp!');
+                toast.warn('Nhập lại mật khẩu không khớp!');
             }
         } catch (error) {
             toast.error(error);
@@ -135,7 +156,7 @@ function ProfileCustomer() {
                 }
 
                 const { data } = await profileCustomer.getUser(token);
-                setFname(data.user._fname); 
+                setFname(data.user._fname);
                 setLname(data.user._lname);
                 setEmail(data.user._email);
                 setPhone(data.user._phones ? data.user._phones[0] : '');
@@ -146,9 +167,6 @@ function ProfileCustomer() {
                 setDateOfBirth(data.user._dateOfBirth);
                 setAvatar(data.user._avatar);
                 setUser(data.user);
-                console.log('====================================');
-                console.log('data', data);
-                console.log('====================================');
             } catch (error) {
                 console.error(error);
             }
@@ -222,12 +240,13 @@ function ProfileCustomer() {
                                                 )}
                                             >
                                                 <input
-                                                    type="text"
+                                                    type="email"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     class={cx('form-control fs-4 py-3')}
                                                     name="name"
                                                     required
+                                                    disabled
                                                 />
                                             </div>
                                         </div>
@@ -242,7 +261,7 @@ function ProfileCustomer() {
                                                 )}
                                             >
                                                 <input
-                                                    type="text"
+                                                    type="number"
                                                     value={phone}
                                                     onChange={(e) => handleChangePhone(e)}
                                                     class={cx('form-control fs-4 py-3')}
@@ -346,7 +365,7 @@ function ProfileCustomer() {
                                         <div className={cx('d-flex justify-content-center')}>
                                             <div>
                                                 <img
-                                                    src={avatar && avatar.trim() !== '' ? avatar : noImage.noImage}
+                                                    src={avatar ? avatar : noImage.noImage}
                                                     className={cx('avatar')}
                                                     alt="avatar"
                                                 />
@@ -426,10 +445,11 @@ function ProfileCustomer() {
                                                 )}
                                             >
                                                 <input
-                                                    type="text"
+                                                    type="email"
                                                     class={cx('form-control fs-4 py-3')}
-                                                    name="name"
+                                                    name="email"
                                                     required
+                                                    disabled
                                                 />
                                             </div>
                                         </div>
@@ -444,9 +464,9 @@ function ProfileCustomer() {
                                                 )}
                                             >
                                                 <input
-                                                    type="text"
+                                                    type="number"
                                                     class={cx('form-control fs-4 py-3')}
-                                                    name="name"
+                                                    name="phone"
                                                     required
                                                 />
                                             </div>
@@ -599,7 +619,11 @@ function ProfileCustomer() {
                             <button className={cx('btn btn-secondary btn-lg')} onClick={closeChangeAvatarModal}>
                                 Đóng
                             </button>
-                            <button className={cx('btn btn-primary btn-lg')} onClick={closeChangeAvatarModal}>
+                            <button
+                                className={cx('btn btn-primary btn-lg')}
+                                disabled={isAdding}
+                                onClick={closeChangeAvatarModal}
+                            >
                                 Lưu thay đổi
                             </button>
                         </Modal.Footer>
