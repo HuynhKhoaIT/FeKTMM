@@ -28,6 +28,12 @@ function ProductItem({ data }) {
         <Link
           to={`/product-detail?id=${data?._id}`}
           className={cx("product-item__name")}
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth", // Optional smooth scrolling animation
+            });
+          }}
         >
           {data?._name}
         </Link>

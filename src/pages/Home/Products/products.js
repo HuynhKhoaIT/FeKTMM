@@ -10,7 +10,12 @@ import { toast } from "react-toastify";
 
 import styles from "./products.module.scss";
 import { ProductSlider } from "./productSlider";
-import { getAllProductsBestSeller, getAllProductsByCategory, getAllProductsMoreSearch, getAllProductsOnSale } from "../../../services/productService";
+import {
+  getAllProductsBestSeller,
+  getAllProductsByCategory,
+  getAllProductsMoreSearch,
+  getAllProductsOnSale,
+} from "../../../services/productService";
 const cx = classNames.bind(styles);
 function Products() {
   const [bestSellingProducts, setBestSellingProducts] = useState([
@@ -64,7 +69,7 @@ function Products() {
     },
   ]);
 
-  const [laptopData, setLoptopData] = useState([])
+  const [laptopData, setLoptopData] = useState([]);
 
   // get best selling products
   const fetchBestSellingProducts = async () => {
@@ -97,10 +102,9 @@ function Products() {
 
   const fetSearchResult = async () => {
     try {
-      const data = await getAllProductsByCategory(1)
+      const data = await getAllProductsByCategory(1);
       setLoptopData(data);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -110,9 +114,16 @@ function Products() {
     fetSearchResult();
   }, []);
 
+  const [windowSize, setWindowSize] = useState();
+
+  useEffect(() => {
+    setWindowSize(window.innerWidth);
+  }, [window.innerWidth]);
+  console.log("windowSize", windowSize);
   return (
     <>
       <ProductSlider
+        slidesToShow={windowSize < 765 ? 3 : 5}
         dataDetail={mostSearchedProducts}
         title={"Sản phẩm được tìm kiếm nhiều nhất"}
         row={1}
@@ -129,6 +140,7 @@ function Products() {
       </Row>
 
       <ProductSlider
+        slidesToShow={windowSize < 765 ? 3 : 5}
         dataDetail={bestSellingProducts}
         title={"Sản phẩm bán chạy nhất"}
         row={1}
@@ -144,11 +156,13 @@ function Products() {
         </a>
       </Row>
       <ProductSlider
+        slidesToShow={windowSize < 765 ? 3 : 5}
         dataDetail={onSaleProducts}
         title={"Sản phẩm đang sale"}
         row={1}
       />
-      {/* <ProductSlider dataDetail={bestSellingProducts} /> */}
+      {/* <ProductSlider
+      slidesToShow={windowSize<765 ?3:5} dataDetail={bestSellingProducts} /> */}
     </>
   );
 }
