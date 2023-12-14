@@ -29,7 +29,7 @@ function Cart() {
                 }
 
                 const data = await cartService.getCartByUserId(token);
-
+                console.log(data);
                 const productDetailsPromises = data.map(async (item) => {
                     const response = await fetch(`https://cnpmmnhom14.onrender.com/api/products/${item.itemId}`);
 
@@ -41,9 +41,9 @@ function Cart() {
                 });
 
                 const productDetails = await Promise.all(productDetailsPromises);
-                console.log(productDetails);
+
                 const listcart = productDetails.map((value, index) => [value, data[index]]);
-                console.log(listcart);
+
                 setCartItems(listcart);
             } catch (error) {
                 console.error(error);
