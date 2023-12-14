@@ -14,10 +14,13 @@ import ViewAll from "../../components/view-all/view-all";
 import { RatingStar } from "../../components/Icons";
 import ProductItem from "../../components/Product/productItem";
 import { ProductSlider } from "../Home/Products/productSlider";
+import Loading from "../../components/loading";
 
 const cx = classNames.bind(styles);
 function ProductDetail({ productId }) {
   //thảm khảo: https://www.pluralsight.com/guides/how-to-use-reactjs-and-complex-json-objects
+  const [loading, setLoading] = useState(false);
+
   const [productDetails, setProductDetails] = useState({
     _id: "",
     _name: "",
@@ -99,18 +102,23 @@ function ProductDetail({ productId }) {
 
   //Get product details from productId
   useEffect(() => {
+    setLoading(true);
     const fetchProductDetails = async () => {
       try {
         const response = await fetch(
           `https://cnpmmnhom14.onrender.com/api/products/${pId}`
         );
         if (!response.ok) {
+          setLoading(false);
+
           throw new Error("Request failed");
         }
         const data = await response.json();
         //console.log(data._brandId._name);
         setProductDetails(data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error("Không lấy được dữ liệu:", error);
       }
     };
@@ -188,6 +196,8 @@ function ProductDetail({ productId }) {
   if (productDetails) {
     return (
       <div className={cx("wrapper")}>
+        <Loading show={loading} />
+
         <Container className={cx("container")}>
           <span className={cx("row-heading")}>Thông tin sản phẩm</span>
           <Row className={cx("bg-white", "padding-12", "productInfo")}>
