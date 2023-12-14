@@ -14,7 +14,6 @@ const cx = classNames.bind(styles);
 function ProductInfo({ dataDetail }) {
   const [loading, setLoading] = useState(false);
   const [loadingBuy, setLoadingBuy] = useState(false);
-
   const token = localStorage.getItem("token");
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -89,13 +88,16 @@ function ProductInfo({ dataDetail }) {
   };
 
   const handleCheckOutClick = (quantity) => {
-    if (dataDetail?._quantity === 0) {
-      alert("Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!");
+    if (token) {
+      if (dataDetail?._quantity === 0) {
+        alert("Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!");
+      }
+      setLoadingBuy(false);
+      sessionStorage.setItem("selectedProductsId", dataDetail._id);
+      sessionStorage.setItem("selectedQuntity", quantity);
+    } else {
+      alert("Vui lòng đăng nhập để thực hiện chức năng này!");
     }
-    setLoadingBuy(false);
-
-    sessionStorage.setItem("selectedProductsId", dataDetail._id);
-    sessionStorage.setItem("selectedQuntity", quantity);
   };
   return (
     <div className={cx("wrapper")}>

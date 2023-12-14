@@ -14,9 +14,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFaceMeh } from "@fortawesome/free-solid-svg-icons";
 import { Container } from "react-bootstrap";
 import SearchResult from "../Search/SearchResult/searchResult";
+import Loading from "../../components/loading";
 
 const cx = classNames.bind(styles);
 function Category() {
+  const [loading, setLoading] = useState(false);
+
   const location = useLocation();
   const [products, setProducts] = useState([]);
   const queryParams = new URLSearchParams(useLocation().search);
@@ -24,55 +27,28 @@ function Category() {
   const categoryId = queryParams.get("categoryId");
   const data = location.state;
   useEffect(() => {
+    setLoading(true);
     // Hàm fetch dữ liệu sản phẩm từ API
     const fetchProducts = async () => {
       try {
         const listProducts = await product.getAllProductsByCategory(data.keyId);
         setProducts(listProducts); // Lưu dữ liệu sản phẩm vào state
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching products:", error);
+        // setLoading(false);
       }
     };
 
     fetchProducts();
   }, [data.keyId]);
-  console.log(products);
   return (
     <Container>
+      <Loading show={loading} />
       <Row className={cx("main-section")}>
         <SearchResult foundProducts={products} />
       </Row>
     </Container>
-
-    // <div className={cx('wrapper')}>
-    //     <div className={cx('container')}>
-    //         <div className={cx('d-flex align-items-center')}>
-    //             <h2>Danh Mục:</h2>
-    //             <h3>{categoryId}</h3>
-    //         </div>
-    //         <div className={cx('row')}>
-    //             <div className={cx('product-list', 'd-flex')}>
-    //                 {products.map((item) => (
-    //                     <div className={cx('product__item')}>
-    //                         <div className={cx('product-img')}>
-    //                             <Image src={item._images[0]} alt="img" />
-    //                         </div>
-    //                         <p className={cx('product__item-name')}>{item._name} </p>
-    //                         <div className={cx('product__item-price')}>
-    //                             <p>{item._price.toLocaleString()}đ</p>
-    //                             <p className={cx('price-sale')}>{item._price.toLocaleString()}đ</p>
-    //                         </div>
-    //                         <Link to={`/product-detail?id=${item._id}`}>
-    //                             <Button className={cx('btn-add')} primary small>
-    //                                 Xem chi tiết
-    //                             </Button>
-    //                         </Link>
-    //                     </div>
-    //                 ))}
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>
   );
 }
 

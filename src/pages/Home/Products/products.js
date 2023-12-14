@@ -16,8 +16,11 @@ import {
   getAllProductsMoreSearch,
   getAllProductsOnSale,
 } from "../../../services/productService";
+import Loading from "../../../components/loading";
 const cx = classNames.bind(styles);
 function Products() {
+  const [loading, setLoading] = useState(false);
+
   const [bestSellingProducts, setBestSellingProducts] = useState([
     {
       _id: "",
@@ -76,8 +79,10 @@ function Products() {
     try {
       const data = await getAllProductsBestSeller();
       setBestSellingProducts(data);
+      setLoading(false);
     } catch (error) {
       console.error("Không lấy được dữ liệu: ", error);
+      setLoading(false);
     }
   };
 
@@ -86,8 +91,10 @@ function Products() {
     try {
       const data = await getAllProductsOnSale();
       setOnSaleProducts(data);
+      setLoading(false);
     } catch (error) {
       console.error("Không lấy được dữ liệu: ", error);
+      setLoading(false);
     }
   };
   //get most searched products
@@ -95,8 +102,10 @@ function Products() {
     try {
       const data = await getAllProductsMoreSearch();
       setMostSearchedProducts(data);
+      setLoading(false);
     } catch (error) {
       console.error("Không lấy được dữ liệu: ", error);
+      setLoading(false);
     }
   };
 
@@ -104,10 +113,14 @@ function Products() {
     try {
       const data = await getAllProductsByCategory(1);
       setLoptopData(data);
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchBestSellingProducts();
     fetchOnSaleProducts();
     fetchMostSearchedProducts();
@@ -122,6 +135,8 @@ function Products() {
   console.log("windowSize", windowSize);
   return (
     <>
+      <Loading show={loading} />
+
       <ProductSlider
         slidesToShow={windowSize < 765 ? 3 : 5}
         dataDetail={mostSearchedProducts}

@@ -121,7 +121,10 @@ function CheckOut() {
   // Tạm tính giá trị đơn hàng
   const calculateSubTotal = () => {
     return cartItems.reduce(
-      (total, item) => total + item[0]._price * item[1].quantity,
+      (total, item) =>
+        total +
+        (item[0]._price - (item[0]._price * item[0]._salePercent) / 100) *
+          item[1].quantity,
       0
     );
   };
@@ -352,7 +355,10 @@ function CheckOut() {
                         key={item[0]._id}
                         itemName={item[0]._name}
                         itemImage={item[0]._images[1]}
-                        itemPrice={item[0]._price}
+                        itemPrice={
+                          item[0]._price -
+                          (item[0]._price * item[0]._salePercent) / 100
+                        }
                         itemQuantity={item[1].quantity}
                         deleteItem={() => {
                           deleteItem(item[0]._id);
@@ -669,7 +675,11 @@ function CheckOut() {
                       </div>
                       <div className={cx("product-right")}>
                         <p className={cx("product-price", "text-end")}>
-                          {parseInt(item[0]._price).toLocaleString("vi-VN")}₫
+                          {parseInt(
+                            item[0]._price -
+                              (item[0]._price * item[0]._salePercent) / 100
+                          ).toLocaleString("vi-VN")}
+                          ₫
                         </p>
                         <p className={cx("product-quantity", "text-end")}>
                           x<span>{item[1].quantity}</span>

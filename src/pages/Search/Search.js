@@ -13,10 +13,13 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+import Loading from "../../components/loading";
 
 const cx = classNames.bind(styles);
 function Search() {
   const location = useLocation();
+  const [loading, setLoading] = useState(false);
+
   const queryParams = new URLSearchParams(location.search);
   const searchQuery = queryParams.get("keyword");
   const [foundProducts, setFoundProducts] = useState([
@@ -40,24 +43,30 @@ function Search() {
   // fetch products found
   useEffect(() => {
     const fetSearchResult = async () => {
+      setLoading(true);
       try {
         const response = await fetch(
           `https://cnpmmnhom14.onrender.com/api/products/get-by-keyId?categoryId=${data.keyId}&brandId=${data.keyId}`
         );
         if (!response.ok) {
           toast.error("Yêu cầu thất bại!");
+          setLoading(false);
         }
         const foundProducts = await response.json();
         setFoundProducts(foundProducts);
+        setLoading(false);
       } catch (error) {
         const result = await searchSrvices.search(searchQuery);
         setFoundProducts(result);
+        setLoading(false);
       }
     };
     fetSearchResult();
   }, [data, searchQuery]);
   return (
     <Container>
+      <Loading show={loading} />
+
       <Row className={cx("main-section")}>
         <SearchResult foundProducts={foundProducts} />
       </Row>
