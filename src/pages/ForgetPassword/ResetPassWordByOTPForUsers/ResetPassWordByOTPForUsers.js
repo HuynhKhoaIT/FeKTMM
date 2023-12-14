@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useLocation } from "react-router-dom";
+import { Button } from "antd";
 
 // import Modal from 'react-bootstrap/Modal';
 
@@ -18,6 +19,7 @@ function ResetPassWordByOTPForUsers({
 }) {
   const location = useLocation();
   const data = location.state;
+  const [loading, setLoading] = useState(false);
 
   const [otp, setOTP] = useState("");
   // const [otpError, setOTPError] = useState('')
@@ -65,15 +67,19 @@ function ResetPassWordByOTPForUsers({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     setError("");
     // setOTPError('')
     // setPasswordError('')
     if (otp !== "" && password !== "" && rePassWord !== "") {
       setSucessMessage("");
+
       setError("");
       if (password === rePassWord) {
         if (checkPasswordComplexity(password)) {
           try {
+            setLoading(false);
+
             // Call your API to register the user
             const response = await fetch(
               "https://cnpmmnhom14.onrender.com/api/verification/user-reset-password",
@@ -102,17 +108,21 @@ function ResetPassWordByOTPForUsers({
               setError(data.message);
             }
           } catch (error) {
+            setLoading(false);
             setError("Reset mật khẩu thất bại, vui lòng thử lại!");
           }
         } else {
+          setLoading(false);
           setError(
             "Mật khẩu dài ít nhất 8 ký tự, tối đa 20 ký tự, phải bao gồm số, chữ hoa, chữ thường và ký tự đặc biệt!"
           );
         }
       } else {
+        setLoading(false);
         setError("Mật khẩu nhập lại không đúng!");
       }
     } else {
+      setLoading(false);
       setError("Vui lòng điền đầy đủ thông tin!");
     }
   };
@@ -205,11 +215,14 @@ function ResetPassWordByOTPForUsers({
           <p className={cx("form-sucess-message")}>{sucessMessage}</p>
         )}
         {error && <p className={cx("form-error-message")}>{error}</p>}
-        <div className={cx("btns-group-control")}>
-          <button className={cx("btn", "btn-SignIn")} type="submit">
-            Xác nhận
-          </button>
-        </div>
+        <Button
+          type="primary"
+          style={{ width: "100%", margin: "10px 0" }}
+          htmlType="submit"
+          loading={loading}
+        >
+          Xác nhận
+        </Button>
         <div className={cx("redirect-options", "option-SignUp")}>
           <p>
             Đã có tài khoản?{" "}

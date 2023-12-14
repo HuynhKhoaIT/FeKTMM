@@ -4,6 +4,7 @@ import styles from "./forget-password.module.scss";
 import classNames from "classnames/bind";
 import { HomeIcon, CloseIcon } from "../../components/Icons";
 import { Link } from "react-router-dom";
+import { Button } from "antd";
 
 // import Modal from 'react-bootstrap/Modal';
 
@@ -16,7 +17,7 @@ function ForgetPassword({
   isShown,
 }) {
   const [email, setEmail] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [sucessMessage, setSucessMessage] = useState("");
 
@@ -29,6 +30,7 @@ function ForgetPassword({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     setError("");
     setMailError("");
 
@@ -53,22 +55,32 @@ function ForgetPassword({
           );
 
           if (response.ok) {
+            setLoading(false);
+
             // successful
             setSucessMessage("Gửi mã OTP thành công!");
           } else {
+            setLoading(false);
+
             // failed
             const data = await response.json();
             setError(data.message);
           }
         } catch (error) {
+          setLoading(false);
+
           setError("Gửi OTP thất bại, vui lòng thử lại!");
         }
       } else {
+        setLoading(false);
+
         setSucessMessage("");
         if (!checkEmailValid(email))
           setMailError("Email không đúng định dạng!");
       }
     } else {
+      setLoading(false);
+
       setError("Vui lòng điền mail!");
     }
   };
@@ -103,6 +115,7 @@ function ForgetPassword({
               id="email"
               name="email"
               placeholder="Nhập email"
+              required
               onChange={(e) => setEmail(e.target.value)}
             ></input>
             {mailError && (
@@ -116,14 +129,20 @@ function ForgetPassword({
           )}
           {error && <p className={cx("form-error-message")}>{error}</p>}
         </div>
+        <Button
+          type="primary"
+          style={{ width: "100%", margin: "10px 0" }}
+          htmlType="submit"
+          loading={loading}
+        >
+          Gửi OTP
+        </Button>
         <div className={cx("btns-group-control")}>
-          <button className={cx("btn", "btn-SignIn")} type="submit">
-            Nhận OTP
-          </button>
           {sucessMessage && (
             <div className={cx("redirect-options", "option-SignUp")}>
               <p>
                 <a
+                  style={{ cursor: "pointer" }}
                   onClick={() => {
                     setShowModalForgetPassWord(false);
                     setShowModalRessetPassword(true);

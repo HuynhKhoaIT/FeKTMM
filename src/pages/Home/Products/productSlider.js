@@ -16,7 +16,6 @@ export function ProductSlider({
   infinite,
   key,
 }) {
-  console.log("title !== undefined ", dataDetail );
   return (
     <Row className={cx("product-best-sale")} style={styles}>
       <Col span={24}>
@@ -27,10 +26,9 @@ export function ProductSlider({
             </div>
             {key && (
               <Link to={"/search"}>
-              <p className={cx("pCate")}>Xem tất cả</p>
-            </Link>
+                <p className={cx("pCate")}>Xem tất cả</p>
+              </Link>
             )}
-            
           </div>
         )}
 
