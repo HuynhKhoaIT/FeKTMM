@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Button } from "antd";
 
 // import Modal from 'react-bootstrap/Modal';
 
@@ -19,7 +20,7 @@ const cx = classNames.bind(styles);
 
 function Signup({ isShown, setShowModalSignup, setShowModal }) {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const [fName, setFName] = useState("");
   const [lName, setLName] = useState("");
   const [email, setEmail] = useState("");
@@ -80,6 +81,7 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     setSucessMessage("");
     setError("");
     setMailError("");
@@ -118,6 +120,8 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
           );
 
           if (response.ok) {
+            setLoading(false);
+
             // Registration was successful
             setShowModalSignup(false);
             setShowModal(true);
@@ -130,10 +134,14 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
             toast.success("Đăng ký thất bại, vui lòng thử lại!");
           }
         } catch (error) {
+          setLoading(false);
+
           setError("Đăng ký thất bại, vui lòng thử lại!");
           toast.success("Đăng ký thất bại, vui lòng thử lại!");
         }
       } else {
+        setLoading(false);
+
         setSucessMessage("");
         if (!checkEmailValid(email))
           setMailError("Email không đúng định dạng!");
@@ -145,6 +153,7 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
         if (hasDiacritics(lName)) setLNameError("Vui lòng dùng chữ không dấu!");
       }
     } else {
+      setLoading(false);
       setError("Vui lòng điền đầy đủ thông tin!");
     }
   };
@@ -184,6 +193,7 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
                 type="text"
                 id="fName"
                 name="fName"
+                required
                 placeholder="Nhập họ"
                 onChange={(e) => setFName(e.target.value)}
               ></input>
@@ -194,9 +204,8 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
               )}
             </div>
             <div className={cx("input-wrapper-item")}>
-              <label className={cx("form-label")} for="lName">
-                {" "}
-                Tên{" "}
+              <label className={cx("form-label")} for="lName" required>
+                Tên
               </label>
               <input
                 className={cx("form-input")}
@@ -204,6 +213,7 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
                 id="lName"
                 name="lName"
                 placeholder="Nhập tên"
+                required
                 onChange={(e) => setLName(e.target.value)}
               ></input>
               {lNameError && (
@@ -225,6 +235,7 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
               id="email"
               name="email"
               placeholder="Nhập email"
+              required
               onChange={(e) => setEmail(e.target.value)}
             ></input>
             {mailError && (
@@ -234,11 +245,12 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
             )}
           </div>
           <div className={cx("input-wrapper-item")}>
-            <label className={cx("form-label")} for="pw">
+            <label className={cx("form-label")} for="pw" required>
               Mật khẩu
             </label>
             <div className={cx("password-input-wrapper")}>
               <input
+                required
                 className={cx("form-input", "password-input")}
                 type={showPassword ? "text" : "password"}
                 id="pw"
@@ -277,24 +289,14 @@ function Signup({ isShown, setShowModalSignup, setShowModal }) {
             Đăng nhập ngay
           </a>
         </div>
-        <div className={cx("btns-group-control")}>
-          <button className={cx("btn", "btn-SignIn")} type="submit">
-            Đăng ký
-          </button>
-          {/* <p className={cx('options-title')}>-Or-</p>
-                    <div className={cx('option-signIn')}>
-                        <div className={cx('btn', 'btn-SignIn-google')} type="button">
-                            <GoogleIcon />
-                            <Link to={'/signup'}> Đăng ký bằng Gmail</Link>
-
-                        </div>
-                        <div className={cx('btn', 'btn-SignIn-facebook')} type="button">
-                            <FacebookIcon width='24' height='24' />
-                            <Link tp={'/signup'}>Đăng ký bằng Facebook</Link>
-
-                        </div>
-                    </div> */}
-        </div>
+        <Button
+          type="primary"
+          style={{ width: "100%", margin: "10px 0" }}
+          htmlType="submit"
+          loading={loading}
+        >
+          Đăng ký
+        </Button>
       </form>
     </div>
   );
