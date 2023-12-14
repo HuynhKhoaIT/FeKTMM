@@ -15,6 +15,7 @@ function ProductInfo({ dataDetail }) {
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const handleAddQuantity = () => {
+      try{
         if (dataDetail?._quantity === 0) {
             alert('Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!');
         } else {
@@ -72,71 +73,86 @@ function ProductInfo({ dataDetail }) {
         }
     };
 
-    const handleCheckOutClick = () => {
-        if (dataDetail?._quantity === 0) {
-            alert('Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!');
-        }
-    };
+  const handleCheckOutClick = () => {
+    if (dataDetail?._quantity === 0) {
+      alert("Sản phẩm hiện tại hết hàng, vui lòng quay lại sau!");
+    }
+  };
 
-    return (
-        <div className={cx('wrapper')}>
-            <div className={cx('flex-item', 'pInfo')}>
-                <p className={cx('pName')}>{dataDetail?._name}</p>
-                <p className={cx('pBrand-wrapper')}>
-                    Thương hiệu: <span className={cx('pBrandName')}>{dataDetail?._brand}</span>
-                </p>
-                <div className={cx('price-group')}>
-                    <p className={cx('pNewPrice')}>
-                        {(dataDetail?._price - dataDetail?._price * (dataDetail?._salePercent / 100)).toLocaleString(
-                            'vi-VN',
-                        )}
-                        đ
-                    </p>
-                    <p className={cx('pOldPrice')}>{dataDetail?._price.toLocaleString('vi-VN')}đ</p>
-                </div>
-                {dataDetail?._quantity === 0 ? (
-                    <p className={cx('pStatus-wrapper')}>
-                        Tình trạng: <span className={cx('pStatus')}> Hết hàng</span>
-                    </p>
-                ) : (
-                    <p className={cx('pStatus-wrapper')}>
-                        Số lượng kho: <span className={cx('pStatus')}> {dataDetail?._quantity} </span>
-                    </p>
-                )}
-            </div>
-            <div className={cx('flex-item', 'pChooseQuantity')}>
-                <p className={cx('choose-quantity-title')}>Chọn số lượng: </p>
-                <div className={cx('choose-quantity-wrapper')}>
-                    <div className={cx('minus-wrapper')} onClick={() => handleMinusQuantity()}>
-                        <MinusIcon />
-                    </div>
-                    <div className={cx('quantity-wrapper')}>
-                        <input className={cx('quantity')} type="text" value={quantity} role="spinbutton"></input>
-                    </div>
-                    <div className={cx('add-wrapper')} onClick={() => handleAddQuantity()}>
-                        <AddIcon />
-                    </div>
-                </div>
-                <button
-                    type="button"
-                    className={cx('btn', 'add-to-cart-btn')}
-                    onClick={() => handleAddToCartClick(dataDetail?._id, quantity)}
-                >
-                    Thêm vào giỏ
-                </button>
-            </div>
-            {/* <div className={cx("flex-item", "buttons-group")}>
-        <button type="button" className={cx('btn', 'buy-btn')} onClick={() => handleCheckOutClick}><Link to={'/cart/checkout'}>Mua ngay</Link></button>
+  return (
+    <div className={cx("wrapper")}>
+      <div className={cx("flex-item", "pInfo")}>
+        <p className={cx("pName")}>{dataDetail?._name}</p>
+        <p className={cx("pBrand-wrapper")}>
+          Thương hiệu:{" "}
+          <span className={cx("pBrandName")}>{dataDetail?._brand}</span>
+        </p>
+        <div className={cx("price-group")}>
+          <p className={cx("pNewPrice")}>
+            {(
+              dataDetail?._price -
+              dataDetail?._price * (dataDetail?._salePercent / 100)
+            ).toLocaleString("vi-VN")}
+            đ
+          </p>
+          <p className={cx("pOldPrice")}>
+            {dataDetail?._price.toLocaleString("vi-VN")}đ
+          </p>
+        </div>
+        {dataDetail?._quantity === 0 ? (
+          <p className={cx("pStatus-wrapper")}>
+            Tình trạng: <span className={cx("pStatus")}> Hết hàng</span>
+          </p>
+        ) : (
+          <p className={cx("pStatus-wrapper")}>
+            Số lượng kho:{" "}
+            <span className={cx("pStatus")}> {dataDetail?._quantity} </span>
+          </p>
+        )}
+      </div>
+      <div className={cx("flex-item", "pChooseQuantity")}>
+        <p className={cx("choose-quantity-title")}>Chọn số lượng: </p>
+        <div className={cx("choose-quantity-wrapper")}>
+          <div
+            className={cx("minus-wrapper")}
+            onClick={() => handleMinusQuantity()}
+          >
+            <MinusIcon />
+          </div>
+          <div className={cx("quantity-wrapper")}>
+            <input
+              className={cx("quantity")}
+              type="text"
+              value={quantity}
+              role="spinbutton"
+            ></input>
+          </div>
+          <div
+            className={cx("add-wrapper")}
+            onClick={() => handleAddQuantity()}
+          >
+            <AddIcon />
+          </div>
+        </div>
+      </div>
+      <div className={cx("flex-item", "buttons-group")}>
+        <button
+          type="button"
+          className={cx("btn", "buy-btn")}
+          onClick={() => handleCheckOutClick}
+        >
+          <Link to={"/cart/checkout"}>Mua ngay</Link>
+        </button>
         <button
           type="button"
           className={cx("btn", "add-to-cart-btn")}
-          onClick={() => handleAddToCartClick(dataDetail?._pId, quantity)}
+          onClick={() => handleAddToCartClick(dataDetail?._id, quantity)}
         >
           Thêm vào giỏ
         </button>
-      </div> */}
-        </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default ProductInfo;
