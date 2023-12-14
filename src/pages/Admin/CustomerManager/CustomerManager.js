@@ -8,6 +8,7 @@ import SidebarAdminMobi from '../../../Layout/components/SidebarAdmin/SidebarAdm
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 //import Modal from 'react-bootstrap/Modal';
 import * as customerAdminService from '../../../services/customerAdminService';
 
@@ -34,6 +35,8 @@ function CustomerManager() {
             if (response === 0) {
                 throw new Error('Yêu cầu không thành công');
             }
+            toast.success('Thao tác thành công');
+            setReloadData(true);
         } catch (error) {
             console.error('Lỗi khi gửi yêu cầu ẩn khách hàng:', error);
             return null;
@@ -44,7 +47,6 @@ function CustomerManager() {
         const shouldDelete = window.confirm('Bạn có muốn ẩn khách hàng này không?');
         if (shouldDelete) {
             hideCustomer(itemId);
-            setReloadData(true);
             //setCustomerListItems((prevCustomerListItems) => prevCustomerListItems.filter((item) => item.id !== itemId));
         }
     };
@@ -55,6 +57,7 @@ function CustomerManager() {
             if (response === 0) {
                 throw new Error('Yêu cầu không thành công');
             }
+            setReloadData(true);
         } catch (error) {
             console.error('Lỗi khi gửi yêu cầu kích hoạt khách hàng:', error);
             return null;
@@ -65,7 +68,8 @@ function CustomerManager() {
         const shouldActive = window.confirm('Bạn có muốn kích hoạt khách hàng này không?');
         if (shouldActive) {
             activeCustomer(itemId);
-            setReloadData(true);
+
+            toast.success('Thao tác thành công');
             //setCustomerListItems((prevCustomerListItems) => prevCustomerListItems.filter((item) => item.id !== itemId));
         }
     };
@@ -128,7 +132,7 @@ function CustomerManager() {
                                         {currentItems.map((item) => (
                                             <CustomerListItem
                                                 key={item._id}
-                                                fullname={item._fname+" "+item._lname}
+                                                fullname={item._fname + ' ' + item._lname}
                                                 phone={item._phones[0]}
                                                 address={item._addresses[0]}
                                                 status={item._status}
