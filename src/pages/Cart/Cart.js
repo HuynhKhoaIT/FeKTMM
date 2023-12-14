@@ -29,8 +29,8 @@ function Cart() {
         }
 
         const data = await cartService.getCartByUserId(token);
-
-        const productDetailsPromises = data.map(async (item) => {
+        console.log('data',data);
+        const productDetailsPromises = data?.map(async (item) => {
           const response = await fetch(
             `https://cnpmmnhom14.onrender.com/api/products/${item.itemId}`
           );

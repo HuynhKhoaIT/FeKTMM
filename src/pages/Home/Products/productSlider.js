@@ -14,19 +14,23 @@ export function ProductSlider({
   slidesToScroll = 3,
   dots = false,
   infinite,
+  key,
 }) {
-  console.log("styles", styles);
+  console.log("title !== undefined ", dataDetail );
   return (
     <Row className={cx("product-best-sale")} style={styles}>
       <Col span={24}>
-        {title !== undefined ?? (
+        {title !== undefined && (
           <div className={cx("product-best__title")}>
             <div className={cx("title-slider__product")}>
               <h4>{title}</h4>
             </div>
-            <Link to={"/search"}>
-              <p className={cx("pCate")}>Xem Thêm</p>
+            {key && (
+              <Link to={"/search"}>
+              <p className={cx("pCate")}>Xem tất cả</p>
             </Link>
+            )}
+            
           </div>
         )}
 

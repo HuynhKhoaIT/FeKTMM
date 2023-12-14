@@ -19,8 +19,13 @@ import banner4 from "../../assets/images/banner4.webp";
 import ProductItem from "../../components/Product/productItem.js";
 import { Link } from "react-router-dom";
 import { ProductSlider } from "./Products/productSlider.js";
+import { getAllCategories } from "../../services/categoryService.js";
+import { getAllProductsByCategory } from "../../services/productService.js";
 const cx = classNames.bind(styles);
 function Home() {
+  const [category, setCategory] = useState();
+  const [laptopData, setLaptopData] = useState();
+
   const [banners, setBanners] = useState([
     "https://lh3.googleusercontent.com/AlIQ9zLNegLMYK3iZ0C38iJTsSuSBolyYK4SH_LmhKgohVHcmz6atxdRtydFItYjNYbhBf_ZdBKg6n0IyHbKOvC7EwqAsQc=w1920-rw",
     "https://lh3.googleusercontent.com/AlIQ9zLNegLMYK3iZ0C38iJTsSuSBolyYK4SH_LmhKgohVHcmz6atxdRtydFItYjNYbhBf_ZdBKg6n0IyHbKOvC7EwqAsQc=w1920-rw",
@@ -48,6 +53,35 @@ function Home() {
     slidesToShow: 3,
     slidesToScroll: 1,
   };
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const data = await getAllCategories();
+        setCategory(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchCategory();
+  }, []);
+
+  useEffect(() => {
+    const fetchProductByCategory = async (id) => {
+      try {
+        const data = await getAllProductsByCategory(id);
+        setLaptopData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    category?.map((item, index) => {
+      if (item?._name === "Laptop") {
+        fetchProductByCategory(item?._id);
+      }
+    });
+  }, [category]);
+  console.log("laptopData", laptopData);
   return (
     <div style={{ width: "100%", position: "relative" }} className={cx("home")}>
       <Spin spinning={!!loading}>
@@ -120,6 +154,9 @@ function Home() {
 
             <Row>
               <Products />
+            </Row>
+            <Row>
+              <ProductSlider dataDetail={laptopData} title={"Lap top"} />
             </Row>
           </div>
         </div>

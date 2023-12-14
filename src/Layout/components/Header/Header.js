@@ -224,7 +224,7 @@ function Header() {
                       {category.map((item) => (
                         <div key={item._id}>
                           <Link
-                            to={`/search?keyword=${item._name}`}
+                            to={`/category?categoryId=${item._name}`}
                             state={{ keyId: `${item._id}` }}
                             className={cx("menu-body")}
                           >
@@ -234,8 +234,8 @@ function Header() {
                             <div className={cx("abc")}>
                               {item._subCategory.map((subCategory) => (
                                 <Link
-                                  key={subCategory._id}
-                                  to={`${item._name}/${subCategory._name}`}
+                                  state={{keyId: `${subCategory._id}`}}
+                                  to={`?categoryId=${subCategory._name}`}
                                 >
                                   {capitalizeFirstLetter(subCategory._name)}
                                 </Link>
@@ -351,7 +351,6 @@ function Header() {
                     className={cx("icon-user")}
                     icon={faCircleUser}
                     color="var(--primary)"
-                    onClick={handleShowLoginForm}
                   />
                   <div className={cx("nav__text", "d-none d-lg-block")}>
                     {!userName ? (
