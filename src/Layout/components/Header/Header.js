@@ -354,7 +354,7 @@ function Header() {
                 </div> */}
                 <div className={cx("account", "d-flex align-items-center")}>
                   {userName ? (
-                    <Link to={"profile"}>
+                    <Link to={"/profile"}>
                       <FontAwesomeIcon
                         className={cx("icon-user")}
                         icon={faCircleUser}
