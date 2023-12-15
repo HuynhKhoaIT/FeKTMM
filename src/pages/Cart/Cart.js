@@ -204,7 +204,7 @@ function Cart() {
   console.log("cartItems", cartItems);
   return (
     <div className={cx("wrapper")}>
-      <Loading show={loading} />
+      {/* <Loading show={loading} /> */}
       <h2 className={cx("d-flex justify-content-center", "title")}>Giỏ Hàng</h2>
       {cartItems.length !== 0 ? (
         <div className={cx("container")}>
